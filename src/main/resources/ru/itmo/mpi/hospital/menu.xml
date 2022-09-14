@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/ui/menu">
+
+    <menu id="application" caption="msg://ru.itmo.mpi.hospital/menu.application" insertBefore="administration">
+        <item screen="User.browse" caption="msg://ru.itmo.mpi.hospital.screen.user/UserBrowse.caption"/>
+        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="Resource_.browse" caption="msg://ru.itmo.mpi.hospital.screen.resource/resourceBrowse.menu"/>
+        <item screen="DiseaseCase.browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.diseasecase/diseaseCaseBrowse.menu"/>
+        <item screen="Disease.browse" caption="msg://ru.itmo.mpi.hospital.screen.disease/diseaseBrowse.menu"/>
+        <item screen="Administrator.browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.administrator/administratorBrowse.menu"/>
+        <item screen="Healer.browse" caption="msg://ru.itmo.mpi.hospital.screen.healer/healerBrowse.menu"/>
+        <item screen="God.browse" caption="msg://ru.itmo.mpi.hospital.screen.god/godBrowse.menu"/>
+        <item screen="Helper.browse" caption="msg://ru.itmo.mpi.hospital.screen.helper/helperBrowse.menu"/>
+        <item screen="Prayer.browse" caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerBrowse.menu"/>
+        <item screen="PrayerUnanswered.browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerUnansweredBrowse.menu"/>
+        <item screen="Patient.browse" caption="msg://ru.itmo.mpi.hospital.screen.patient/patientBrowse.menu"/>
+    </menu>
+
+</menu-config>

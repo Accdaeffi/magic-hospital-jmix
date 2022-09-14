@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="magic-hospital">
+        <createTable tableName="DISEASE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_DISEASE"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="symptoms" type="VARCHAR(255)"/>
+            <column name="recipe" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="magic-hospital">
+        <createTable tableName="DISEASE_CASE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_DISEASE_CASE"/>
+            </column>
+            <column name="patient_complaints" type="VARCHAR(255)"/>
+            <column name="actions" type="VARCHAR(255)"/>
+            <column name="disease_id" type="UUID"/>
+            <column name="administrator_id" type="UUID"/>
+            <column name="healer_id" type="UUID"/>
+            <column name="patient_id" type="UUID"/>
+            <column name="prayer_id" type="UUID"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="DATETIME"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="magic-hospital">
+        <createTable tableName="PATIENT">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PATIENT"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="surname" type="VARCHAR(255)"/>
+            <column name="is_male" type="BOOLEAN"/>
+            <column name="is_mage" type="BOOLEAN"/>
+            <column name="social_status" type="VARCHAR(255)"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="magic-hospital">
+        <createTable tableName="PRAYER">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PRAYER"/>
+            </column>
+            <column name="god_id" type="UUID"/>
+            <column name="pray_text" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="magic-hospital">
+        <createTable tableName="REQUEST">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_REQUEST"/>
+            </column>
+            <column name="helper_id" type="UUID"/>
+            <column name="disease_case_id" type="UUID"/>
+            <column name="required_penta_help" type="BOOLEAN"/>
+            <column name="additional_info" type="VARCHAR(255)"/>
+            <column name="request_status" type="VARCHAR(255)"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="6" author="magic-hospital">
+        <createTable tableName="REQUEST_RESOURCE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_REQUEST_RESOURCE"/>
+            </column>
+            <column name="request_id" type="UUID"/>
+            <column name="resource_id" type="UUID"/>
+            <column name="amount" type="INT"/>
+            <column name="received_amount" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="7" author="magic-hospital">
+        <createTable tableName="RESOURCE_">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RESOURCE_"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="code" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="8" author="magic-hospital">
+        <addColumn tableName="USER_">
+            <column name="DTYPE" type="VARCHAR(31)"/>
+        </addColumn>
+
+        <update tableName="USER_">
+            <column name="DTYPE" value="User"/>
+            <where>DTYPE is null</where>
+        </update>
+    </changeSet>
+    <changeSet id="9" author="magic-hospital">
+        <addColumn tableName="USER_">
+            <column name="healer_power" type="INT"/>
+            <column name="social_status" type="VARCHAR(255)"/>
+            <column name="work_start_date" type="DATETIME"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="10" author="magic-hospital">
+        <addForeignKeyConstraint baseColumnNames="administrator_id" baseTableName="DISEASE_CASE"
+                                 constraintName="FK_DISEASECASE_ON_ADMINISTRATO" referencedColumnNames="ID"
+                                 referencedTableName="USER_"/>
+    </changeSet>
+    <changeSet id="11" author="magic-hospital">
+        <addForeignKeyConstraint baseColumnNames="disease_id" baseTableName="DISEASE_CASE"
+                                 constraintName="FK_DISEASE_CASE_ON_DISEASE" referencedColumnNames="ID"
+                                 referencedTableName="DISEASE"/>
+    </changeSet>
+    <changeSet id="12" author="magic-hospital">
+        <addForeignKeyConstraint baseColumnNames="healer_id" baseTableName="DISEASE_CASE"
+                                 constraintName="FK_DISEASE_CASE_ON_HEALER" referencedColumnNames="ID"
+                                 referencedTableName="USER_"/>
+    </changeSet>
+    <changeSet id="13" author="magic-hospital">
+        <addForeignKeyConstraint baseColumnNames="patient_id" baseTableName="DISEASE_CASE"
+                                 constraintName="FK_DISEASE_CASE_ON_PATIENT" referencedColumnNames="ID"
+                                 referencedTableName="PATIENT"/>
+    </changeSet>
+    <changeSet id="14" author="magic-hospital">
+        <addForeignKeyConstraint baseColumnNames="prayer_id" baseTableName="DISEASE_CASE"
+                                 constraintName="FK_DISEASE_CASE_ON_PRAYER" referencedColumnNames="ID"
+                                 referencedTableName="PRAYER"/>
+    </changeSet>
+    <changeSet id="15" author="magic-hospital">
+        <addForeignKeyConstraint baseColumnNames="god_id" baseTableName="PRAYER" constraintName="FK_PRAYER_ON_GOD"
+                                 referencedColumnNames="ID" referencedTableName="USER_"/>
+    </changeSet>
+    <changeSet id="16" author="magic-hospital">
+        <addForeignKeyConstraint baseColumnNames="resource_id" baseTableName="REQUEST_RESOURCE"
+                                 constraintName="FK_REQUESTRESOURCE_ON_RESOURCE" referencedColumnNames="ID"
+                                 referencedTableName="RESOURCE_"/>
+    </changeSet>
+    <changeSet id="17" author="magic-hospital">
+        <addForeignKeyConstraint baseColumnNames="disease_case_id" baseTableName="REQUEST"
+                                 constraintName="FK_REQUEST_ON_DISEASE_CASE" referencedColumnNames="ID"
+                                 referencedTableName="DISEASE_CASE"/>
+    </changeSet>
+    <changeSet id="18" author="magic-hospital">
+        <addForeignKeyConstraint baseColumnNames="helper_id" baseTableName="REQUEST"
+                                 constraintName="FK_REQUEST_ON_HELPER" referencedColumnNames="ID"
+                                 referencedTableName="USER_"/>
+    </changeSet>
+    <changeSet id="19" author="magic-hospital">
+        <addForeignKeyConstraint baseColumnNames="request_id" baseTableName="REQUEST_RESOURCE"
+                                 constraintName="FK_REQUEST_RESOURCE_ON_REQUEST" referencedColumnNames="ID"
+                                 referencedTableName="REQUEST"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://helperBrowse.caption"
+        focusComponent="helpersTable">
+    <data readOnly="true">
+        <collection id="helpersDc"
+                    class="ru.itmo.mpi.hospital.entity.Helper">
+            <fetchPlan extends="_base"/>
+            <loader id="helpersDl">
+                <query>
+                    <![CDATA[select e from Helper e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="helpersTable" spacing="true">
+        <filter id="filter"
+                dataLoader="helpersDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="helpersTable"
+                    width="100%"
+                    dataContainer="helpersDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="username"/>
+                <column id="firstName"/>
+                <column id="lastName"/>
+                <column id="isMale"/>
+                <column id="email"/>
+                <column id="active"/>
+                <column id="timeZoneId"/>
+                <column id="workStartDate"/>
+                <column id="socialStatus"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="helpersTable.create"/>
+                <button id="editBtn" action="helpersTable.edit"/>
+                <button id="removeBtn" action="helpersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

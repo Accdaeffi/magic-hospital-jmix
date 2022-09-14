@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://prayerView.caption"
+        focusComponent="form">
+    <data>
+        <instance id="prayerDc"
+                  class="ru.itmo.mpi.hospital.entity.Prayer">
+            <fetchPlan extends="_base">
+                <property name="diseaseCase"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="rejectPrayerId" type="rejectPrayer" />
+        <action id="acceptPrayerId" type="acceptPrayer" />
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="prayerDc" editable="false">
+            <column width="350px">
+                <textField id="healerName" property="diseaseCase.healer" />
+                <textField id="patientName" property="diseaseCase.patient" />
+                <textField id="diseaseName" property="diseaseCase.disease" />
+                <textField id="prayTextField" property="prayText"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="rejectBtn" action="rejectPrayerId" />
+            <button id="acceptBtn" action="acceptPrayerId" />
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
