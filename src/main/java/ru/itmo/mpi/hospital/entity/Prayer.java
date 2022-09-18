@@ -3,8 +3,6 @@ package ru.itmo.mpi.hospital.entity;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -38,7 +36,9 @@ public class Prayer {
     @JoinColumn(name = "god_id")
     private God god;
 
-    @OneToOne(mappedBy = "prayer", fetch = FetchType.LAZY)
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "disease_case_id", referencedColumnName = "id")
     private DiseaseCase diseaseCase;
 
     @InstanceName

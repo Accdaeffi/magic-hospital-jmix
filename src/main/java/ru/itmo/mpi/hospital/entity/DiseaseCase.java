@@ -2,7 +2,8 @@ package ru.itmo.mpi.hospital.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -24,7 +25,8 @@ import java.util.UUID;
 @JmixEntity
 @Table(name = "DISEASE_CASE")
 @Entity
-@Data
+@Getter
+@Setter
 public class DiseaseCase {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
@@ -53,8 +55,7 @@ public class DiseaseCase {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "prayer_id")
+    @OneToOne(mappedBy = "diseaseCase", fetch = FetchType.LAZY)
     private Prayer prayer;
 
     @CreatedBy
