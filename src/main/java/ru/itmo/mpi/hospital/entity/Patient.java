@@ -5,6 +5,7 @@ import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -22,6 +23,7 @@ import java.util.UUID;
 @Table(name = "PATIENT")
 @Entity
 @Data
+@Builder
 public class Patient {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)

@@ -7,40 +7,56 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class DiseaseTestData {
+public class DiseaseTestData implements TestDataProvisioning<Disease, Disease.DiseaseBuilder> {
 
     @Autowired
     DataManager dataManager;
 
     public List<Disease> diseases;
 
-    private static final String[] listTitles = {"title1", "title2", "title3"};
-    private static final String[] listRecipe = {"recipe1", "recipe2", "recipe3"};
-    private static final String[] listSymptoms = {"symptom1", "symptom2", "symptom3"};
-
-    @PostConstruct
-    void init() {
-        diseases = new ArrayList<>();
-
-        for (int i = 0; i<listTitles.length; i++) {
-
-            Disease disease = dataManager.create(Disease.class);
-            disease.setTitle(listTitles[i]);
-            disease.setRecipe(listRecipe[i]);
-            disease.setSymptoms(listSymptoms[i]);
-
-            diseases.add(disease);
-        }
-
+    @Override
+    public Disease defaultData() {
+        dataManager.create(Disease.class);
+        return new Disease("title1", "recipe1", "symptom1");
+        return Disease.builder()
+                .title("title1")
+                .recipe("recipe1")
+                .symptoms("symptom1");
     }
 
-    @PreDestroy
-    void preDestroy() {
-        diseases.forEach(object -> dataManager.remove(object));
+    @Override
+    public Disease save(Disease dto) {
+        return dataManager.save(dto);
+    }
+
+    @Override
+    public Disease saveDefault() {
+        return dataManager.save(defaultData().build());
+    }
+
+    @Override
+    public Disease create(Disease dto) {
+        Disease disease = dataManager.create(Disease.class);
+        disease.setRecipe(dto.getRecipe());
+        disease.setTitle(dto.getTitle());
+        disease.setSymptoms(dto.getSymptoms());
+        return disease;
+    }
+
+    @Override
+    public Disease createDefault() {
+        Disease disease = dataManager.create(Disease.class);
+        Disease buffer = defaultData();
+        disease.setRecipe(buffer.getRecipe());
+        disease.setTitle(buffer.getTitle());
+        disease.setSymptoms(buffer.getSymptoms());
+        return disease;
     }
 
 }

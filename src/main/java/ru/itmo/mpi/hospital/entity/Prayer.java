@@ -3,6 +3,7 @@ package ru.itmo.mpi.hospital.entity;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,6 +29,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@Builder
 public class Prayer {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)

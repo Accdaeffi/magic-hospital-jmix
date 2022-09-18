@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.persistence.Column;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,38 +34,48 @@ public class DiseaseCaseTestData {
     private static final String[] listComplaints = {"complaints1", "complaints2", "complaints3"};
     private static final String[] listActions = {"actions1", "actions2", "actions3"};
 
-    @PostConstruct
-    void init() {
+    public void loadData() {
         diseaseCases = new ArrayList<>();
 
-        DiseaseCase diseaseCase = dataManager.create(DiseaseCase.class);
+        diseaseTestData.loadData();
+        healerTestData.loadData();
+        patientTestData.loadData();
+
+        DiseaseCase diseaseCase = new DiseaseCase();
         diseaseCase.setDisease(diseaseTestData.diseases.get(0));
         diseaseCase.setActions(listActions[0]);
         diseaseCase.setPatientComplaints(listComplaints[0]);
         diseaseCase.setPatient(patientTestData.patients.get(0));
         diseaseCase.setHealer(healerTestData.healers.get(0));
-        diseaseCases.add(diseaseCase);
+        diseaseCases.add(dataManager.save(diseaseCase));
 
-        diseaseCase = dataManager.create(DiseaseCase.class);
+        diseaseCase = DiseaseCase.builder().disease(diseaseTestData.createDefault());
         diseaseCase.setDisease(diseaseTestData.diseases.get(1));
         diseaseCase.setActions(listActions[1]);
         diseaseCase.setPatientComplaints(listComplaints[1]);
         diseaseCase.setPatient(patientTestData.patients.get(1));
         diseaseCase.setHealer(healerTestData.healers.get(0));
-        diseaseCases.add(diseaseCase);
+        diseaseCases.add(dataManager.save(diseaseCase));
 
-        diseaseCase = dataManager.create(DiseaseCase.class);
+
+        diseaseCase = new DiseaseCase();
         diseaseCase.setDisease(diseaseTestData.diseases.get(1));
         diseaseCase.setActions(listActions[2]);
         diseaseCase.setPatientComplaints(listComplaints[2]);
         diseaseCase.setPatient(patientTestData.patients.get(2));
         diseaseCase.setHealer(healerTestData.healers.get(1));
-        diseaseCases.add(diseaseCase);
+        diseaseCases.add(dataManager.save(diseaseCase));
+
+        dataManager.save(diseaseCase);
     }
 
-    @PreDestroy
-    void preDestroy() {
+    public void unloadData() {
         diseaseCases.forEach(object -> dataManager.remove(object));
+        diseaseCases.clear();
+
+        diseaseTestData.unloadData();
+        healerTestData.unloadData();
+        patientTestData.unloadData();
     }
 
 }

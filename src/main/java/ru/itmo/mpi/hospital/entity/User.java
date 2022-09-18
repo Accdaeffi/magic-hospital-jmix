@@ -8,6 +8,7 @@ import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import io.jmix.security.authentication.JmixUserDetails;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @Table(name = "USER_", indexes = {
         @Index(name = "IDX_USER__ON_USERNAME", columnList = "USERNAME", unique = true)
 })
+@Data
 public class User implements JmixUserDetails, HasTimeZone {
 
     @Id
@@ -170,5 +172,22 @@ public class User implements JmixUserDetails, HasTimeZone {
 
     public void setTimeZoneId(String timeZoneId) {
         this.timeZoneId = timeZoneId;
+    }
+
+    public User() {
+    }
+
+    public User(UUID id, Integer version, String username, String password, String firstName, String lastName, Boolean isMale, String email, Boolean active, String timeZoneId, Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
+        this.version = version;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isMale = isMale;
+        this.email = email;
+        this.active = active;
+        this.timeZoneId = timeZoneId;
+        this.authorities = authorities;
     }
 }

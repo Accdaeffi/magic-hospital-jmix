@@ -2,6 +2,7 @@ package ru.itmo.mpi.hospital.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -25,6 +26,7 @@ import java.util.UUID;
 @Table(name = "DISEASE_CASE")
 @Entity
 @Data
+@Builder
 public class DiseaseCase {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)

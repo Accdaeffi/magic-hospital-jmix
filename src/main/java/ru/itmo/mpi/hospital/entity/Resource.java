@@ -2,6 +2,7 @@ package ru.itmo.mpi.hospital.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Table(name = "RESOURCE_")
 @Entity(name = "Resource_")
 @Data
+@Builder
 public class Resource {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)

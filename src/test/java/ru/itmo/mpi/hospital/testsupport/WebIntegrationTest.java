@@ -1,5 +1,6 @@
 package ru.itmo.mpi.hospital.testsupport;
 
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import ru.itmo.mpi.hospital.MagicHospitalApplication;
 import ru.itmo.mpi.hospital.testsupport.testdata.TestData;
 import io.jmix.ui.Screens;
@@ -12,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 @SpringBootTest
 @UiTest(authenticatedUser = "admin", mainScreenId = "MainScreen", screenBasePackages = "ru.itmo.mpi.hospital.screen")
 @ContextConfiguration(classes = {MagicHospitalApplication.class, TestData.class, UiTestAssistConfiguration.class})
+@AutoConfigureTestDatabase
 public abstract class WebIntegrationTest {
 
 

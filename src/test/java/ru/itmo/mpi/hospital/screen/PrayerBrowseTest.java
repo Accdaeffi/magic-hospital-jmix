@@ -1,5 +1,7 @@
 package ru.itmo.mpi.hospital.screen;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import ru.itmo.mpi.hospital.entity.Prayer;
 import ru.itmo.mpi.hospital.screen.prayer.PrayerBrowse;
 import ru.itmo.mpi.hospital.screen.prayer.PrayerEdit;
@@ -27,7 +29,13 @@ class PrayerBrowseTest extends WebIntegrationTest {
 
     @BeforeEach
     void setUp() {
+        prayers.loadData();
         prayer = prayers.prayers.get(0);
+    }
+
+    @AfterEach
+    void tearDown() {
+        prayers.unloadData();
     }
 
     @Test
@@ -39,7 +47,7 @@ class PrayerBrowseTest extends WebIntegrationTest {
         TableInteractions<Prayer> customerTable = customerTable(customerBrowse);
 
         // expect:
-        assertTrue(customerTable.firstItem().getPrayText().equals(prayer.getPrayText()));
+        Assertions.assertEquals(customerTable.firstItem().getPrayText(), prayer.getPrayText());
 
         /*assertThat(customerTable.firstItem())
                 .isEqualTo(prayer);*/

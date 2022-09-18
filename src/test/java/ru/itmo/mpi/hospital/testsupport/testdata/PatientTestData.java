@@ -26,26 +26,25 @@ public class PatientTestData {
     private static final Boolean[] listMage = {false, false, true};
     private static final SocialStatus[] listSocialStatus = {SocialStatus.ARISTOCRAT, SocialStatus.COMMONER, SocialStatus.SLAVE};
 
-    @PostConstruct
-    void init() {
+    public void loadData() {
         patients = new ArrayList<>();
 
         for (int i = 0; i<listName.length; i++) {
 
-            Patient patient = dataManager.create(Patient.class);
+            Patient patient = new Patient();
             patient.setName(listName[i]);
             patient.setSurname(listSurname[i]);
             patient.setIsMale(listMale[i]);
             patient.setIsMage(listMage[i]);
             patient.setSocialStatus(listSocialStatus[i]);
 
-            patients.add(patient);
+            dataManager.save(patients.add(patient));
         }
 
     }
 
-    @PreDestroy
-    void preDestroy() {
+    public void unloadData() {
         patients.forEach(object -> dataManager.remove(object));
+        patients.clear();
     }
 }

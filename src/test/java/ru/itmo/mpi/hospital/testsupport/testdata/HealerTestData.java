@@ -23,24 +23,23 @@ public class HealerTestData {
     private static final String[] listName = {"healerName1", "healerName2", "healerName3"};
     private static final String[] listSurname = {"healerSurname1", "healerSurname2", "healerSurname3"};
 
-    @PostConstruct
-    void init() {
+    public void loadData() {
         healers = new ArrayList<>();
 
         for (int i = 0; i < listUsername.length; i++) {
 
-            Healer healer = dataManager.create(Healer.class);
+            Healer healer = new Healer();
             healer.setUsername(listUsername[i]);
             healer.setFirstName(listName[i]);
             healer.setLastName(listSurname[i]);
 
-            healers.add(healer);
+            dataManager.save(healers.add(healer));
         }
 
     }
 
-    @PreDestroy
-    void preDestroy() {
+    public void unloadData() {
         healers.forEach(object -> dataManager.remove(object));
+        healers.clear();
     }
 }

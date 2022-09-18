@@ -28,23 +28,28 @@ public class PrayerTestData {
     private static final String[] listPrayText = {"pray1", "pray2", "pray3"};
     private static final PrayerStatus[] listPrayerStatus = {PrayerStatus.UNANSWERED, PrayerStatus.UNANSWERED, PrayerStatus.REJECTED};
 
-    @PostConstruct
-    void init() {
+    public void loadData() {
         prayers = new ArrayList<>();
+
+        godTestData.loadData();
+        diseaseCaseTestData.loadData();
 
         Prayer prayer = dataManager.create(Prayer.class);
         prayer.setGod(godTestData.gods.get(0));
         prayer.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(0));
         prayer.setPrayerStatus(listPrayerStatus[0]);
         prayer.setPrayText(listPrayText[0]);
-        prayers.add(prayer);
+        prayers.add(dataManager.save(prayer));
 
-        prayer = dataManager.create(Prayer.class);
+
+        /*prayer = dataManager.create(Prayer.class);
         prayer.setGod(godTestData.gods.get(1));
         prayer.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(1));
         prayer.setPrayerStatus(listPrayerStatus[1]);
         prayer.setPrayText(listPrayText[1]);
         prayers.add(prayer);
+
+        dataManager.save(prayer);
 
         prayer = dataManager.create(Prayer.class);
         prayer.setGod(godTestData.gods.get(0));
@@ -52,11 +57,16 @@ public class PrayerTestData {
         prayer.setPrayerStatus(listPrayerStatus[2]);
         prayer.setPrayText(listPrayText[2]);
         prayers.add(prayer);
+
+        dataManager.save(prayer);*/
     }
 
-    @PreDestroy
-    void preDestroy() {
+    public void unloadData() {
         prayers.forEach(object -> dataManager.remove(object));
+        prayers.clear();
+
+        godTestData.unloadData();
+        diseaseCaseTestData.unloadData();
     }
 
 }
