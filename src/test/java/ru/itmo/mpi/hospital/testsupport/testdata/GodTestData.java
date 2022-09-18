@@ -1,12 +1,11 @@
 package ru.itmo.mpi.hospital.testsupport.testdata;
 
-import ru.itmo.mpi.hospital.entity.God;
 import io.jmix.core.DataManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.itmo.mpi.hospital.entity.God;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +17,9 @@ public class GodTestData {
 
     public List<God> gods;
 
-    private static final String[] listUsername = {"godUserName1", "godUserName2", "godUserName3"};
-    private static final String[] listName = {"godName1", "godName2", "godName3"};
-    private static final String[] listSurname = {"godSurname1", "godSurname2", "godSurname3"};
+    private static final String[] listUsername = {"godUserName1"};
+    private static final String[] listName = {"godName1"};
+    private static final String[] listSurname = {"godSurname1"};
 
     @PostConstruct
     void init() {
@@ -33,13 +32,9 @@ public class GodTestData {
             god.setFirstName(listName[i]);
             god.setLastName(listSurname[i]);
 
-            gods.add(god);
+            gods.add(dataManager.save(god));
         }
 
     }
 
-    @PreDestroy
-    void preDestroy() {
-        gods.forEach(object -> dataManager.remove(object));
-    }
 }

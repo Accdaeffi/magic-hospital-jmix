@@ -1,10 +1,9 @@
 package ru.itmo.mpi.hospital.testsupport.testdata;
 
-import ru.itmo.mpi.hospital.entity.God;
-import ru.itmo.mpi.hospital.entity.Healer;
 import io.jmix.core.DataManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.itmo.mpi.hospital.entity.Healer;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -34,7 +33,7 @@ public class HealerTestData {
             healer.setFirstName(listName[i]);
             healer.setLastName(listSurname[i]);
 
-            healers.add(healer);
+            healers.add(dataManager.save(healer));
         }
 
     }

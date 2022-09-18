@@ -1,5 +1,10 @@
 package ru.itmo.mpi.hospital.screen;
 
+import io.jmix.core.DataManager;
+import io.jmix.ui.Screens;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.Prayer;
 import ru.itmo.mpi.hospital.screen.prayer.PrayerBrowse;
 import ru.itmo.mpi.hospital.screen.prayer.PrayerEdit;
@@ -7,10 +12,6 @@ import ru.itmo.mpi.hospital.testsupport.ScreenInteractions;
 import ru.itmo.mpi.hospital.testsupport.TableInteractions;
 import ru.itmo.mpi.hospital.testsupport.WebIntegrationTest;
 import ru.itmo.mpi.hospital.testsupport.testdata.PrayerTestData;
-import io.jmix.ui.Screens;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotNull;
 
@@ -24,10 +25,20 @@ class PrayerBrowseTest extends WebIntegrationTest {
     @Autowired
     private PrayerTestData prayers;
 
+    @Autowired
+    private DataManager dataManager;
+
 
     @BeforeEach
     void setUp() {
+
+        /*prayer = dataManager.create(Prayer.class);
+
+        prayer.setPrayText("test");
+
+        prayer = dataManager.save(prayer);*/
         prayer = prayers.prayers.get(0);
+
     }
 
     @Test
@@ -38,11 +49,14 @@ class PrayerBrowseTest extends WebIntegrationTest {
         PrayerBrowse customerBrowse = screenInteractions.open(PrayerBrowse.class);
         TableInteractions<Prayer> customerTable = customerTable(customerBrowse);
 
+        System.out.println(customerTable.firstItem().getPrayText());
+        System.out.println(prayer.getPrayText());
+
         // expect:
         assertTrue(customerTable.firstItem().getPrayText().equals(prayer.getPrayText()));
 
-        /*assertThat(customerTable.firstItem())
-                .isEqualTo(prayer);*/
+        assertThat(customerTable.firstItem())
+                .isEqualTo(prayer);
 
 
     }
@@ -68,6 +82,11 @@ class PrayerBrowseTest extends WebIntegrationTest {
         assertThat(customerEdit.getEditedEntity())
                 .isEqualTo(firstCustomer);
     }
+
+    /*@AfterEach
+    void tearDown() {
+        dataManager.remove(prayer);
+    }*/
 
     @NotNull
     private TableInteractions<Prayer> customerTable(PrayerBrowse customerBrowse) {

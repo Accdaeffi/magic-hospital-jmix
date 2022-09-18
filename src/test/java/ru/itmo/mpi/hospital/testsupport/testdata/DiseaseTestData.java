@@ -33,7 +33,7 @@ public class DiseaseTestData {
             disease.setRecipe(listRecipe[i]);
             disease.setSymptoms(listSymptoms[i]);
 
-            diseases.add(disease);
+            diseases.add(dataManager.save(disease));
         }
 
     }

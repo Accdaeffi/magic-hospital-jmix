@@ -1,11 +1,10 @@
 package ru.itmo.mpi.hospital.testsupport.testdata;
 
-import ru.itmo.mpi.hospital.entity.Disease;
-import ru.itmo.mpi.hospital.entity.Patient;
-import ru.itmo.mpi.hospital.entity.SocialStatus;
 import io.jmix.core.DataManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.itmo.mpi.hospital.entity.Patient;
+import ru.itmo.mpi.hospital.entity.SocialStatus;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -30,7 +29,7 @@ public class PatientTestData {
     void init() {
         patients = new ArrayList<>();
 
-        for (int i = 0; i<listName.length; i++) {
+        for (int i = 0; i < listName.length; i++) {
 
             Patient patient = dataManager.create(Patient.class);
             patient.setName(listName[i]);
@@ -39,7 +38,7 @@ public class PatientTestData {
             patient.setIsMage(listMage[i]);
             patient.setSocialStatus(listSocialStatus[i]);
 
-            patients.add(patient);
+            patients.add(dataManager.save(patient));
         }
 
     }

@@ -1,14 +1,12 @@
 package ru.itmo.mpi.hospital.testsupport.testdata;
 
-import ru.itmo.mpi.hospital.entity.Disease;
-import ru.itmo.mpi.hospital.entity.DiseaseCase;
 import io.jmix.core.DataManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.itmo.mpi.hospital.entity.DiseaseCase;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class DiseaseCaseTestData {
         diseaseCase.setPatientComplaints(listComplaints[0]);
         diseaseCase.setPatient(patientTestData.patients.get(0));
         diseaseCase.setHealer(healerTestData.healers.get(0));
-        diseaseCases.add(diseaseCase);
+        diseaseCases.add(dataManager.save(diseaseCase));
 
         diseaseCase = dataManager.create(DiseaseCase.class);
         diseaseCase.setDisease(diseaseTestData.diseases.get(1));
@@ -50,7 +48,7 @@ public class DiseaseCaseTestData {
         diseaseCase.setPatientComplaints(listComplaints[1]);
         diseaseCase.setPatient(patientTestData.patients.get(1));
         diseaseCase.setHealer(healerTestData.healers.get(0));
-        diseaseCases.add(diseaseCase);
+        diseaseCases.add(dataManager.save(diseaseCase));
 
         diseaseCase = dataManager.create(DiseaseCase.class);
         diseaseCase.setDisease(diseaseTestData.diseases.get(1));
@@ -58,7 +56,7 @@ public class DiseaseCaseTestData {
         diseaseCase.setPatientComplaints(listComplaints[2]);
         diseaseCase.setPatient(patientTestData.patients.get(2));
         diseaseCase.setHealer(healerTestData.healers.get(1));
-        diseaseCases.add(diseaseCase);
+        diseaseCases.add(dataManager.save(diseaseCase));
     }
 
     @PreDestroy
