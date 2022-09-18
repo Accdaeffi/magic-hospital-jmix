@@ -17,6 +17,7 @@
         <item screen="PrayerUnanswered.browse"
               caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerUnansweredBrowse.menu"/>
         <item screen="Patient.browse" caption="msg://ru.itmo.mpi.hospital.screen.patient/patientBrowse.menu"/>
+        <item screen="Prayer.god-browse" caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerGodBrowse.menu"/>
     </menu>
 
 </menu-config>

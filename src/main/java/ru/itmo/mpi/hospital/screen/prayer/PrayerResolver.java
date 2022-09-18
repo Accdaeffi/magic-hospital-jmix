@@ -14,10 +14,10 @@ import io.jmix.ui.screen.UiDescriptor;
 
 import javax.inject.Named;
 
-@UiController("Prayer.view")
-@UiDescriptor("prayer-view.xml")
+@UiController("Prayer.resolve")
+@UiDescriptor("prayer-resolve.xml")
 @EditedEntityContainer("prayerDc")
-public class PrayerView extends StandardEditor<Prayer> {
+public class PrayerResolver extends StandardEditor<Prayer> {
 
     @Named("acceptPrayerId")
     private AcceptPrayerAction<Prayer> acceptPrayerAction;

@@ -37,9 +37,11 @@ public class AcceptPrayerAction<E extends Prayer> extends ItemTrackingAction {
     @Override
     public void actionPerform(Component component) {
 
-        Prayer selectedPrayer = prayerGenerator.apply(new String());
+        Prayer selectedPrayer = prayerGenerator.apply("");
 
-        if (selectedPrayer == null || selectedPrayer.getPrayerStatus() != PrayerStatus.UNANSWERED) {
+        Prayer prayerFromDb = dataManager.load(Prayer.class).id(selectedPrayer.getId()).one();
+
+        if (selectedPrayer == null || prayerFromDb.getPrayerStatus() != PrayerStatus.UNANSWERED) {
             return;
         }
 

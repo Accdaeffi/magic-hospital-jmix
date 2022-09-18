@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
-        caption="msg://prayerView.caption"
+        caption="msg://prayerResolver.caption"
         focusComponent="form">
     <data>
         <instance id="prayerDc"
@@ -33,6 +33,7 @@
             <column width="350px">
                 <textField id="healerName" property="diseaseCase.healer" />
                 <textField id="patientName" property="diseaseCase.patient" />
+                <textField id="patientStatus" property="diseaseCase.patient.socialStatus" />
                 <textField id="diseaseName" property="diseaseCase.disease" />
                 <textField id="prayTextField" property="prayText"/>
             </column>

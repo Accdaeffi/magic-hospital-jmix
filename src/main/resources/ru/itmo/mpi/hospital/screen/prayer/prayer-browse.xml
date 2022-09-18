@@ -44,6 +44,7 @@
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
+                <action id="view" type="view"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
@@ -60,6 +61,7 @@
                           alwaysVisible="true">
                 <button id="createBtn" action="prayersTable.create"/>
                 <button id="editBtn" action="prayersTable.edit"/>
+                <button id="viewBtn" action="prayersTable.view"/>
                 <button id="removeBtn" action="prayersTable.remove"/>
             </buttonsPanel>
         </groupTable>

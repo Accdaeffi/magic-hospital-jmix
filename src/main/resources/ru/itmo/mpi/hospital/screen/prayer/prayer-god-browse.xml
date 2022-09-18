@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://prayerUnansweredBrowse.caption"
+        caption="msg://prayerGodBrowse.caption"
         focusComponent="prayersTable">
     <data readOnly="true">
         <collection id="prayersDc"
                     class="ru.itmo.mpi.hospital.entity.Prayer">
             <fetchPlan extends="_base">
-                <property name="diseaseCase"/>
+                <property name="god" fetchPlan="_base"/>
+                <property name="diseaseCase" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="prayersDl">
                 <query>
-                    <![CDATA[select e from Prayer e where e.prayerStatus = 'unanswered']]>
+                    <![CDATA[select e from Prayer e]]>
                 </query>
             </loader>
         </collection>
@@ -41,9 +42,10 @@
                     width="100%"
                     dataContainer="prayersDc">
             <actions>
-                <action id="viewPrayer" trackSelection="true" shortcut="${TABLE_EDIT_SHORTCUT}"/>
+                <action id="view" type="view"/>
             </actions>
             <columns>
+                <column id="god"/>
                 <column id="diseaseCase.patient" />
                 <column id="diseaseCase.healer" />
                 <column id="diseaseCase.disease" />
@@ -53,7 +55,7 @@
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="viewBtn" caption="Resolve prayer" action="prayersTable.viewPrayer" />
+                <button id="viewBtn" action="prayersTable.view"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
