@@ -1,6 +1,5 @@
 package ru.itmo.mpi.hospital.entity;
 
-import io.jmix.core.Messages;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
@@ -28,7 +27,7 @@ public class Patient {
     @Id
     private UUID id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "surname")
@@ -62,9 +61,9 @@ public class Patient {
 
     @InstanceName
     @DependsOnProperties({"name", "surname"})
-    public String getDisplayName(Messages messages) {
-        return messages.formatMessage(
-                getClass(), "Patient.instanceName", this.name, this.surname);
+    public String getDisplayName() {
+        return String.format("%s %s", (name != null ? name : ""),
+                (surname != null ? surname : "")).trim();
     }
 
 }

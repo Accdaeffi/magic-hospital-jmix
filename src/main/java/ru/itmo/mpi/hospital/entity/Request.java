@@ -1,6 +1,9 @@
 package ru.itmo.mpi.hospital.entity;
 
+import io.jmix.core.Messages;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.DependsOnProperties;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
@@ -65,6 +68,12 @@ public class Request {
 
     public void setRequestStatus(RequestStatus requestStatus) {
         this.requestStatus = requestStatus == null ? null : requestStatus.getId();
+    }
+
+    @InstanceName
+    @DependsOnProperties({"id"})
+    public String getDisplayName(Messages messages) {
+        return messages.formatMessage(getClass(), "Request.instanceName", id.toString());
     }
 
 }

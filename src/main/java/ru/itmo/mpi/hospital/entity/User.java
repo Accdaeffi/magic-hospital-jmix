@@ -11,7 +11,14 @@ import io.jmix.security.authentication.JmixUserDetails;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.Collections;
@@ -43,7 +50,7 @@ public class User implements JmixUserDetails, HasTimeZone {
     @Column(name = "PASSWORD")
     protected String password;
 
-    @Column(name = "FIRST_NAME")
+    @Column(name = "FIRST_NAME", nullable = false)
     protected String firstName;
 
     @Column(name = "LAST_NAME")
@@ -161,10 +168,10 @@ public class User implements JmixUserDetails, HasTimeZone {
     }
 
     @InstanceName
-    @DependsOnProperties({"firstName", "lastName", "username"})
+    @DependsOnProperties({"firstName", "lastName"})
     public String getDisplayName() {
-        return String.format("%s %s [%s]", (firstName != null ? firstName : ""),
-                (lastName != null ? lastName : ""), username).trim();
+        return String.format("%s %s", (firstName != null ? firstName : ""),
+                (lastName != null ? lastName : "")).trim();
     }
 
     @Override

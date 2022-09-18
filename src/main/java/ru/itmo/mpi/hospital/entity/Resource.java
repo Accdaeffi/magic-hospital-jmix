@@ -1,6 +1,7 @@
 package ru.itmo.mpi.hospital.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class Resource {
     @Id
     private UUID id;
 
+    @InstanceName
     @Column(name = "name")
     private String name;
 

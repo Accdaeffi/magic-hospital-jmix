@@ -1,6 +1,9 @@
 package ru.itmo.mpi.hospital.entity;
 
+import io.jmix.core.Messages;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.DependsOnProperties;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,7 +55,7 @@ public class DiseaseCase {
     private Healer healer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
     @OneToOne(mappedBy = "diseaseCase", fetch = FetchType.LAZY)
@@ -75,5 +78,11 @@ public class DiseaseCase {
     @Column(name = "LAST_MODIFIED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModifiedDate;
+
+    @InstanceName
+    @DependsOnProperties({"patient", "createdDate"})
+    public String getDisplayName(Messages messages) {
+        return messages.formatMessage(getClass(), "DiseaseCase.instanceName", patient.getDisplayName(), createdDate.toString());
+    }
 
 }

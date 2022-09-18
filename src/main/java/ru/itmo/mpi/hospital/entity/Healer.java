@@ -1,5 +1,7 @@
 package ru.itmo.mpi.hospital.entity;
 
+import io.jmix.core.metamodel.annotation.DependsOnProperties;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,4 +32,12 @@ public class Healer extends User {
     public void setSocialStatus(SocialStatus socialStatus) {
         this.socialStatus = socialStatus == null ? null : socialStatus.getId();
     }
+
+    @InstanceName
+    @DependsOnProperties({"firstName", "lastName"})
+    public String getDisplayName() {
+        return String.format("%s %s", (firstName != null ? firstName : ""),
+                (lastName != null ? lastName : "")).trim();
+    }
+
 }

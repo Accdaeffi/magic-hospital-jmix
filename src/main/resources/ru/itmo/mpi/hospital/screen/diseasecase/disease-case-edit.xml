@@ -8,7 +8,6 @@
             <fetchPlan extends="_base">
                 <property name="healer" fetchPlan="_base"/>
                 <property name="disease" fetchPlan="_base"/>
-                <property name="patient" fetchPlan="_base"/>
                 <property name="prayer" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
@@ -47,12 +46,6 @@
                     </actions>
                 </entityPicker>
                 <entityPicker id="patientField" property="patient">
-                    <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
-                        <action id="entityClear" type="entity_clear"/>
-                    </actions>
-                </entityPicker>
-                <entityPicker id="prayerField" property="prayer">
                     <actions>
                         <action id="entityLookup" type="entity_lookup"/>
                         <action id="entityClear" type="entity_clear"/>
