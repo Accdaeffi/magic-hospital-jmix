@@ -36,7 +36,6 @@ public class Prayer {
     @JoinColumn(name = "god_id")
     private God god;
 
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "disease_case_id", referencedColumnName = "id")
     private DiseaseCase diseaseCase;

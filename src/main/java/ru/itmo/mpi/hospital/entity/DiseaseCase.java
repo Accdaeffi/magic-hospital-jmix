@@ -61,6 +61,9 @@ public class DiseaseCase {
     @OneToOne(mappedBy = "diseaseCase", fetch = FetchType.LAZY)
     private Prayer prayer;
 
+    @OneToOne(mappedBy = "diseaseCase", fetch = FetchType.LAZY)
+    private Request request;
+
     @CreatedBy
     @Column(name = "CREATED_BY")
     private String createdBy;

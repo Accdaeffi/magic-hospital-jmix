@@ -15,12 +15,11 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
@@ -37,8 +36,8 @@ public class Request {
     @JoinColumn(name = "helper_id")
     private Helper helper;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "disease_case_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "disease_case_id", referencedColumnName = "id")
     private DiseaseCase diseaseCase;
 
     @Column(name = "required_penta_help")
@@ -47,11 +46,14 @@ public class Request {
     @Column(name = "additional_info")
     private String additionalInfo;
 
-    @OneToMany(mappedBy = "request")
-    private List<RequestResource> requestResources;
-
     @Column(name = "request_status")
     private String requestStatus;
+
+    @Column(name = "dust_amount_required")
+    private Integer dustAmountRequired;
+
+    @Column(name = "water_required")
+    private Integer waterRequired;
 
     @CreatedBy
     @Column(name = "CREATED_BY")
