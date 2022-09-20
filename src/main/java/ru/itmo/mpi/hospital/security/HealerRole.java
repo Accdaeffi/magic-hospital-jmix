@@ -21,7 +21,7 @@ import ru.itmo.mpi.hospital.entity.Request;
 public interface HealerRole {
 
     @EntityPolicy(entityClass = Prayer.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.CREATE})
-    @EntityAttributePolicy(entityClass = Prayer.class, attributes = {"god", "prayText", "diseaseCase"}, action = EntityAttributePolicyAction.VIEW)
+    @EntityAttributePolicy(entityClass = Prayer.class, attributes = {"god", "prayText", "diseaseCase", "prayerStatus"}, action = EntityAttributePolicyAction.MODIFY)
     @EntityAttributePolicy(entityClass = Prayer.class, attributes = "prayerStatus", action = EntityAttributePolicyAction.VIEW)
     @ScreenPolicy(screenIds = {"Prayer.healer-create", "Prayer.browse"})
     @MenuPolicy(menuIds = "Prayer.browse")
@@ -30,8 +30,8 @@ public interface HealerRole {
     @EntityPolicy(entityClass = DiseaseCase.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.UPDATE})
     @EntityAttributePolicy(entityClass = DiseaseCase.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
     @EntityAttributePolicy(entityClass = DiseaseCase.class, attributes = {"patientComplaints", "actions", "disease", "prayer"}, action = EntityAttributePolicyAction.MODIFY)
-    @ScreenPolicy(screenIds = {"DiseaseCase.edit", "DiseaseCase.browse"})
-    @MenuPolicy(menuIds = "DiseaseCase.browse")
+    @ScreenPolicy(screenIds = {"DiseaseCase.healer-examine", "DiseaseCase.healer-browse"})
+    @MenuPolicy(menuIds = "DiseaseCase.healer-browse")
     void diseaseCase();
 
     @EntityPolicy(entityClass = Request.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.CREATE, EntityPolicyAction.UPDATE})

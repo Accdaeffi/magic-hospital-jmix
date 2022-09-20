@@ -4,7 +4,6 @@
     <menu id="application" caption="msg://ru.itmo.mpi.hospital/menu.application" insertBefore="administration">
         <item screen="User.browse" caption="msg://ru.itmo.mpi.hospital.screen.user/UserBrowse.caption"/>
         <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
-        <item screen="Resource_.browse" caption="msg://ru.itmo.mpi.hospital.screen.resource/resourceBrowse.menu"/>
         <item screen="DiseaseCase.browse"
               caption="msg://ru.itmo.mpi.hospital.screen.diseasecase/diseaseCaseBrowse.menu"/>
         <item screen="Disease.browse" caption="msg://ru.itmo.mpi.hospital.screen.disease/diseaseBrowse.menu"/>
@@ -20,6 +19,8 @@
         <item screen="Prayer.god-browse" caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerGodBrowse.menu"/>
         <item screen="Request.healer-browse"
               caption="msg://ru.itmo.mpi.hospital.screen.request/requestHealerBrowse.menu"/>
+        <item screen="DiseaseCase.healer-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.diseasecase/diseaseCaseHealerBrowse.menu"/>
     </menu>
 
 </menu-config>

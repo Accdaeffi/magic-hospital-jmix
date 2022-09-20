@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://resourceBrowse.caption"
-        focusComponent="resourcesTable">
+        caption="msg://diseaseCaseHealerBrowse.caption"
+        focusComponent="diseaseCasesTable">
     <data readOnly="true">
-        <collection id="resourcesDc"
-                    class="ru.itmo.mpi.hospital.entity.Resource">
+        <collection id="diseaseCasesDc"
+                    class="ru.itmo.mpi.hospital.entity.DiseaseCase">
             <fetchPlan extends="_base"/>
-            <loader id="resourcesDl">
+            <loader id="diseaseCasesDl">
                 <query>
-                    <![CDATA[select e from Resource_ e]]>
+                    <![CDATA[select e from DiseaseCase e]]>
                 </query>
             </loader>
         </collection>
@@ -30,29 +30,29 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="resourcesTable" spacing="true">
+    <layout expand="diseaseCasesTable" spacing="true">
         <filter id="filter"
-                dataLoader="resourcesDl">
+                dataLoader="diseaseCasesDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="resourcesTable"
+        <groupTable id="diseaseCasesTable"
                     width="100%"
-                    dataContainer="resourcesDc">
+                    dataContainer="diseaseCasesDc">
             <actions>
-                <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="examine" />
             </actions>
             <columns>
-                <column id="name"/>
-                <column id="code"/>
+                <column id="patientComplaints"/>
+                <column id="actions"/>
+                <column id="patient"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="resourcesTable.create"/>
-                <button id="editBtn" action="resourcesTable.edit"/>
-                <button id="removeBtn" action="resourcesTable.remove"/>
+                <button id="editBtn" action="diseaseCasesTable.edit"/>
+                <button id="examineBtn" action="diseaseCasesTable.examine"
+                        caption="msg://diseaseCaseHealerBrowse.examineButton"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

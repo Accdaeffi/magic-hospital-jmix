@@ -29,9 +29,14 @@ public class PrayerUnansweredBrowse extends StandardLookup<Prayer> {
     @Subscribe("prayersTable.viewPrayer")
     public void onViewPrayer(Action.ActionPerformedEvent event) {
 
+        Prayer selectedPrayer = prayersDc.getItem();
+
         screenBuilders.editor(Prayer.class, this)
                 .withScreenClass(PrayerResolver.class)
-                .editEntity(prayersDc.getItem())
+                .withAfterCloseListener(listener -> {
+                    prayersDc.replaceItem(selectedPrayer);
+                })
+                .editEntity(selectedPrayer)
                 .build().show();
     }
 
