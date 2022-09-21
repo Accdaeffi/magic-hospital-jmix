@@ -21,6 +21,7 @@
               caption="msg://ru.itmo.mpi.hospital.screen.request/requestHealerBrowse.menu"/>
         <item screen="DiseaseCase.healer-browse"
               caption="msg://ru.itmo.mpi.hospital.screen.diseasecase/diseaseCaseHealerBrowse.menu"/>
+        <item screen="Prayer.healer-browse" caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerHealerBrowse.menu"/>
     </menu>
 
 </menu-config>
