@@ -2,12 +2,15 @@ package ru.itmo.mpi.hospital.screen.diseasecase;
 
 import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.action.Action;
+import io.jmix.ui.component.Button;
 import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.DiseaseCase;
 import ru.itmo.mpi.hospital.entity.Prayer;
+import ru.itmo.mpi.hospital.entity.Request;
 import ru.itmo.mpi.hospital.screen.prayer.PrayerHealerCreate;
+import ru.itmo.mpi.hospital.screen.request.RequestHealerCreate;
 
 @UiController("DiseaseCase.healer-examine")
 @UiDescriptor("disease-case-healer-examine.xml")
@@ -18,12 +21,44 @@ public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
     InstanceContainer<DiseaseCase> diseaseCaseDc;
 
     @Autowired
+    Button createPrayerBtn;
+
+    @Autowired
+    Button createRequestBtn;
+
+    @Autowired
     ScreenBuilders screenBuilders;
+
+    @Subscribe
+    public void onAfterShow(AfterShowEvent event) {
+        DiseaseCase diseaseCase = diseaseCaseDc.getItem();
+
+        if (diseaseCase.getPrayer() != null) {
+            createPrayerBtn.setEnabled(false);
+        }
+
+        if (diseaseCase.getRequest() != null) {
+            createRequestBtn.setEnabled(false);
+        }
+    }
+
+
 
     @Subscribe("createPrayer")
     public void onCreatePrayer(Action.ActionPerformedEvent event) {
         PrayerHealerCreate screen = screenBuilders.editor(Prayer.class, this)
                 .withScreenClass(PrayerHealerCreate.class)
+                .newEntity()
+                .build();
+
+        screen.setDiseaseCase(diseaseCaseDc.getItem());
+        screen.show();
+    }
+
+    @Subscribe("createRequest")
+    public void onCreateRequest(Action.ActionPerformedEvent event) {
+        RequestHealerCreate screen = screenBuilders.editor(Request.class, this)
+                .withScreenClass(RequestHealerCreate.class)
                 .newEntity()
                 .build();
 

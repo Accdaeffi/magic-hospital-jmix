@@ -5,6 +5,7 @@ import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.DiseaseCase;
 import ru.itmo.mpi.hospital.entity.Prayer;
+import ru.itmo.mpi.hospital.entity.PrayerStatus;
 
 @UiController("Prayer.healer-create")
 @UiDescriptor("prayer-healer-create.xml")
@@ -23,5 +24,6 @@ public class PrayerHealerCreate extends StandardEditor<Prayer> {
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         prayerDc.getItem().setDiseaseCase(diseaseCase);
+        prayerDc.getItem().setPrayerStatus(PrayerStatus.UNANSWERED);
     }
 }
