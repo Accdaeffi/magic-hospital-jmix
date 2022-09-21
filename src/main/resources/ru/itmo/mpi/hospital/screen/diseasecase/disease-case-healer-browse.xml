@@ -6,7 +6,10 @@
     <data readOnly="true">
         <collection id="diseaseCasesDc"
                     class="ru.itmo.mpi.hospital.entity.DiseaseCase">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="prayer" fetchPlan="_base"/>
+                <property name="request" fetchPlan="_base"/>
+            </fetchPlan>
             <loader id="diseaseCasesDl">
                 <query>
                     <![CDATA[select e from DiseaseCase e]]>
@@ -43,6 +46,8 @@
                 <action id="examine" />
             </actions>
             <columns>
+                <column id="prayer" />
+                <column id="request" />
                 <column id="patientComplaints"/>
                 <column id="actions"/>
                 <column id="patient"/>
