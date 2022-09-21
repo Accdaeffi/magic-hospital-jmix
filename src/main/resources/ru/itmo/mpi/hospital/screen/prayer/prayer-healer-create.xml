@@ -5,7 +5,9 @@
     <data>
         <instance id="prayerDc"
                   class="ru.itmo.mpi.hospital.entity.Prayer">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="god" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
     </data>
@@ -30,7 +32,12 @@
         <form id="form" dataContainer="prayerDc">
             <column width="350px">
                 <textField id="prayTextField" property="prayText"/>
-                <comboBox id="prayerStatusField" property="prayerStatus"/>
+                <entityPicker id="helperField" property="god" required="true">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

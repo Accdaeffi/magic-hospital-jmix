@@ -5,7 +5,9 @@
     <data>
         <instance id="requestDc"
                   class="ru.itmo.mpi.hospital.entity.Request">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="helper" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
     </data>
@@ -33,7 +35,7 @@
                 <textField id="additionalInfoField" property="additionalInfo"/>
                 <textField id="dustAmountRequiredField" property="dustAmountRequired"/>
                 <textField id="waterRequiredField" property="waterRequired"/>
-                <entityPicker id="helperField" property="helper">
+                <entityPicker id="helperField" property="helper" required="true">
                     <actions>
                         <action id="entityLookup" type="entity_lookup"/>
                         <action id="entityClear" type="entity_clear"/>

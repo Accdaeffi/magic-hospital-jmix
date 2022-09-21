@@ -1,7 +1,11 @@
 package ru.itmo.mpi.hospital.screen.prayer;
 
 import io.jmix.ui.model.InstanceContainer;
-import io.jmix.ui.screen.*;
+import io.jmix.ui.screen.EditedEntityContainer;
+import io.jmix.ui.screen.StandardEditor;
+import io.jmix.ui.screen.Subscribe;
+import io.jmix.ui.screen.UiController;
+import io.jmix.ui.screen.UiDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.DiseaseCase;
 import ru.itmo.mpi.hospital.entity.Prayer;
@@ -26,4 +30,6 @@ public class PrayerHealerCreate extends StandardEditor<Prayer> {
         prayerDc.getItem().setDiseaseCase(diseaseCase);
         prayerDc.getItem().setPrayerStatus(PrayerStatus.UNANSWERED);
     }
+
+
 }
