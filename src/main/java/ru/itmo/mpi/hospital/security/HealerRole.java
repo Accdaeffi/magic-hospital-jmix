@@ -36,13 +36,19 @@ public interface HealerRole {
 
     @EntityPolicy(entityClass = Request.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.CREATE, EntityPolicyAction.UPDATE})
     @EntityAttributePolicy(entityClass = Request.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @EntityAttributePolicy(entityClass = Request.class, attributes = {"dustAmountRequired", "requestStatus", "waterRequired", "additionalInfo", "required_penta_help", "diseaseCase", "helper"}, action = EntityAttributePolicyAction.MODIFY)
+    @EntityAttributePolicy(entityClass = Request.class, attributes = {"dustAmountRequired", "requestStatus", "waterRequired", "additionalInfo", "requiredPentaHelp", "diseaseCase", "helper"}, action = EntityAttributePolicyAction.MODIFY)
     @ScreenPolicy(screenIds = {"Request.healer-create", "Request.healer-browse"})
     @MenuPolicy(menuIds = "Request.healer-browse")
     void request();
 
+    @EntityPolicy(entityClass = Helper.class, actions = {EntityPolicyAction.READ})
+    @EntityAttributePolicy(entityClass = Helper.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @ScreenPolicy(screenIds = {"Helper.browse"})
+    void helper();
+
     @EntityPolicy(entityClass = God.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = God.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @ScreenPolicy(screenIds = {"God.browse"})
     void god();
 
     @EntityPolicy(entityClass = Disease.class, actions = {EntityPolicyAction.READ})
@@ -60,10 +66,6 @@ public interface HealerRole {
     @EntityPolicy(entityClass = Administrator.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = Administrator.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
     void administrator();
-
-    @EntityPolicy(entityClass = Helper.class, actions = {EntityPolicyAction.READ})
-    @EntityAttributePolicy(entityClass = Helper.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    void helper();
 
 
 }
