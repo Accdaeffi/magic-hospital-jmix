@@ -22,8 +22,7 @@ public interface HealerRole {
 
     @EntityPolicy(entityClass = Prayer.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.CREATE})
     @EntityAttributePolicy(entityClass = Prayer.class, attributes = {"god", "prayText", "diseaseCase", "prayerStatus"}, action = EntityAttributePolicyAction.MODIFY)
-    @EntityAttributePolicy(entityClass = Prayer.class, attributes = "prayerStatus", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"Prayer.healer-create", "Prayer.healer-browse"})
+    @ScreenPolicy(screenIds = {"Prayer.healer-create", "Prayer.healer-browse", "Prayer.edit"})
     @MenuPolicy(menuIds = "Prayer.healer-browse")
     void prayer();
 
@@ -53,6 +52,7 @@ public interface HealerRole {
 
     @EntityPolicy(entityClass = Disease.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = Disease.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @ScreenPolicy(screenIds = {"Disease.browse"})
     void disease();
 
     @EntityPolicy(entityClass = Patient.class, actions = {EntityPolicyAction.READ})

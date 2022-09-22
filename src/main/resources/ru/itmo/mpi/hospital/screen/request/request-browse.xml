@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://requestHealerBrowse.caption"
+        caption="msg://requestBrowse.caption"
         focusComponent="requestsTable">
     <data readOnly="true">
         <collection id="requestsDc"
@@ -39,11 +39,9 @@
                     width="100%"
                     dataContainer="requestsDc">
             <actions>
-                <action id="view" type="view">
-                    <properties>
-                        <property name="screenClass" value="ru.itmo.mpi.hospital.screen.request.RequestHealerCreate"/>
-                    </properties>
-                </action>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
             </actions>
             <columns>
                 <column id="requiredPentaHelp"/>
@@ -55,7 +53,9 @@
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="viewBtn" action="requestsTable.view"/>
+                <button id="createBtn" action="requestsTable.create"/>
+                <button id="editBtn" action="requestsTable.edit"/>
+                <button id="removeBtn" action="requestsTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

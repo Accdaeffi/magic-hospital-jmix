@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://requestHealerBrowse.caption"
-        focusComponent="requestsTable">
+        caption="msg://diseaseCaseAdministratorBrowse.caption"
+        focusComponent="diseaseCasesTable">
     <data readOnly="true">
-        <collection id="requestsDc"
-                    class="ru.itmo.mpi.hospital.entity.Request">
-            <fetchPlan extends="_base"/>
-            <loader id="requestsDl">
+        <collection id="diseaseCasesDc"
+                    class="ru.itmo.mpi.hospital.entity.DiseaseCase">
+            <fetchPlan extends="_base">
+                <property name="disease" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="diseaseCasesDl">
                 <query>
-                    <![CDATA[select e from Request e]]>
+                    <![CDATA[select e from DiseaseCase e]]>
                 </query>
             </loader>
         </collection>
@@ -30,32 +32,37 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="requestsTable" spacing="true">
+    <layout expand="diseaseCasesTable" spacing="true">
         <filter id="filter"
-                dataLoader="requestsDl">
+                dataLoader="diseaseCasesDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="requestsTable"
+        <groupTable id="diseaseCasesTable"
                     width="100%"
-                    dataContainer="requestsDc">
+                    dataContainer="diseaseCasesDc">
             <actions>
-                <action id="view" type="view">
+                <action id="create" type="create">
                     <properties>
-                        <property name="screenClass" value="ru.itmo.mpi.hospital.screen.request.RequestHealerCreate"/>
+                        <property name="screenClass" value="ru.itmo.mpi.hospital.screen.diseasecase.DiseaseCaseAdministratorEdit"/>
+                    </properties>
+                </action>
+                <action id="edit" type="edit">
+                    <properties>
+                        <property name="screenClass" value="ru.itmo.mpi.hospital.screen.diseasecase.DiseaseCaseAdministratorEdit"/>
                     </properties>
                 </action>
             </actions>
             <columns>
-                <column id="requiredPentaHelp"/>
-                <column id="additionalInfo"/>
-                <column id="requestStatus"/>
-                <column id="dustAmountRequired"/>
-                <column id="waterRequired"/>
+                <column id="patientComplaints"/>
+                <column id="actions"/>
+                <column id="disease"/>
+                <column id="patient"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="viewBtn" action="requestsTable.view"/>
+                <button id="createBtn" action="diseaseCasesTable.create"/>
+                <button id="editBtn" action="diseaseCasesTable.edit"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

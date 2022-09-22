@@ -32,6 +32,7 @@
                     width="100%"
                     dataContainer="prayersDc">
             <actions>
+                <action id="view" type="view" />
             </actions>
             <columns>
                 <column id="god" />
@@ -42,6 +43,7 @@
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
+                <button id="viewBtn" action="prayersTable.view"/>
             </buttonsPanel>
         </groupTable>
     </layout>
