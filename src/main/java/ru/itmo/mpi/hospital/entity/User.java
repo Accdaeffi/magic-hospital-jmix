@@ -1,6 +1,5 @@
 package ru.itmo.mpi.hospital.entity;
 
-import io.jmix.core.HasTimeZone;
 import io.jmix.core.annotation.Secret;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.SystemLevel;
@@ -31,7 +30,7 @@ import java.util.UUID;
 })
 @Getter
 @Setter
-public class User implements JmixUserDetails, HasTimeZone {
+public class User implements JmixUserDetails {
 
     @Id
     @Column(name = "ID")
@@ -50,7 +49,7 @@ public class User implements JmixUserDetails, HasTimeZone {
     @Column(name = "PASSWORD")
     protected String password;
 
-    @Column(name = "FIRST_NAME", nullable = false)
+    @Column(name = "FIRST_NAME")
     protected String firstName;
 
     @Column(name = "LAST_NAME")
@@ -65,9 +64,6 @@ public class User implements JmixUserDetails, HasTimeZone {
 
     @Column(name = "ACTIVE")
     protected Boolean active = true;
-
-    @Column(name = "TIME_ZONE_ID")
-    protected String timeZoneId;
 
     @Transient
     protected Collection<? extends GrantedAuthority> authorities;
@@ -174,12 +170,4 @@ public class User implements JmixUserDetails, HasTimeZone {
                 (lastName != null ? lastName : "")).trim();
     }
 
-    @Override
-    public String getTimeZoneId() {
-        return timeZoneId;
-    }
-
-    public void setTimeZoneId(String timeZoneId) {
-        this.timeZoneId = timeZoneId;
-    }
 }

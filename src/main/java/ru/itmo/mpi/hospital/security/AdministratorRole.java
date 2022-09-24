@@ -15,6 +15,7 @@ import ru.itmo.mpi.hospital.entity.Healer;
 import ru.itmo.mpi.hospital.entity.Helper;
 import ru.itmo.mpi.hospital.entity.Patient;
 import ru.itmo.mpi.hospital.entity.Prayer;
+import ru.itmo.mpi.hospital.entity.Request;
 
 @ResourceRole(name = "AdministratorRole", code = "administrator-role", scope = "UI")
 public interface AdministratorRole {
@@ -34,14 +35,14 @@ public interface AdministratorRole {
 
     @EntityPolicy(entityClass = Prayer.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = Prayer.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"Prayer.browse"})
-    @MenuPolicy(menuIds = "Prayer.browse")
+    @ScreenPolicy(screenIds = {"Prayer.administrator-browse", "Prayer.administrator-view"})
+    @MenuPolicy(menuIds = "Prayer.administrator-browse")
     void prayer();
 
-    @EntityPolicy(entityClass = Helper.class, actions = {EntityPolicyAction.READ})
-    @EntityAttributePolicy(entityClass = Helper.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"Request.browse"})
-    @MenuPolicy(menuIds = {"Request.browse"})
+    @EntityPolicy(entityClass = Request.class, actions = {EntityPolicyAction.READ})
+    @EntityAttributePolicy(entityClass = Request.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @ScreenPolicy(screenIds = {"Request.administrator-browse", "Request.administrator-view"})
+    @MenuPolicy(menuIds = {"Request.administrator-browse"})
     void request();
 
     @EntityPolicy(entityClass = Helper.class, actions = {EntityPolicyAction.READ})

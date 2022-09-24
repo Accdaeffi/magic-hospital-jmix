@@ -25,6 +25,12 @@
         <item screen="Request.browse" caption="msg://ru.itmo.mpi.hospital.screen.request/requestBrowse.menu"/>
         <item screen="DiseaseCase.administrator-browse"
               caption="msg://ru.itmo.mpi.hospital.screen.diseasecase/diseaseCaseAdministratorBrowse.menu"/>
+        <item screen="Patient.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.patient/patientAdministratorBrowse.menu"/>
+        <item screen="Request.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.request/requestAdministratorBrowse.menu"/>
+        <item screen="Prayer.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerAdministratorBrowse.menu"/>
     </menu>
 
 </menu-config>

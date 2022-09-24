@@ -43,6 +43,13 @@
                     </actions>
                 </entityPicker>
                 <textField id="patientComplaintsField" property="patientComplaints"/>
+                <entityPicker id="diseaseField" property="disease">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+
             </column>
         </form>
         <hbox id="editActions" spacing="true">

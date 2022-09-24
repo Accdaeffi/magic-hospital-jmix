@@ -28,13 +28,12 @@
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="administratorDc">
                 <column width="350px">
-                    <textField id="usernameField" property="username"/>
-                    <textField id="firstNameField" property="firstName"/>
+                    <textField id="usernameField" property="username" required="true"/>
+                    <textField id="firstNameField" property="firstName" required="true"/>
                     <textField id="lastNameField" property="lastName"/>
                     <checkBox id="isMaleField" property="isMale"/>
                     <textField id="emailField" property="email"/>
                     <checkBox id="activeField" property="active"/>
-                    <textField id="timeZoneIdField" property="timeZoneId"/>
                     <dateField id="workStartDateField" property="workStartDate"/>
                     <comboBox id="socialStatusField" property="socialStatus"/>
                 </column>
