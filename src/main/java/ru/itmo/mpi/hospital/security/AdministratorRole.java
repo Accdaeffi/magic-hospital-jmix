@@ -47,20 +47,20 @@ public interface AdministratorRole {
 
     @EntityPolicy(entityClass = Helper.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = Helper.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"Helper.browse", "Helper.edit"})
-    @MenuPolicy(menuIds = {"Helper.browse"})
+    @ScreenPolicy(screenIds = {"Helper.administrator-browse", "Helper.administrator-view"})
+    @MenuPolicy(menuIds = {"Helper.administrator-browse"})
     void helper();
 
     @EntityPolicy(entityClass = God.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = God.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"God.browse", "God.edit"})
-    @MenuPolicy(menuIds = {"God.browse"})
+    @ScreenPolicy(screenIds = {"God.administrator-browse", "God.administrator-view"})
+    @MenuPolicy(menuIds = {"God.administrator-browse"})
     void god();
 
     @EntityPolicy(entityClass = Healer.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = Healer.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"Healer.browse", "Healer.edit"})
-    @MenuPolicy(menuIds = {"Healer.browse"})
+    @ScreenPolicy(screenIds = {"Healer.administrator-browse", "Healer.administrator-view"})
+    @MenuPolicy(menuIds = {"Healer.administrator-browse"})
     void healer();
 
     @EntityPolicy(entityClass = Disease.class, actions = {EntityPolicyAction.READ})

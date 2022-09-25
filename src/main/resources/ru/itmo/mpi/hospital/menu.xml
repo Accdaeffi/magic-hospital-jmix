@@ -31,6 +31,12 @@
               caption="msg://ru.itmo.mpi.hospital.screen.request/requestAdministratorBrowse.menu"/>
         <item screen="Prayer.administrator-browse"
               caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerAdministratorBrowse.menu"/>
+        <item screen="God.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.god/godAdministratorBrowse.menu"/>
+        <item screen="Healer.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.healer/healerAdministratorBrowse.menu"/>
+        <item screen="Helper.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.helper/helperAdminsitratorBrowse.menu"/>
     </menu>
 
 </menu-config>
