@@ -33,11 +33,11 @@ public class Request {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "helper_id")
+    @JoinColumn(name = "helper_id", nullable = false)
     private Helper helper;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "disease_case_id", referencedColumnName = "id")
+    @JoinColumn(name = "disease_case_id", referencedColumnName = "id", nullable = false)
     private DiseaseCase diseaseCase;
 
     @Column(name = "required_penta_help")

@@ -50,7 +50,6 @@
                 <column id="isMale"/>
                 <column id="email"/>
                 <column id="active"/>
-                <column id="timeZoneId"/>
                 <column id="workStartDate"/>
                 <column id="socialStatus"/>
                 <column id="healerPower"/>

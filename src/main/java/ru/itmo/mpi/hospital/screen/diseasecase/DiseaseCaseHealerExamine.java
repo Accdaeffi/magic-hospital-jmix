@@ -4,7 +4,12 @@ import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.action.Action;
 import io.jmix.ui.component.Button;
 import io.jmix.ui.model.InstanceContainer;
-import io.jmix.ui.screen.*;
+import io.jmix.ui.screen.EditedEntityContainer;
+import io.jmix.ui.screen.StandardEditor;
+import io.jmix.ui.screen.StandardOutcome;
+import io.jmix.ui.screen.Subscribe;
+import io.jmix.ui.screen.UiController;
+import io.jmix.ui.screen.UiDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.DiseaseCase;
 import ru.itmo.mpi.hospital.entity.Prayer;
@@ -43,11 +48,15 @@ public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
     }
 
 
-
     @Subscribe("createPrayer")
     public void onCreatePrayer(Action.ActionPerformedEvent event) {
         PrayerHealerCreate screen = screenBuilders.editor(Prayer.class, this)
                 .withScreenClass(PrayerHealerCreate.class)
+                .withAfterCloseListener(afterCloseEvent -> {
+                    if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
+                        createPrayerBtn.setEnabled(false);
+                    }
+                })
                 .newEntity()
                 .build();
 
@@ -59,6 +68,11 @@ public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
     public void onCreateRequest(Action.ActionPerformedEvent event) {
         RequestHealerCreate screen = screenBuilders.editor(Request.class, this)
                 .withScreenClass(RequestHealerCreate.class)
+                .withAfterCloseListener(afterCloseEvent -> {
+                    if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
+                        createRequestBtn.setEnabled(false);
+                    }
+                })
                 .newEntity()
                 .build();
 

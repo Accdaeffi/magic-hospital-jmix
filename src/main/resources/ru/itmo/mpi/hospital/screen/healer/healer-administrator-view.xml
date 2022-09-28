@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
-        caption="msg://administratorEdit.caption"
+        caption="msg://healerAdministratorView.caption"
         focusComponent="form">
     <data>
-        <instance id="administratorDc"
-                  class="ru.itmo.mpi.hospital.entity.Administrator">
+        <instance id="healerDc"
+                  class="ru.itmo.mpi.hospital.entity.Healer">
             <fetchPlan extends="_base"/>
             <loader/>
         </instance>
@@ -26,21 +26,21 @@
                 width="800"/>
     <layout spacing="true" expand="scrollBox">
         <scrollBox id="scrollBox" spacing="true">
-            <form id="form" dataContainer="administratorDc">
+            <form id="form" dataContainer="healerDc">
                 <column width="350px">
-                    <textField id="usernameField" property="username" required="true"/>
-                    <textField id="firstNameField" property="firstName" required="true"/>
+                    <textField id="usernameField" property="username"/>
+                    <textField id="firstNameField" property="firstName"/>
                     <textField id="lastNameField" property="lastName"/>
                     <checkBox id="isMaleField" property="isMale"/>
                     <textField id="emailField" property="email"/>
                     <checkBox id="activeField" property="active"/>
                     <dateField id="workStartDateField" property="workStartDate"/>
                     <comboBox id="socialStatusField" property="socialStatus"/>
+                    <textField id="healerPowerField" property="healerPower"/>
                 </column>
             </form>
         </scrollBox>
         <hbox id="editActions" spacing="true">
-            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>
         </hbox>
     </layout>

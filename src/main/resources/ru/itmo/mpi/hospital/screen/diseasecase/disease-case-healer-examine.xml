@@ -8,6 +8,7 @@
             <fetchPlan extends="_base">
                 <property name="prayer" fetchPlan="_base"/>
                 <property name="request" fetchPlan="_base"/>
+                <property name="disease" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
         </instance>
@@ -33,6 +34,12 @@
         <form id="form" dataContainer="diseaseCaseDc">
             <column width="350px">
                 <textField id="patientComplaintsField" property="patientComplaints"/>
+                <entityPicker id="diseaseField" property="disease">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
                 <textField id="actionsField" property="actions"/>
                 <entityPicker id="patientField" property="patient">
                     <actions>
@@ -43,8 +50,8 @@
             </column>
         </form>
         <hbox id="editActions" spacing="true">
-            <button id="createPrayerBtn" action="createPrayer" />
-            <button id="createRequestBtn" action="createRequest" />
+            <button id="createPrayerBtn" action="createPrayer"/>
+            <button id="createRequestBtn" action="createRequest"/>
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>
         </hbox>

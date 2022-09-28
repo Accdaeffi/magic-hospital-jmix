@@ -6,18 +6,19 @@
   --menubar-menuitem-selected-background-color: #A18BD7;
 
   /* Basic */
-  --app-background-color: #FAFAFA;
+  --app-background-color: #D8FFEF;
+  --background-color: #F1FFF9;
+  --background-color_rgb: 241, 255, 249;
   --error-color: #FF415B;
   --primary-color: #A18BD7;
   --primary-color_rgb: 161, 139, 215;
 
   /* Button */
-  --button-default-active-color: #BFBFBF;
-  --button-default-color: #F2F2F2;
-  --button-default-disabled-color: #F2F2F2;
-  --button-default-focused-border-color: #F2F2F2;
-  --button-default-hover-color: #D6D6D6;
-  --button-error-color: #FF415B;
+  --button-default-active-color: #FFFA75;
+  --button-default-color: #FFFEDA;
+  --button-default-disabled-color: #FFFEFD;
+  --button-default-focused-border-color: #FFFEFD;
+  --button-default-hover-color: #FFFCA3;
   --button-primary-active-color: #914AFF;
   --button-primary-color: #A18BD7;
   --button-primary-hover-color: #7C59C2;
@@ -43,6 +44,10 @@
   --datefield-calendarpanel-day-hover-color: #A18BD7;
   --datefield-calendarpanel-day-selected-background-color: #A18BD7;
 
+  /* Drawer */
+  --drawer-background-color: #FAFFFD;
+  --drawer-sidemenu-submenu-background-color: #FAFFFD;
+
   /* FileUpload */
   --fileupload-dropzone-border-color: #A18BD7;
 
@@ -62,14 +67,10 @@
   --link-visited-color: #A18BD7;
 
   /* Notification */
-  --notification-error-background-color: #FF415B;
   --notification-humanized-background-color: #A18BD7;
 
   /* Pagination */
-  --pagination-selected-page-active-color: #914AFF;
-  --pagination-selected-page-color: #A18BD7;
-  --pagination-selected-page-focused-border-color: #A18BD7;
-  --pagination-selected-page-hover-color: #7C59C2;
+  --pagination-page-disabled-color: #FFFFF0;
 
   /* RadioButtonGroup */
   --radio-checked-color: #A18BD7;
@@ -105,12 +106,9 @@
   --tagpicker-tag-background-color: #A18BD7;
 
   /* Tooltip */
-  --tooltip-error-message-font-color: #FF415B;
-  --tooltip-error-message-level-error-font-color: #FF415B;
   --tooltip-error-message-level-system-font-color: #A18BD7;
 
   /* Tree */
   --tree-focused-row-border-color: #A18BD7;
   --tree-selected-row-background-color: #A18BD7;
-
 }

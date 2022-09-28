@@ -42,8 +42,7 @@
                     width="100%"
                     dataContainer="diseaseCasesDc">
             <actions>
-                <action id="edit" type="edit"/>
-                <action id="examine" />
+                <action id="examine" shortcut="${TABLE_EDIT_SHORTCUT}"/>
             </actions>
             <columns>
                 <column id="prayer" />
@@ -55,7 +54,6 @@
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="editBtn" action="diseaseCasesTable.edit"/>
                 <button id="examineBtn" action="diseaseCasesTable.examine"
                         caption="msg://diseaseCaseHealerBrowse.examineButton"/>
             </buttonsPanel>
