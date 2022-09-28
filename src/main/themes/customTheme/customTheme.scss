@@ -2,9 +2,6 @@
 
 @mixin customTheme {
   @include helium;
-  /* Accordion */
-  --accordion-item-content-background-color: #F1FFF9;
-
   /* AppMenu */
   --menubar-menuitem-selected-background-color: #A18BD7;
 
@@ -17,12 +14,11 @@
   --primary-color_rgb: 161, 139, 215;
 
   /* Button */
-  --button-default-active-color: #A8D19E;
-  --button-default-color: #E6F2E3;
-  --button-default-disabled-color: #E9F4E7;
-  --button-default-focused-border-color: #E6F2E3;
-  --button-default-hover-color: #C4E0BD;
-  --button-error-color: #FF415B;
+  --button-default-active-color: #FFFA75;
+  --button-default-color: #FFFEDA;
+  --button-default-disabled-color: #FFFEFD;
+  --button-default-focused-border-color: #FFFEFD;
+  --button-default-hover-color: #FFFCA3;
   --button-primary-active-color: #914AFF;
   --button-primary-color: #A18BD7;
   --button-primary-hover-color: #7C59C2;
@@ -37,33 +33,16 @@
   --calendar-week-current-time-color: #A18BD7;
 
   /* CheckBox */
-  --checkbox-background-color: #F1FFF9;
-  --checkbox-checked-background-color: #F1FFF9;
   --checkbox-checked-border-color: #A18BD7;
   --checkbox-checked-color: #A18BD7;
   --checkbox-checked-focused-border-color: #A18BD7;
   --checkbox-checked-focused-color: #A18BD7;
-  --checkbox-read-only-background-color: #F1FFF9;
-  --checkbox-read-only-checked-background-color: #F1FFF9;
-  --checkbox-read-only-checked-focused-background-color: #F1FFF9;
-  --checkbox-read-only-focused-background-color: #F1FFF9;
-
-  /* ColorPicker */
-  --colorpicker-buttons-panel-background-color: #F1FFF9;
-
-  /* ComboBox */
-  --combobox-no-input-background-color: #F1FFF9;
 
   /* DateField */
   --datefield-calendarpanel-button-hover-color: #A18BD7;
-  --datefield-calendarpanel-day-background-color: #F1FFF9;
   --datefield-calendarpanel-day-focused-border-color: #A18BD7;
   --datefield-calendarpanel-day-hover-color: #A18BD7;
   --datefield-calendarpanel-day-selected-background-color: #A18BD7;
-  --datefield-popup-background-color: #F1FFF9;
-
-  /* DatePicker */
-  --datepicker-background-color: #F1FFF9;
 
   /* Drawer */
   --drawer-background-color: #FAFFFD;
@@ -71,60 +50,32 @@
 
   /* FileUpload */
   --fileupload-dropzone-border-color: #A18BD7;
-  --fileupload-dropzone-prompt-background-color: #F1FFF9;
-
-  /* FoldersPane */
-  --folders-pane-background-color: #F1FFF9;
 
   /* Grid */
-  --grid-background-color: #F1FFF9;
   --grid-details-deco-color: #A18BD7;
   --grid-drop-marker-color: #A18BD7;
   --grid-editor-border-color: #A18BD7;
   --grid-editor-cancel-button-color: #A18BD7;
   --grid-editor-save-button-color: #A18BD7;
   --grid-focused-cell-border-color: #A18BD7;
-  --grid-row-color: #F1FFF9;
   --grid-row-drag-background-color: #A18BD7;
   --grid-row-drag-border-color: #A18BD7;
   --grid-selected-row-background-color: #A18BD7;
-  --grid-sidebar-popup-background-color: #F1FFF9;
 
   /* Link */
   --link-color: #A18BD7;
   --link-visited-color: #A18BD7;
 
-  /* Main Window */
-  --maintabsheet-tabcontainer-background-color: #F1FFF9;
-
-  /* NativeSelect */
-  --select-background-color: #F1FFF9;
-
   /* Notification */
-  --notification-error-background-color: #FF415B;
   --notification-humanized-background-color: #A18BD7;
 
   /* Pagination */
-  --pagination-selected-page-active-color: #914AFF;
-  --pagination-selected-page-color: #A18BD7;
-  --pagination-selected-page-focused-border-color: #A18BD7;
-  --pagination-selected-page-hover-color: #7C59C2;
-
-  /* Panel */
-  --panel-background-color: #F1FFF9;
-
-  /* PickerField */
-  --pickerfield-button-background-color: #F1FFF9;
-  --pickerfield-button-hover-background-color: #F1FFF9;
-
-  /* PivotTable */
-  --pivot-background-color: #F1FFF9;
+  --pagination-page-disabled-color: #FFFFF0;
 
   /* RadioButtonGroup */
   --radio-checked-color: #A18BD7;
 
   /* SelectionOverlay (ContextMenu) */
-  --overlay-background-color: #F1FFF9;
   --selection-overlay-selected-item-background-color: #A18BD7;
 
   /* SideMenu */
@@ -133,13 +84,8 @@
   --sidemenu-item-selected-background-color: #A18BD7;
   --sidemenu-responsive-item-selected-background-color: #A18BD7;
 
-  /* SourceCodeEditor */
-  --sourcecodeeditor-background-color: #F1FFF9;
-
   /* TabSheet */
   --tabsheet-drop-indicator-color: #A18BD7;
-  --tabsheet-framed-content-background-color: #F1FFF9;
-  --tabsheet-framed-tabcontainer-background-color: #F1FFF9;
   --tabsheet-scroller-button-hover-color: #A18BD7;
   --tabsheet-tabitemcell-caption-focus-color: #A18BD7;
   --tabsheet-tabitemcell-caption-hover-color: #A18BD7;
@@ -147,9 +93,7 @@
   --tabsheet-tabitemcell-selected-deco-color: #A18BD7;
 
   /* Table */
-  --table-background-color: #F1FFF9;
   --table-focused-row-border-color: #A18BD7;
-  --table-row-color: #F1FFF9;
   --table-selected-row-background-color: #A18BD7;
 
   /* TagField */
@@ -161,20 +105,10 @@
   /* TagPicker */
   --tagpicker-tag-background-color: #A18BD7;
 
-  /* TextField */
-  --textfield-background-color: #F1FFF9;
-
   /* Tooltip */
-  --tooltip-error-message-font-color: #FF415B;
-  --tooltip-error-message-level-error-font-color: #FF415B;
   --tooltip-error-message-level-system-font-color: #A18BD7;
 
   /* Tree */
   --tree-focused-row-border-color: #A18BD7;
   --tree-selected-row-background-color: #A18BD7;
-
-  /* Window */
-  --window-background-color: #F1FFF9;
-  --window-header-background-color: #F1FFF9;
-
 }
