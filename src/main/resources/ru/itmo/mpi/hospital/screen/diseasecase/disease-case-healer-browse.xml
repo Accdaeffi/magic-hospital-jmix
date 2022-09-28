@@ -42,7 +42,7 @@
                     width="100%"
                     dataContainer="diseaseCasesDc">
             <actions>
-                <action id="examine" shortcut="${TABLE_EDIT_SHORTCUT}"/>
+                <action id="examine" shortcut="${TABLE_EDIT_SHORTCUT}" trackSelection="true"/>
             </actions>
             <columns>
                 <column id="prayer" />

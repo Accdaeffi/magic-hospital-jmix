@@ -34,7 +34,6 @@
                     <checkBox id="isMaleField" property="isMale"/>
                     <textField id="emailField" property="email"/>
                     <checkBox id="activeField" property="active"/>
-                    <textField id="timeZoneIdField" property="timeZoneId"/>
                     <dateField id="workStartDateField" property="workStartDate"/>
                     <comboBox id="socialStatusField" property="socialStatus"/>
                 </column>
