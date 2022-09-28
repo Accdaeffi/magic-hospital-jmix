@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
-        caption="msg://prayerHealerCreate.caption"
+        caption="msg://diseaseCaseAdministratorEdit.caption"
         focusComponent="form">
     <data>
-        <instance id="prayerDc"
-                  class="ru.itmo.mpi.hospital.entity.Prayer">
+        <instance id="diseaseCaseDc"
+                  class="ru.itmo.mpi.hospital.entity.DiseaseCase">
             <fetchPlan extends="_base">
-                <property name="god" fetchPlan="_base"/>
+                <property name="disease" fetchPlan="_base"/>
+                <property name="healer" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
         </instance>
@@ -24,20 +25,31 @@
                 caption="msg:///actions.Close"
                 icon="EDITOR_CANCEL"/>
     </actions>
-    <dialogMode height="AUTO"
-                width="AUTO"
-                modal="true"
-                forceDialog="true"/>
+    <dialogMode height="600"
+                width="800"/>
     <layout spacing="true" expand="editActions">
-        <form id="form" dataContainer="prayerDc">
+        <form id="form" dataContainer="diseaseCaseDc">
             <column width="350px">
-                <textField id="prayTextField" property="prayText"/>
-                <entityPicker id="godField" property="god" required="true">
+                <entityPicker id="patientField" property="patient">
                     <actions>
                         <action id="entityLookup" type="entity_lookup"/>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
+                <entityPicker id="healerField" property="healer">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <textField id="patientComplaintsField" property="patientComplaints"/>
+                <entityPicker id="diseaseField" property="disease">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+
             </column>
         </form>
         <hbox id="editActions" spacing="true">

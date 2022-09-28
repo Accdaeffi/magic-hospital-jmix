@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
-        caption="msg://requestHealerCreate.caption"
+        caption="msg://requestAdministratorView.caption"
         focusComponent="form">
     <data>
         <instance id="requestDc"
                   class="ru.itmo.mpi.hospital.entity.Request">
             <fetchPlan extends="_base">
                 <property name="helper" fetchPlan="_base"/>
+                <property name="diseaseCase"/>
             </fetchPlan>
             <loader/>
         </instance>
@@ -24,27 +25,22 @@
                 caption="msg:///actions.Close"
                 icon="EDITOR_CANCEL"/>
     </actions>
-    <dialogMode height="AUTO"
-                width="AUTO"
-                modal="true"
-                forceDialog="true"/>
+    <dialogMode height="600"
+                width="800"/>
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="requestDc">
             <column width="350px">
+                <entityPicker id="healerField" property="diseaseCase.healer" />
+                <entityPicker id="patientField" property="diseaseCase.patient" />
+                <entityPicker id="helperField" property="helper" required="true"/>
                 <checkBox id="requiredPentaHelpField" property="requiredPentaHelp"/>
                 <textField id="additionalInfoField" property="additionalInfo"/>
+                <comboBox id="requestStatusField" property="requestStatus"/>
                 <textField id="dustAmountRequiredField" property="dustAmountRequired"/>
                 <textField id="waterRequiredField" property="waterRequired"/>
-                <entityPicker id="helperField" property="helper" required="true">
-                    <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
-                        <action id="entityClear" type="entity_clear"/>
-                    </actions>
-                </entityPicker>
             </column>
         </form>
         <hbox id="editActions" spacing="true">
-            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>
         </hbox>
     </layout>

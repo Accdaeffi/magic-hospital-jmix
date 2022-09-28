@@ -21,6 +21,22 @@
               caption="msg://ru.itmo.mpi.hospital.screen.request/requestHealerBrowse.menu"/>
         <item screen="DiseaseCase.healer-browse"
               caption="msg://ru.itmo.mpi.hospital.screen.diseasecase/diseaseCaseHealerBrowse.menu"/>
+        <item screen="Prayer.healer-browse" caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerHealerBrowse.menu"/>
+        <item screen="Request.browse" caption="msg://ru.itmo.mpi.hospital.screen.request/requestBrowse.menu"/>
+        <item screen="DiseaseCase.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.diseasecase/diseaseCaseAdministratorBrowse.menu"/>
+        <item screen="Patient.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.patient/patientAdministratorBrowse.menu"/>
+        <item screen="Request.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.request/requestAdministratorBrowse.menu"/>
+        <item screen="Prayer.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerAdministratorBrowse.menu"/>
+        <item screen="God.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.god/godAdministratorBrowse.menu"/>
+        <item screen="Healer.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.healer/healerAdministratorBrowse.menu"/>
+        <item screen="Helper.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.helper/helperAdminsitratorBrowse.menu"/>
     </menu>
 
 </menu-config>

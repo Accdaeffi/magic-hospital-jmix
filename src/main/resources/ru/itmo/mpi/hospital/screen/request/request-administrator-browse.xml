@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://godBrowse.caption"
-        focusComponent="godsTable">
+        caption="msg://requestAdministratorBrowse.caption"
+        focusComponent="requestsTable">
     <data readOnly="true">
-        <collection id="godsDc"
-                    class="ru.itmo.mpi.hospital.entity.God">
+        <collection id="requestsDc"
+                    class="ru.itmo.mpi.hospital.entity.Request">
             <fetchPlan extends="_base"/>
-            <loader id="godsDl">
+            <loader id="requestsDl">
                 <query>
-                    <![CDATA[select e from God e]]>
+                    <![CDATA[select e from Request e]]>
                 </query>
             </loader>
         </collection>
@@ -30,33 +30,32 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="godsTable" spacing="true">
+    <layout expand="requestsTable" spacing="true">
         <filter id="filter"
-                dataLoader="godsDl">
+                dataLoader="requestsDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="godsTable"
+        <groupTable id="requestsTable"
                     width="100%"
-                    dataContainer="godsDc">
+                    dataContainer="requestsDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="view" type="view">
+                    <properties>
+                        <property name="screenClass" value="ru.itmo.mpi.hospital.screen.request.RequestAdministratorView"/>
+                    </properties>
+                </action>
             </actions>
             <columns>
-                <column id="username"/>
-                <column id="firstName"/>
-                <column id="lastName"/>
-                <column id="isMale"/>
-                <column id="email"/>
-                <column id="active"/>
+                <column id="requiredPentaHelp"/>
+                <column id="additionalInfo"/>
+                <column id="requestStatus"/>
+                <column id="dustAmountRequired"/>
+                <column id="waterRequired"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="godsTable.create"/>
-                <button id="editBtn" action="godsTable.edit"/>
-                <button id="removeBtn" action="godsTable.remove"/>
+                <button id="viewBtn" action="requestsTable.view"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

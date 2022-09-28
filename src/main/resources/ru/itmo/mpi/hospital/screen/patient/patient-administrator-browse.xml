@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://godBrowse.caption"
-        focusComponent="godsTable">
+        caption="msg://patientAdministratorBrowse.caption"
+        focusComponent="patientsTable">
     <data readOnly="true">
-        <collection id="godsDc"
-                    class="ru.itmo.mpi.hospital.entity.God">
+        <collection id="patientsDc"
+                    class="ru.itmo.mpi.hospital.entity.Patient">
             <fetchPlan extends="_base"/>
-            <loader id="godsDl">
+            <loader id="patientsDl">
                 <query>
-                    <![CDATA[select e from God e]]>
+                    <![CDATA[select e from Patient e]]>
                 </query>
             </loader>
         </collection>
@@ -30,33 +30,30 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="godsTable" spacing="true">
+    <layout expand="patientsTable" spacing="true">
         <filter id="filter"
-                dataLoader="godsDl">
+                dataLoader="patientsDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="godsTable"
+        <groupTable id="patientsTable"
                     width="100%"
-                    dataContainer="godsDc">
+                    dataContainer="patientsDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="edit" type="edit" />
+                <action id="create" type="create" />
             </actions>
             <columns>
-                <column id="username"/>
-                <column id="firstName"/>
-                <column id="lastName"/>
+                <column id="name"/>
+                <column id="surname"/>
                 <column id="isMale"/>
-                <column id="email"/>
-                <column id="active"/>
+                <column id="isMage"/>
+                <column id="socialStatus"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="godsTable.create"/>
-                <button id="editBtn" action="godsTable.edit"/>
-                <button id="removeBtn" action="godsTable.remove"/>
+                <button id="createBtn" action="patientsTable.create"/>
+                <button id="editBtn" action="patientsTable.edit"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

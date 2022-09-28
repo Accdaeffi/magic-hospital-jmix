@@ -33,11 +33,11 @@ public class Prayer {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "god_id")
+    @JoinColumn(name = "god_id", nullable = false)
     private God god;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "disease_case_id", referencedColumnName = "id")
+    @JoinColumn(name = "disease_case_id", referencedColumnName = "id", nullable = false)
     private DiseaseCase diseaseCase;
 
     @InstanceName

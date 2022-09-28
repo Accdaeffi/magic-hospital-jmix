@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://godBrowse.caption"
-        focusComponent="godsTable">
+        caption="msg://prayerAdministratorBrowse.caption"
+        focusComponent="prayersTable">
     <data readOnly="true">
-        <collection id="godsDc"
-                    class="ru.itmo.mpi.hospital.entity.God">
+        <collection id="prayersDc"
+                    class="ru.itmo.mpi.hospital.entity.Prayer">
             <fetchPlan extends="_base"/>
-            <loader id="godsDl">
+            <loader id="prayersDl">
                 <query>
-                    <![CDATA[select e from God e]]>
+                    <![CDATA[select e from Prayer e]]>
                 </query>
             </loader>
         </collection>
@@ -30,33 +30,29 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="godsTable" spacing="true">
+    <layout expand="prayersTable" spacing="true">
         <filter id="filter"
-                dataLoader="godsDl">
+                dataLoader="prayersDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="godsTable"
+        <groupTable id="prayersTable"
                     width="100%"
-                    dataContainer="godsDc">
+                    dataContainer="prayersDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="view" type="view">
+                    <properties>
+                        <property name="screenClass" value="ru.itmo.mpi.hospital.screen.prayer.PrayerAdministratorView"/>
+                    </properties>
+                </action>
             </actions>
             <columns>
-                <column id="username"/>
-                <column id="firstName"/>
-                <column id="lastName"/>
-                <column id="isMale"/>
-                <column id="email"/>
-                <column id="active"/>
+                <column id="prayText"/>
+                <column id="prayerStatus"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="godsTable.create"/>
-                <button id="editBtn" action="godsTable.edit"/>
-                <button id="removeBtn" action="godsTable.remove"/>
+                <button id="viewBtn" action="prayersTable.view"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
