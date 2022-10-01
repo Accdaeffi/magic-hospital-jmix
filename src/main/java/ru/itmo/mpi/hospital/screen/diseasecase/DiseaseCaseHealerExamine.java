@@ -10,6 +10,7 @@ import io.jmix.ui.screen.StandardOutcome;
 import io.jmix.ui.screen.Subscribe;
 import io.jmix.ui.screen.UiController;
 import io.jmix.ui.screen.UiDescriptor;
+import io.jmix.ui.util.OperationResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.DiseaseCase;
 import ru.itmo.mpi.hospital.entity.DiseaseCaseState;
@@ -20,10 +21,30 @@ import ru.itmo.mpi.hospital.entity.Request;
 import ru.itmo.mpi.hospital.screen.prayer.PrayerHealerCreate;
 import ru.itmo.mpi.hospital.screen.request.RequestHealerCreate;
 
+import java.util.ConcurrentModificationException;
+
 @UiController("DiseaseCase.healer-examine")
 @UiDescriptor("disease-case-healer-examine.xml")
 @EditedEntityContainer("diseaseCaseDc")
 public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
+
+    // TODO: fix committing
+
+    @Override
+    protected OperationResult commitChanges() {
+        OperationResult operationResult = null;
+
+        boolean committed = false;
+
+        while (!committed) {
+            try {
+                operationResult = super.commitChanges();
+                committed = true;
+            } catch (ConcurrentModificationException ignored) {}
+        }
+
+        return operationResult;
+    }
 
     @Autowired
     InstanceContainer<DiseaseCase> diseaseCaseDc;
@@ -91,7 +112,14 @@ public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
         patient.setPatientState(PatientState.HEALTHY);
         diseaseCase.setDiseaseCaseState(DiseaseCaseState.RECOVERY);
 
-        closeWithCommit();
+        boolean committed = false;
+
+        while (!committed) {
+            try {
+                closeWithCommit();
+                committed = true;
+            } catch (ConcurrentModificationException ignored) {}
+        }
     }
 
     @Subscribe("recordDeath")
@@ -102,7 +130,14 @@ public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
         patient.setPatientState(PatientState.DISEASED);
         diseaseCase.setDiseaseCaseState(DiseaseCaseState.DEATH);
 
-        closeWithCommit();
+        boolean committed = false;
+
+        while (!committed) {
+            try {
+                closeWithCommit();
+                committed = true;
+            } catch (ConcurrentModificationException ignored) {}
+        }
     }
 
 }
