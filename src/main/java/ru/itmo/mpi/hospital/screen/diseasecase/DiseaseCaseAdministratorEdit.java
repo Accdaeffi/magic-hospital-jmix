@@ -8,8 +8,7 @@ import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.Administrator;
 import ru.itmo.mpi.hospital.entity.DiseaseCase;
-import ru.itmo.mpi.hospital.entity.Prayer;
-import ru.itmo.mpi.hospital.entity.User;
+import ru.itmo.mpi.hospital.entity.DiseaseCaseState;
 
 @UiController("DiseaseCase.administrator-edit")
 @UiDescriptor("disease-case-administrator-edit.xml")
@@ -29,6 +28,8 @@ public class DiseaseCaseAdministratorEdit extends StandardEditor<DiseaseCase> {
     public void onPreCommit(DataContext.PreCommitEvent event) {
         Administrator currentAdministrator = ((Administrator) authentication.getUser());
 
-        diseaseCaseDc.getItem().setRegistrator(currentAdministrator);
+        DiseaseCase diseaseCase = diseaseCaseDc.getItem();
+        diseaseCase.setRegistrator(currentAdministrator);
+        diseaseCase.setDiseaseCaseState(DiseaseCaseState.AT_WORK);
     }
 }

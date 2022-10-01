@@ -37,6 +37,8 @@
               caption="msg://ru.itmo.mpi.hospital.screen.healer/healerAdministratorBrowse.menu"/>
         <item screen="Helper.administrator-browse"
               caption="msg://ru.itmo.mpi.hospital.screen.helper/helperAdminsitratorBrowse.menu"/>
+        <item screen="Patient.administrator-healthy"
+              caption="msg://ru.itmo.mpi.hospital.screen.patient/patientAdministratorHealthy.menu"/>
     </menu>
 
 </menu-config>

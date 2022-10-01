@@ -22,13 +22,13 @@ public interface AdministratorRole {
 
     @EntityPolicy(entityClass = Patient.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.CREATE, EntityPolicyAction.UPDATE})
     @EntityAttributePolicy(entityClass = Patient.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
-    @ScreenPolicy(screenIds = {"Patient.browse", "Patient.edit"})
-    @MenuPolicy(menuIds = {"Patient.browse"})
+    @ScreenPolicy(screenIds = {"Patient.administrator-browse", "Patient.administrator-edit", "Patient.administrator-healthy"})
+    @MenuPolicy(menuIds = {"Patient.administrator-browse"})
     void patient();
 
     @EntityPolicy(entityClass = DiseaseCase.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.CREATE})
     @EntityAttributePolicy(entityClass = DiseaseCase.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @EntityAttributePolicy(entityClass = DiseaseCase.class, attributes = {"healer", "patient", "registrator", "patientComplaints"}, action = EntityAttributePolicyAction.MODIFY)
+    @EntityAttributePolicy(entityClass = DiseaseCase.class, attributes = {"healer", "patient", "registrator", "patientComplaints", "state"}, action = EntityAttributePolicyAction.MODIFY)
     @ScreenPolicy(screenIds = {"DiseaseCase.administrator-browse", "DiseaseCase.administrator-edit"})
     @MenuPolicy(menuIds = "DiseaseCase.administrator-browse")
     void diseaseCase();

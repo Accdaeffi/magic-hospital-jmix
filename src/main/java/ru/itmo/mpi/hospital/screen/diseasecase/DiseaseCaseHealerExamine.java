@@ -12,6 +12,9 @@ import io.jmix.ui.screen.UiController;
 import io.jmix.ui.screen.UiDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.DiseaseCase;
+import ru.itmo.mpi.hospital.entity.DiseaseCaseState;
+import ru.itmo.mpi.hospital.entity.Patient;
+import ru.itmo.mpi.hospital.entity.PatientState;
 import ru.itmo.mpi.hospital.entity.Prayer;
 import ru.itmo.mpi.hospital.entity.Request;
 import ru.itmo.mpi.hospital.screen.prayer.PrayerHealerCreate;
@@ -78,6 +81,28 @@ public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
 
         screen.setDiseaseCase(diseaseCaseDc.getItem());
         screen.show();
+    }
+
+    @Subscribe("recordRecovery")
+    public void onRecordRecovery(Action.ActionPerformedEvent event) {
+        DiseaseCase diseaseCase = diseaseCaseDc.getItem();
+        Patient patient = diseaseCase.getPatient();
+
+        patient.setPatientState(PatientState.HEALTHY);
+        diseaseCase.setDiseaseCaseState(DiseaseCaseState.RECOVERY);
+
+        closeWithCommit();
+    }
+
+    @Subscribe("recordDeath")
+    public void onRecordDeath(Action.ActionPerformedEvent event) {
+        DiseaseCase diseaseCase = diseaseCaseDc.getItem();
+        Patient patient = diseaseCase.getPatient();
+
+        patient.setPatientState(PatientState.DISEASED);
+        diseaseCase.setDiseaseCaseState(DiseaseCaseState.DEATH);
+
+        closeWithCommit();
     }
 
 }

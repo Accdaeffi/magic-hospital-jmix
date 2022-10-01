@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://patientAdministratorBrowse.caption"
+        caption="msg://patientAdministratorHealthy.caption"
         focusComponent="patientsTable">
     <data readOnly="true">
         <collection id="patientsDc"
@@ -9,7 +9,7 @@
             <fetchPlan extends="_base"/>
             <loader id="patientsDl">
                 <query>
-                    <![CDATA[select e from Patient e]]>
+                    <![CDATA[select e from Patient e where e.patientState = 'healthy']]>
                 </query>
             </loader>
         </collection>
@@ -31,24 +31,10 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="patientsTable" spacing="true">
-        <filter id="filter"
-                dataLoader="patientsDl">
-            <properties include=".*"/>
-        </filter>
         <groupTable id="patientsTable"
                     width="100%"
                     dataContainer="patientsDc">
             <actions>
-                <action id="edit" type="edit">
-                    <properties>
-                        <property name="screenClass" value="ru.itmo.mpi.hospital.screen.patient.PatientAdministratorEdit"/>
-                    </properties>
-                </action>
-                <action id="create" type="create">
-                    <properties>
-                        <property name="screenClass" value="ru.itmo.mpi.hospital.screen.patient.PatientAdministratorEdit"/>
-                    </properties>
-                </action>
             </actions>
             <columns>
                 <column id="name"/>
@@ -59,11 +45,6 @@
                 <column id="patientState"/>
             </columns>
             <simplePagination/>
-            <buttonsPanel id="buttonsPanel"
-                          alwaysVisible="true">
-                <button id="createBtn" action="patientsTable.create"/>
-                <button id="editBtn" action="patientsTable.edit"/>
-            </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>

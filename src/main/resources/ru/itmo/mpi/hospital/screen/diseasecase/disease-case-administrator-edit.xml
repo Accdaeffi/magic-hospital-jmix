@@ -32,7 +32,11 @@
             <column width="350px">
                 <entityPicker id="patientField" property="patient" required="true">
                     <actions>
-                        <action id="entityLookup" type="entity_lookup" />
+                        <action id="entityLookup" type="entity_lookup">
+                            <properties>
+                                <property name="screenClass" value="ru.itmo.mpi.hospital.screen.patient.PatientAdministratorHealthy"/>
+                            </properties>
+                        </action>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>

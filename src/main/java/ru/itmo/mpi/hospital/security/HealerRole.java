@@ -55,8 +55,9 @@ public interface HealerRole {
     @ScreenPolicy(screenIds = {"Disease.browse"})
     void disease();
 
-    @EntityPolicy(entityClass = Patient.class, actions = {EntityPolicyAction.READ})
+    @EntityPolicy(entityClass = Patient.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.UPDATE})
     @EntityAttributePolicy(entityClass = Patient.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityAttributePolicy(entityClass = Patient.class, attributes = "patientState", action = EntityAttributePolicyAction.MODIFY)
     void patient();
 
     @EntityPolicy(entityClass = Healer.class, actions = {EntityPolicyAction.READ})

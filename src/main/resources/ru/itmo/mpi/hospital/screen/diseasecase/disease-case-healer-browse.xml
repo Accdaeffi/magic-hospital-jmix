@@ -12,7 +12,7 @@
             </fetchPlan>
             <loader id="diseaseCasesDl">
                 <query>
-                    <![CDATA[select e from DiseaseCase e]]>
+                    <![CDATA[select e from DiseaseCase e where e.diseaseCaseState = 'at_work']]>
                 </query>
             </loader>
         </collection>
