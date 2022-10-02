@@ -36,7 +36,7 @@ public interface HealerRole {
     @EntityPolicy(entityClass = Request.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.CREATE, EntityPolicyAction.UPDATE})
     @EntityAttributePolicy(entityClass = Request.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
     @EntityAttributePolicy(entityClass = Request.class, attributes = {"dustAmountRequired", "requestStatus", "waterRequired", "additionalInfo", "requiredPentaHelp", "diseaseCase", "helper"}, action = EntityAttributePolicyAction.MODIFY)
-    @ScreenPolicy(screenIds = {"Request.healer-create", "Request.healer-browse"})
+    @ScreenPolicy(screenIds = {"Request.healer-create", "Request.healer-browse", "Request.healer-edit"})
     @MenuPolicy(menuIds = "Request.healer-browse")
     void request();
 
