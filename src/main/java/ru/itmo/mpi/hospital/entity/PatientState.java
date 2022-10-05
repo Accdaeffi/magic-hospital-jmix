@@ -9,7 +9,8 @@ public enum PatientState implements EnumClass<String> {
 
     HEALTHY("healthy"),
     SICK("sick"),
-    DISEASED("diseased");
+    DISEASED("diseased"),
+    BURIED("buried");
 
     private String id;
 

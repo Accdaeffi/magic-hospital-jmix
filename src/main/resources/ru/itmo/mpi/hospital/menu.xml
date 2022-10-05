@@ -41,6 +41,8 @@
               caption="msg://ru.itmo.mpi.hospital.screen.patient/patientAdministratorHealthy.menu"/>
         <item screen="Request.helper-browse"
               caption="msg://ru.itmo.mpi.hospital.screen.request/requestHelperBrowse.menu"/>
+        <item screen="Patient.administrator-diseased-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.patient/patientAdministratorDiseasedBrowse.menu"/>
     </menu>
 
 </menu-config>
