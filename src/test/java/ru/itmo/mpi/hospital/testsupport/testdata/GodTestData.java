@@ -4,6 +4,7 @@ import io.jmix.core.DataManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.itmo.mpi.hospital.entity.God;
+import ru.itmo.mpi.hospital.testsupport.testdata.util.RolesTestData;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -14,6 +15,9 @@ public class GodTestData {
 
     @Autowired
     DataManager dataManager;
+
+    @Autowired
+    RolesTestData rolesTestData;
 
     public List<God> gods;
 
@@ -28,11 +32,17 @@ public class GodTestData {
         for (int i = 0; i < listUsername.length; i++) {
 
             God god = dataManager.create(God.class);
+
             god.setUsername(listUsername[i]);
             god.setFirstName(listName[i]);
             god.setLastName(listSurname[i]);
 
-            gods.add(dataManager.save(god));
+
+            god = dataManager.save(god);
+
+            gods.add(god);
+            
+            dataManager.save(rolesTestData.getRoles(god).toArray());
         }
 
     }

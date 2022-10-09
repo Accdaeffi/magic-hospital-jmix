@@ -7,8 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.Prayer;
-import ru.itmo.mpi.hospital.screen.prayer.PrayerBrowse;
 import ru.itmo.mpi.hospital.screen.prayer.PrayerEdit;
+import ru.itmo.mpi.hospital.screen.prayer.PrayerGodBrowse;
 import ru.itmo.mpi.hospital.testsupport.ScreenInteractions;
 import ru.itmo.mpi.hospital.testsupport.TableInteractions;
 import ru.itmo.mpi.hospital.testsupport.WebIntegrationTest;
@@ -18,9 +18,8 @@ import javax.validation.constraints.NotNull;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
-@UiTest(authenticatedUser = "admin", mainScreenId = "MainScreen", screenBasePackages = "ru.itmo.mpi.hospital.screen")
-class PrayerBrowseTest extends WebIntegrationTest {
+@UiTest(authenticatedUser = "godUserName1", mainScreenId = "MainScreen", screenBasePackages = "ru.itmo.mpi.hospital.screen")
+public class PrayerGodBrowseTest extends WebIntegrationTest {
 
     private Prayer prayer;
     @Autowired
@@ -47,7 +46,7 @@ class PrayerBrowseTest extends WebIntegrationTest {
 
         // given:
         ScreenInteractions screenInteractions = ScreenInteractions.forBrowse(screens);
-        PrayerBrowse prayerBrowse = screenInteractions.open(PrayerBrowse.class);
+        PrayerGodBrowse prayerBrowse = screenInteractions.open(PrayerGodBrowse.class);
         TableInteractions<Prayer> prayerTable = entityTable(prayerBrowse);
 
         System.out.println(prayerTable.firstItem().getPrayText());
@@ -66,14 +65,14 @@ class PrayerBrowseTest extends WebIntegrationTest {
 
         // given:
         ScreenInteractions screenInteractions = ScreenInteractions.forBrowse(screens);
-        PrayerBrowse prayerBrowse = screenInteractions.open(PrayerBrowse.class);
+        PrayerGodBrowse prayerBrowse = screenInteractions.open(PrayerGodBrowse.class);
         TableInteractions<Prayer> prayerTable = entityTable(prayerBrowse);
 
         // and:
         Prayer firstPrayer = prayerTable.firstItem();
 
         // and:
-        prayerTable.edit(firstPrayer);
+        prayerTable.view(firstPrayer);
 
         // then:
         PrayerEdit prayerEdit = screenInteractions.findOpenScreen(PrayerEdit.class);
@@ -83,7 +82,8 @@ class PrayerBrowseTest extends WebIntegrationTest {
     }
 
     @NotNull
-    private TableInteractions<Prayer> entityTable(PrayerBrowse browseScreen) {
+    private TableInteractions<Prayer> entityTable(PrayerGodBrowse browseScreen) {
         return TableInteractions.of(browseScreen, Prayer.class, "prayersTable");
     }
+
 }

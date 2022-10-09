@@ -47,4 +47,9 @@ public class TableInteractions<E> {
     public void create() {
         table.getActionNN("create").actionPerform(null);
     }
+
+    public void view(E entity) {
+        table.setSelected(entity);
+        button("viewBtn").click();
+    }
 }
