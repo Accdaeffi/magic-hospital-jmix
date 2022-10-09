@@ -42,7 +42,7 @@ class PrayerBrowseTest extends WebIntegrationTest {
     }
 
     @Test
-    void given_oneCustomerExists_when_openCustomerBrowse_then_tableContainsTheCustomer(Screens screens) {
+    void given_onePrayerExists_when_openPrayerBrowse_then_tableContainsThePrayer(Screens screens) {
 
         // given:
         ScreenInteractions screenInteractions = ScreenInteractions.forBrowse(screens);
@@ -63,7 +63,7 @@ class PrayerBrowseTest extends WebIntegrationTest {
 
 
     @Test
-    void given_oneCustomerExists_when_editCustomer_then_editCustomerEditorIsShown(Screens screens) {
+    void given_onePrayerExists_when_editPrayer_then_editPrayerEditorIsShown(Screens screens) {
 
         // given:
         ScreenInteractions screenInteractions = ScreenInteractions.forBrowse(screens);
