@@ -1,5 +1,6 @@
 package ru.itmo.mpi.hospital.screen.request;
 
+import io.jmix.core.DataManager;
 import io.jmix.ui.action.Action;
 import io.jmix.ui.component.Button;
 import io.jmix.ui.model.InstanceContainer;
@@ -17,6 +18,9 @@ public class RequestHealerEdit extends StandardEditor<Request> {
     InstanceContainer<Request> requestDc;
 
     @Autowired
+    DataManager dataManager;
+
+    @Autowired
     Button receiveBtn;
 
     @Subscribe
@@ -31,6 +35,12 @@ public class RequestHealerEdit extends StandardEditor<Request> {
     @Subscribe("receive")
     public void onReceive(Action.ActionPerformedEvent event) {
         Request request = requestDc.getItem();
+
+        Request requestFromDb = dataManager.load(Request.class).id(request.getId()).one();
+
+        if (requestFromDb.getRequestStatus() != RequestStatus.PROCESSING) {
+            closeWithDiscard();
+        }
 
         if (request.getRequestStatus() == RequestStatus.PROCESSING) {
             request.setRequestStatus(RequestStatus.COMPLETED);

@@ -1,5 +1,6 @@
 package ru.itmo.mpi.hospital.screen.diseasecase;
 
+import io.jmix.core.DataManager;
 import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.action.Action;
 import io.jmix.ui.component.Button;
@@ -28,23 +29,8 @@ import java.util.ConcurrentModificationException;
 @EditedEntityContainer("diseaseCaseDc")
 public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
 
-    // TODO: fix committing
-
-    @Override
-    protected OperationResult commitChanges() {
-        OperationResult operationResult = null;
-
-        boolean committed = false;
-
-        while (!committed) {
-            try {
-                operationResult = super.commitChanges();
-                committed = true;
-            } catch (ConcurrentModificationException ignored) {}
-        }
-
-        return operationResult;
-    }
+    @Autowired
+    DataManager dataManager;
 
     @Autowired
     InstanceContainer<DiseaseCase> diseaseCaseDc;
@@ -112,13 +98,11 @@ public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
         patient.setPatientState(PatientState.HEALTHY);
         diseaseCase.setDiseaseCaseState(DiseaseCaseState.RECOVERY);
 
-        boolean committed = false;
-
-        while (!committed) {
-            try {
-                closeWithCommit();
-                committed = true;
-            } catch (ConcurrentModificationException ignored) {}
+        DiseaseCase diseaseCaseFromDb = dataManager.load(DiseaseCase.class).id(diseaseCase.getId()).one();
+        if (diseaseCaseFromDb.getDiseaseCaseState() != DiseaseCaseState.AT_WORK) {
+            closeWithDiscard();
+        } else {
+            closeWithCommit();
         }
     }
 
@@ -130,14 +114,28 @@ public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
         patient.setPatientState(PatientState.DISEASED);
         diseaseCase.setDiseaseCaseState(DiseaseCaseState.DEATH);
 
+        DiseaseCase diseaseCaseFromDb = dataManager.load(DiseaseCase.class).id(diseaseCase.getId()).one();
+        if (diseaseCaseFromDb.getDiseaseCaseState() != DiseaseCaseState.AT_WORK) {
+            closeWithDiscard();
+        } else {
+            closeWithCommit();
+        }
+    }
+
+    @Override
+    protected OperationResult commitChanges() {
+        OperationResult operationResult = null;
+
         boolean committed = false;
 
         while (!committed) {
             try {
-                closeWithCommit();
+                operationResult = super.commitChanges();
                 committed = true;
             } catch (ConcurrentModificationException ignored) {}
         }
+
+        return operationResult;
     }
 
 }

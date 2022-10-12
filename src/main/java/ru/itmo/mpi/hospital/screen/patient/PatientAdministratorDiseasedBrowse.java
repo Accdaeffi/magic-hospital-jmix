@@ -4,6 +4,7 @@ import io.jmix.core.DataManager;
 import io.jmix.ui.action.Action;
 import io.jmix.ui.component.Button;
 import io.jmix.ui.model.CollectionContainer;
+import io.jmix.ui.model.CollectionLoader;
 import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.screen.LookupComponent;
 import io.jmix.ui.screen.StandardLookup;
@@ -16,6 +17,7 @@ import ru.itmo.mpi.hospital.entity.Patient;
 import ru.itmo.mpi.hospital.entity.PatientState;
 import ru.itmo.mpi.hospital.entity.SocialStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +35,9 @@ public class PatientAdministratorDiseasedBrowse extends StandardLookup<Patient> 
     @Autowired
     private CollectionContainer<Patient> patientsDc;
 
+    @Autowired
+    private CollectionLoader<Patient> patientsDl;
+
     @Subscribe(id = "patientsDc", target = Target.DATA_CONTAINER)
     public void onPatientsDcItemChange(InstanceContainer.ItemChangeEvent<Patient> event) {
         Patient corpse = patientsDc.getItemOrNull();
@@ -42,32 +47,37 @@ public class PatientAdministratorDiseasedBrowse extends StandardLookup<Patient> 
 
     @Subscribe("patientsTable.bury")
     public void onPatientsTableBury(Action.ActionPerformedEvent event) {
+        patientsDl.load();
+
         Patient corpse = patientsDc.getItem();
 
-        System.out.println(corpse.toString());
+        if (corpse.getPatientState() != PatientState.BURIED) {
 
-        corpse.setPatientState(PatientState.BURIED);
+            System.out.println(corpse.toString());
 
-        dataManager.save(corpse);
+            corpse.setPatientState(PatientState.BURIED);
+
+            dataManager.save(corpse);
+        }
     }
 
     @Subscribe("patientsTable.buryAll")
     public void onPatientsTableBuryAll(Action.ActionPerformedEvent event) {
+        patientsDl.load();
+
         List<Patient> corpses = patientsDc.getItems();
+
+        List<Patient> buried = new ArrayList<>();
 
         String result = corpses
                 .stream()
                 .filter(c -> c.getPatientState() == PatientState.DISEASED)
+                .peek(c -> {buried.add(c); c.setPatientState(PatientState.BURIED);})
                 .map(Patient::toString)
                 .collect(Collectors.joining("\n"));
         System.out.println(result);
 
-        corpses.stream()
-                .filter(c -> c.getPatientState() == PatientState.DISEASED)
-                .forEach(c -> {
-                    c.setPatientState(PatientState.BURIED);
-                    dataManager.save(c);
-                });
+        dataManager.save(buried.toArray());
 
     }
 }

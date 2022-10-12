@@ -4,7 +4,12 @@ import io.jmix.core.DataManager;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.ui.model.DataContext;
 import io.jmix.ui.model.InstanceContainer;
-import io.jmix.ui.screen.*;
+import io.jmix.ui.screen.EditedEntityContainer;
+import io.jmix.ui.screen.StandardEditor;
+import io.jmix.ui.screen.Subscribe;
+import io.jmix.ui.screen.Target;
+import io.jmix.ui.screen.UiController;
+import io.jmix.ui.screen.UiDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.Administrator;
 import ru.itmo.mpi.hospital.entity.DiseaseCase;
@@ -37,6 +42,13 @@ public class DiseaseCaseAdministratorEdit extends StandardEditor<DiseaseCase> {
         Patient patient = diseaseCase.getPatient();
         patient.setPatientState(PatientState.SICK);
 
-        patient = dataManager.save(patient);
+        Patient patientFromDb = dataManager.load(Patient.class).id(patient.getId()).one();
+
+        if (patientFromDb.getPatientState() != PatientState.HEALTHY) {
+            disableCommitActions();
+            event.preventCommit();
+        } else {
+            patient = dataManager.save(patient);
+        }
     }
 }
