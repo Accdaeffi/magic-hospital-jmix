@@ -53,7 +53,7 @@
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="viewBtn" caption="Resolve prayer" action="prayersTable.viewPrayer" />
+                <button id="viewBtn" caption="msg://prayerUnansweredBrowse.resolvePrayer" action="prayersTable.viewPrayer" />
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

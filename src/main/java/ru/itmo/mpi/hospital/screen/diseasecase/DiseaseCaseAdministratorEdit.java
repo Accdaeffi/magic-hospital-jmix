@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.Administrator;
 import ru.itmo.mpi.hospital.entity.DiseaseCase;
 import ru.itmo.mpi.hospital.entity.DiseaseCaseState;
+import ru.itmo.mpi.hospital.entity.Patient;
+import ru.itmo.mpi.hospital.entity.PatientState;
 
 @UiController("DiseaseCase.administrator-edit")
 @UiDescriptor("disease-case-administrator-edit.xml")
@@ -31,5 +33,10 @@ public class DiseaseCaseAdministratorEdit extends StandardEditor<DiseaseCase> {
         DiseaseCase diseaseCase = diseaseCaseDc.getItem();
         diseaseCase.setRegistrator(currentAdministrator);
         diseaseCase.setDiseaseCaseState(DiseaseCaseState.AT_WORK);
+
+        Patient patient = diseaseCase.getPatient();
+        patient.setPatientState(PatientState.SICK);
+
+        patient = dataManager.save(patient);
     }
 }

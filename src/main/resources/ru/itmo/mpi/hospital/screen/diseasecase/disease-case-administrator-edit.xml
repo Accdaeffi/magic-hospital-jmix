@@ -5,9 +5,10 @@
     <data>
         <instance id="diseaseCaseDc"
                   class="ru.itmo.mpi.hospital.entity.DiseaseCase">
-            <fetchPlan extends="_base">
+            <fetchPlan extends="_local">
                 <property name="disease" fetchPlan="_base"/>
                 <property name="healer" fetchPlan="_base"/>
+                <property name="patient" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
         </instance>

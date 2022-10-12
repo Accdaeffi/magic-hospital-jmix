@@ -32,7 +32,11 @@
                     width="100%"
                     dataContainer="prayersDc">
             <actions>
-                <action id="view" type="view" />
+                <action id="view" type="view">
+                    <properties>
+                        <property name="screenClass" value="ru.itmo.mpi.hospital.screen.prayer.PrayerHealerView"/>
+                    </properties>
+                </action>
             </actions>
             <columns>
                 <column id="god" />

@@ -43,6 +43,10 @@
               caption="msg://ru.itmo.mpi.hospital.screen.request/requestHelperBrowse.menu"/>
         <item screen="Patient.administrator-diseased-browse"
               caption="msg://ru.itmo.mpi.hospital.screen.patient/patientAdministratorDiseasedBrowse.menu"/>
+        <item screen="Helper.healer-browse" caption="msg://ru.itmo.mpi.hospital.screen.helper/helperHealerBrowse.menu"/>
+        <item screen="God.healer-browse" caption="msg://ru.itmo.mpi.hospital.screen.god/godHealerBrowse.menu"/>
+        <item screen="Disease.healer-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.disease/diseaseHealerBrowse.menu"/>
     </menu>
 
 </menu-config>

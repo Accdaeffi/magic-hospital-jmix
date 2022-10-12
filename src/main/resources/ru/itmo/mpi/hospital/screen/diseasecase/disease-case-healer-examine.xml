@@ -43,17 +43,16 @@
                 <textField id="patientComplaintsField" property="patientComplaints"/>
                 <entityPicker id="diseaseField" property="disease">
                     <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityLookup" type="entity_lookup">
+                            <properties>
+                                <property name="screenClass" value="ru.itmo.mpi.hospital.screen.disease.DiseaseHealerBrowse"/>
+                            </properties>
+                        </action>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
                 <textField id="actionsField" property="actions"/>
-                <entityPicker id="patientField" property="patient">
-                    <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
-                        <action id="entityClear" type="entity_clear"/>
-                    </actions>
-                </entityPicker>
+                <entityPicker id="patientField" property="patient" />
             </column>
         </form>
         <vbox id="actions" spacing="true">
