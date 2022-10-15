@@ -27,7 +27,7 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="prayerDc">
             <column width="350px">
-                <textField id="prayTextField" property="prayText"/>
+                <textArea id="prayTextField" property="prayText"/>
                 <comboBox id="prayerStatusField" property="prayerStatus"/>
             </column>
         </form>

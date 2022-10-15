@@ -51,7 +51,7 @@
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <textField id="patientComplaintsField" property="patientComplaints"/>
+                <textArea id="patientComplaintsField" property="patientComplaints"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

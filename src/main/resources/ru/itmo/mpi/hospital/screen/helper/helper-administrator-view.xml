@@ -30,9 +30,9 @@
                 <textField id="firstNameField" property="firstName"/>
                 <textField id="lastNameField" property="lastName"/>
                 <checkBox id="isMaleField" property="isMale"/>
-                <textField id="emailField" property="email"/>
-                <dateField id="workStartDateField" property="workStartDate"/>
                 <comboBox id="socialStatusField" property="socialStatus"/>
+                <dateField id="workStartDateField" property="workStartDate"/>
+                <textField id="emailField" property="email"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

@@ -7,6 +7,7 @@
                   class="ru.itmo.mpi.hospital.entity.Request">
             <fetchPlan extends="_base">
                 <property name="helper" fetch="AUTO" fetchPlan="_base"/>
+                <property name="diseaseCase"/>
             </fetchPlan>
             <loader/>
         </instance>
@@ -30,11 +31,12 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="requestDc">
             <column width="350px">
-                <entityPicker id="helperField" property="helper" />
-                <checkBox id="requiredPentaHelpField" property="requiredPentaHelp"/>
-                <textField id="additionalInfoField" property="additionalInfo"/>
-                <textField id="dustAmountRequiredField" property="dustAmountRequired"/>
-                <textField id="waterRequiredField" property="waterRequired"/>
+                <entityPicker id="patientField" property="diseaseCase.patient" />
+                <entityPicker id="healerField" property="diseaseCase.healer" />
+                <checkBox id="requiredPentaHelpField" property="requiredPentaHelp" />
+                <textArea id="additionalInfoField" property="additionalInfo" />
+                <textField id="dustAmountRequiredField" property="dustAmountRequired" />
+                <textField id="waterRequiredField" property="waterRequired" />
                 <comboBox id="requestStatusField" property="requestStatus" editable="false"/>
             </column>
         </form>

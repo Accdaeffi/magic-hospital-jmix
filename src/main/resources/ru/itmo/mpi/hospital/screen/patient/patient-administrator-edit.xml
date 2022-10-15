@@ -30,8 +30,8 @@
                 <textField id="nameField" property="name"/>
                 <textField id="surnameField" property="surname"/>
                 <checkBox id="isMaleField" property="isMale"/>
-                <checkBox id="isMageField" property="isMage"/>
                 <comboBox id="socialStatusField" property="socialStatus" required="true"/>
+                <checkBox id="isMageField" property="isMage"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

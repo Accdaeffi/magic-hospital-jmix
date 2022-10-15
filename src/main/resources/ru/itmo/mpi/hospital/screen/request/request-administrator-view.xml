@@ -34,10 +34,10 @@
                 <entityPicker id="patientField" property="diseaseCase.patient" />
                 <entityPicker id="helperField" property="helper" required="true"/>
                 <checkBox id="requiredPentaHelpField" property="requiredPentaHelp"/>
-                <textField id="additionalInfoField" property="additionalInfo"/>
-                <comboBox id="requestStatusField" property="requestStatus"/>
+                <textArea id="additionalInfoField" property="additionalInfo"/>
                 <textField id="dustAmountRequiredField" property="dustAmountRequired"/>
                 <textField id="waterRequiredField" property="waterRequired"/>
+                <comboBox id="requestStatusField" property="requestStatus"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

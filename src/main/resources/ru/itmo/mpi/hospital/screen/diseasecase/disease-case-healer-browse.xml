@@ -45,11 +45,12 @@
                 <action id="examine" shortcut="${TABLE_EDIT_SHORTCUT}" trackSelection="true"/>
             </actions>
             <columns>
-                <column id="prayer" />
-                <column id="request" />
+                <column id="patient"/>
                 <column id="patientComplaints"/>
                 <column id="actions"/>
-                <column id="patient"/>
+                <column id="prayer"/>
+                <column id="request"/>
+                <column id="diseaseCaseState"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

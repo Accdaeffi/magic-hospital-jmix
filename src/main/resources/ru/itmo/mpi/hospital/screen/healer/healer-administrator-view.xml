@@ -36,7 +36,6 @@
                     <checkBox id="activeField" property="active"/>
                     <dateField id="workStartDateField" property="workStartDate"/>
                     <comboBox id="socialStatusField" property="socialStatus"/>
-                    <textField id="healerPowerField" property="healerPower"/>
                 </column>
             </form>
         </scrollBox>

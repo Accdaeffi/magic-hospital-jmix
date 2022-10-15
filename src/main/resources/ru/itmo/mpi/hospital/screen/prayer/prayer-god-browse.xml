@@ -49,9 +49,8 @@
                 </action>
             </actions>
             <columns>
-                <column id="god"/>
-                <column id="diseaseCase.patient" />
                 <column id="diseaseCase.healer" />
+                <column id="diseaseCase.patient" />
                 <column id="diseaseCase.disease" />
                 <column id="prayText"/>
                 <column id="prayerStatus"/>

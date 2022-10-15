@@ -35,7 +35,7 @@
                 <textField id="patientName" property="diseaseCase.patient" />
                 <textField id="patientStatus" property="diseaseCase.patient.socialStatus" />
                 <textField id="diseaseName" property="diseaseCase.disease" />
-                <textField id="prayTextField" property="prayText"/>
+                <textArea id="prayTextField" property="prayText"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

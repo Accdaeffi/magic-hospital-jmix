@@ -40,9 +40,8 @@
                 <column id="name"/>
                 <column id="surname"/>
                 <column id="isMale"/>
-                <column id="isMage"/>
                 <column id="socialStatus"/>
-                <column id="patientState"/>
+                <column id="isMage"/>
             </columns>
             <simplePagination/>
         </groupTable>

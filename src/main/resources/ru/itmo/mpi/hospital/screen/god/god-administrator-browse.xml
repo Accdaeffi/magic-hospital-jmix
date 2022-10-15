@@ -46,11 +46,9 @@
                 </action>
             </actions>
             <columns>
-                <column id="username"/>
                 <column id="firstName"/>
                 <column id="lastName"/>
                 <column id="isMale"/>
-                <column id="email"/>
                 <column id="active"/>
             </columns>
             <simplePagination/>

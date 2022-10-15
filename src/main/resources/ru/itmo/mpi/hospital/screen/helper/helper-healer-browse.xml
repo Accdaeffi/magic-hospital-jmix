@@ -9,7 +9,7 @@
             <fetchPlan extends="_base"/>
             <loader id="helpersDl">
                 <query>
-                    <![CDATA[select e from Helper e]]>
+                    <![CDATA[select e from Helper e where e.active = true]]>
                 </query>
             </loader>
         </collection>
@@ -41,14 +41,11 @@
             <actions>
             </actions>
             <columns>
-                <column id="username"/>
                 <column id="firstName"/>
                 <column id="lastName"/>
                 <column id="isMale"/>
-                <column id="email"/>
-                <column id="active"/>
-                <column id="workStartDate"/>
                 <column id="socialStatus"/>
+                <column id="workStartDate"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

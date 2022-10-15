@@ -6,7 +6,10 @@
     <data readOnly="true">
         <collection id="requestsDc"
                     class="ru.itmo.mpi.hospital.entity.Request">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="diseaseCase"/>
+                <property name="helper" fetchPlan="_base"/>
+            </fetchPlan>
             <loader id="requestsDl">
                 <query>
                     <![CDATA[select e from Request e]]>
@@ -46,11 +49,14 @@
                 </action>
             </actions>
             <columns>
+                <column id="diseaseCase.healer"/>
+                <column id="diseaseCase.patient"/>
+                <column id="helper"/>
                 <column id="requiredPentaHelp"/>
                 <column id="additionalInfo"/>
-                <column id="requestStatus"/>
                 <column id="dustAmountRequired"/>
                 <column id="waterRequired"/>
+                <column id="requestStatus"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

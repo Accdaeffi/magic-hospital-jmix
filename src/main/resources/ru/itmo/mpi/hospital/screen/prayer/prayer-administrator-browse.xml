@@ -6,7 +6,10 @@
     <data readOnly="true">
         <collection id="prayersDc"
                     class="ru.itmo.mpi.hospital.entity.Prayer">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="god" fetchPlan="_base"/>
+                <property name="diseaseCase"/>
+            </fetchPlan>
             <loader id="prayersDl">
                 <query>
                     <![CDATA[select e from Prayer e]]>
@@ -46,7 +49,10 @@
                 </action>
             </actions>
             <columns>
+                <column id="god"/>
                 <column id="prayText"/>
+                <column id="diseaseCase.healer"/>
+                <column id="diseaseCase.patient"/>
                 <column id="prayerStatus"/>
             </columns>
             <simplePagination/>

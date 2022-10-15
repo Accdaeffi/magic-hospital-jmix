@@ -9,7 +9,7 @@
             <fetchPlan extends="_base"/>
             <loader id="godsDl">
                 <query>
-                    <![CDATA[select e from God e]]>
+                    <![CDATA[select e from God e where e.active = true]]>
                 </query>
             </loader>
         </collection>
@@ -41,12 +41,9 @@
             <actions>
             </actions>
             <columns>
-                <column id="username"/>
                 <column id="firstName"/>
                 <column id="lastName"/>
                 <column id="isMale"/>
-                <column id="email"/>
-                <column id="active"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

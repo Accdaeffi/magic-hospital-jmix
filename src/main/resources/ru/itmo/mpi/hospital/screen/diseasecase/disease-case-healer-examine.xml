@@ -37,10 +37,10 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout spacing="true">
+    <layout spacing="true" expand="actions">
         <form id="form" dataContainer="diseaseCaseDc">
             <column width="350px">
-                <textField id="patientComplaintsField" property="patientComplaints"/>
+                <textArea id="patientComplaintsField" property="patientComplaints"/>
                 <entityPicker id="diseaseField" property="disease">
                     <actions>
                         <action id="entityLookup" type="entity_lookup">
@@ -51,11 +51,11 @@
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <textField id="actionsField" property="actions"/>
+                <textArea id="actionsField" property="actions" rows="7"/>
                 <entityPicker id="patientField" property="patient" />
             </column>
         </form>
-        <vbox id="actions" spacing="true">
+        <vbox id="actions" spacing="true" expand="closeActions">
             <hbox id="helpActions" spacing="true">
                 <button id="createPrayerBtn" action="createPrayer"/>
                 <button id="createRequestBtn" action="createRequest"/>

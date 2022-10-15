@@ -46,15 +46,13 @@
                 </action>
             </actions>
             <columns>
-                <column id="username"/>
                 <column id="firstName"/>
                 <column id="lastName"/>
                 <column id="isMale"/>
-                <column id="email"/>
-                <column id="active"/>
                 <column id="workStartDate"/>
                 <column id="socialStatus"/>
-                <column id="healerPower"/>
+                <column id="email"/>
+                <column id="active"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

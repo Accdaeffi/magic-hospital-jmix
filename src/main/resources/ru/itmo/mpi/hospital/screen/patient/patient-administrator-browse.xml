@@ -54,8 +54,8 @@
                 <column id="name"/>
                 <column id="surname"/>
                 <column id="isMale"/>
-                <column id="isMage"/>
                 <column id="socialStatus"/>
+                <column id="isMage"/>
                 <column id="patientState"/>
             </columns>
             <simplePagination/>

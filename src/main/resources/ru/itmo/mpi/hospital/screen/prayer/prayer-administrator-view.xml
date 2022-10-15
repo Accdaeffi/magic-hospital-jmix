@@ -33,7 +33,7 @@
                 <entityPicker id="healerField" property="diseaseCase.healer" />
                 <entityPicker id="godField" property="god" />
                 <entityPicker id="patientField" property="diseaseCase.patient" />
-                <textField id="prayTextField" property="prayText"/>
+                <textArea id="prayTextField" property="prayText"/>
                 <comboBox id="prayerStatusField" property="prayerStatus"/>
             </column>
         </form>

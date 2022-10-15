@@ -30,9 +30,9 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="prayerDc">
             <column width="350px">
-                <entityPicker id="diseaseCaseField" property="diseaseCase" />
-                <entityPicker id="godField" property="god" />
-                <textField id="prayTextField" property="prayText"/>
+                <entityPicker id="healerField" property="diseaseCase.healer" />
+                <entityPicker id="patientField" property="diseaseCase.patient" />
+                <textArea id="prayTextField" property="prayText"/>
                 <comboBox id="prayerStatusField" property="prayerStatus"/>
             </column>
         </form>
