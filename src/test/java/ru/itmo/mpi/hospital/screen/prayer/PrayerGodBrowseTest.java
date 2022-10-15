@@ -1,14 +1,13 @@
-package ru.itmo.mpi.hospital.screen;
+package ru.itmo.mpi.hospital.screen.prayer;
 
 import io.jmix.core.DataManager;
 import io.jmix.ui.Screens;
 import io.jmix.ui.testassist.junit.UiTest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.Prayer;
-import ru.itmo.mpi.hospital.screen.prayer.PrayerEdit;
-import ru.itmo.mpi.hospital.screen.prayer.PrayerGodBrowse;
 import ru.itmo.mpi.hospital.testsupport.ScreenInteractions;
 import ru.itmo.mpi.hospital.testsupport.TableInteractions;
 import ru.itmo.mpi.hospital.testsupport.WebIntegrationTest;
@@ -32,6 +31,8 @@ public class PrayerGodBrowseTest extends WebIntegrationTest {
     @BeforeEach
     void setUp() {
 
+        prayers.loadDefault();
+
         /*prayer = dataManager.create(Prayer.class);
 
         prayer.setPrayText("test");
@@ -49,13 +50,11 @@ public class PrayerGodBrowseTest extends WebIntegrationTest {
         PrayerGodBrowse prayerBrowse = screenInteractions.open(PrayerGodBrowse.class);
         TableInteractions<Prayer> prayerTable = entityTable(prayerBrowse);
 
-        System.out.println(prayerTable.firstItem().getPrayText());
-        System.out.println(prayer.getPrayText());
+        // then
+        Prayer tablePrayer = prayerTable.allItems().stream().filter(pr -> pr.equals(prayer)).findFirst().orElse(null);
 
         // expect:
-        assertThat(prayerTable.firstItem())
-                .isEqualTo(prayer);
-
+        assertThat(tablePrayer).isNotNull();
 
     }
 
@@ -75,7 +74,7 @@ public class PrayerGodBrowseTest extends WebIntegrationTest {
         prayerTable.view(firstPrayer);
 
         // then:
-        PrayerEdit prayerEdit = screenInteractions.findOpenScreen(PrayerEdit.class);
+        PrayerGodView prayerEdit = screenInteractions.findOpenScreen(PrayerGodView.class);
 
         assertThat(prayerEdit.getEditedEntity())
                 .isEqualTo(firstPrayer);
@@ -84,6 +83,11 @@ public class PrayerGodBrowseTest extends WebIntegrationTest {
     @NotNull
     private TableInteractions<Prayer> entityTable(PrayerGodBrowse browseScreen) {
         return TableInteractions.of(browseScreen, Prayer.class, "prayersTable");
+    }
+
+    @AfterEach
+    void tearDown() {
+        prayers.cleanup();
     }
 
 }

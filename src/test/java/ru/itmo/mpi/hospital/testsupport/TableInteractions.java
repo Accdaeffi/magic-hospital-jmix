@@ -5,6 +5,8 @@ import io.jmix.ui.component.Table;
 import io.jmix.ui.screen.Screen;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class TableInteractions<E> {
@@ -29,6 +31,10 @@ public class TableInteractions<E> {
     @Nullable
     Button button(String buttonId) {
         return Optional.ofNullable((Button) table.getButtonsPanel().getComponent(buttonId)).orElseThrow();
+    }
+
+    public List<E> allItems() {
+        return new ArrayList<>(table.getItems().getItems());
     }
 
     public E firstItem() {

@@ -3,6 +3,7 @@ package ru.itmo.mpi.hospital.screen;
 import io.jmix.core.DataManager;
 import io.jmix.ui.Screens;
 import io.jmix.ui.testassist.junit.UiTest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ class PrayerBrowseTest extends WebIntegrationTest {
     @BeforeEach
     void setUp() {
 
+        prayers.loadDefault();
+
         /*prayer = dataManager.create(Prayer.class);
 
         prayer.setPrayText("test");
@@ -50,12 +53,11 @@ class PrayerBrowseTest extends WebIntegrationTest {
         PrayerBrowse prayerBrowse = screenInteractions.open(PrayerBrowse.class);
         TableInteractions<Prayer> prayerTable = entityTable(prayerBrowse);
 
-        System.out.println(prayerTable.firstItem().getPrayText());
-        System.out.println(prayer.getPrayText());
+        // then
+        Prayer tablePrayer = prayerTable.allItems().stream().filter(pr -> pr.equals(prayer)).findFirst().orElse(null);
 
         // expect:
-        assertThat(prayerTable.firstItem())
-                .isEqualTo(prayer);
+        assertThat(tablePrayer).isNotNull();
 
 
     }
@@ -85,5 +87,10 @@ class PrayerBrowseTest extends WebIntegrationTest {
     @NotNull
     private TableInteractions<Prayer> entityTable(PrayerBrowse browseScreen) {
         return TableInteractions.of(browseScreen, Prayer.class, "prayersTable");
+    }
+
+    @AfterEach
+    void tearDown() {
+        prayers.cleanup();
     }
 }

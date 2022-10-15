@@ -8,11 +8,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import ru.itmo.mpi.hospital.MagicHospitalApplication;
-import ru.itmo.mpi.hospital.testsupport.testdata.TestData;
 
 @SpringBootTest
 @UiTest(authenticatedUser = "admin", mainScreenId = "MainScreen", screenBasePackages = "ru.itmo.mpi.hospital.screen")
-@ContextConfiguration(classes = {MagicHospitalApplication.class, TestData.class, UiTestAssistConfiguration.class})
+@ContextConfiguration(classes = {MagicHospitalApplication.class, UiTestAssistConfiguration.class})
 @AutoConfigureTestDatabase
 public abstract class WebIntegrationTest {
 
