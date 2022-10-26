@@ -32,12 +32,6 @@ public class PrayerGodBrowseTest extends WebIntegrationTest {
     void setUp() {
 
         prayers.loadDefault();
-
-        /*prayer = dataManager.create(Prayer.class);
-
-        prayer.setPrayText("test");
-
-        prayer = dataManager.save(prayer);*/
         prayer = prayers.prayers.get(0);
 
     }
