@@ -47,9 +47,6 @@ public class RejectPrayerAction<E extends Prayer> extends ItemTrackingAction {
 
         selectedPrayer.setPrayerStatus(PrayerStatus.REJECTED);
         dataManager.save(selectedPrayer);
-
-        PrayerAnsweredEvent event = new PrayerAnsweredEvent(this, selectedPrayer, (User) currentAuthentication.getUser());
-        eventHub.publish(PrayerAnsweredEvent.class, event);
     }
 
 }
