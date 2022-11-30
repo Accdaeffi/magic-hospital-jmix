@@ -16,6 +16,8 @@ import java.util.Map;
 @Component
 public class HelperTestData {
 
+    private static boolean loaded = false;
+
     @Autowired
     DataManager dataManager;
 
@@ -38,21 +40,24 @@ public class HelperTestData {
     @PostConstruct
     void init() {
 
-        for (int i = 0; i < listUsername.length; i++) {
+        if (!loaded) {
 
-            Helper helper = dataManager.create(Helper.class);
-            helper.setUsername(listUsername[i]);
-            helper.setFirstName(listName[i]);
-            helper.setLastName(listSurname[i]);
+            for (int i = 0; i < listUsername.length; i++) {
 
-            helper = dataManager.save(helper);
+                Helper helper = dataManager.create(Helper.class);
+                helper.setUsername(listUsername[i]);
+                helper.setFirstName(listName[i]);
+                helper.setLastName(listSurname[i]);
 
-            helpers.add(helper);
+                helper = dataManager.save(helper);
 
-            dataManager.save(rolesTestData.getRoles(helper, helperRoles).toArray());
+                helpers.add(helper);
+
+                dataManager.save(rolesTestData.getRoles(helper, helperRoles).toArray());
+            }
+
+            loaded = true;
         }
-
-
     }
 
 }

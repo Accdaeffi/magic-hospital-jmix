@@ -12,6 +12,8 @@ import java.util.List;
 @Component
 public class DiseaseTestData {
 
+    private static boolean loaded = false;
+
     @Autowired
     DataManager dataManager;
 
@@ -24,14 +26,20 @@ public class DiseaseTestData {
     @PostConstruct
     void init() {
 
-        for (int i = 0; i < listTitles.length; i++) {
+        if (!loaded) {
 
-            Disease disease = dataManager.create(Disease.class);
-            disease.setTitle(listTitles[i]);
-            disease.setRecipe(listRecipe[i]);
-            disease.setSymptoms(listSymptoms[i]);
+            for (int i = 0; i < listTitles.length; i++) {
 
-            diseases.add(dataManager.save(disease));
+                Disease disease = dataManager.create(Disease.class);
+                disease.setTitle(listTitles[i]);
+                disease.setRecipe(listRecipe[i]);
+                disease.setSymptoms(listSymptoms[i]);
+
+                diseases.add(dataManager.save(disease));
+            }
+
+            loaded = true;
+
         }
 
     }

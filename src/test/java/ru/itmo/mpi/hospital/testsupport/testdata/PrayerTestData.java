@@ -12,6 +12,7 @@ import java.util.List;
 
 @Component
 public class PrayerTestData {
+    private static boolean loaded = false;
 
     public List<Prayer> prayers = new ArrayList<>();
 
@@ -31,45 +32,53 @@ public class PrayerTestData {
     private static final PrayerStatus[] listPrayerStatus = {PrayerStatus.UNANSWERED, PrayerStatus.ACCEPTED, PrayerStatus.REJECTED};
 
     public void loadDefault() {
-        diseaseCaseTestData.loadDefaults();
+        if (!loaded){
+            diseaseCaseTestData.loadDefaults();
 
-        authenticator.withSystem(() -> {
+            authenticator.withSystem(() -> {
 
-            Prayer prayer = dataManager.create(Prayer.class);
-            prayer.setGod(godTestData.gods.get(0));
-            prayer.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(0));
-            prayer.setPrayerStatus(listPrayerStatus[0]);
-            prayer.setPrayText(listPrayText[0]);
-            prayers.add(dataManager.save(prayer));
+                Prayer prayer = dataManager.create(Prayer.class);
+                prayer.setGod(godTestData.gods.get(0));
+                prayer.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(0));
+                prayer.setPrayerStatus(listPrayerStatus[0]);
+                prayer.setPrayText(listPrayText[0]);
+                prayers.add(dataManager.save(prayer));
 
-            prayer = dataManager.create(Prayer.class);
-            prayer.setGod(godTestData.gods.get(0));
-            prayer.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(1));
-            prayer.setPrayerStatus(listPrayerStatus[1]);
-            prayer.setPrayText(listPrayText[1]);
-            prayers.add(dataManager.save(prayer));
+                prayer = dataManager.create(Prayer.class);
+                prayer.setGod(godTestData.gods.get(0));
+                prayer.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(1));
+                prayer.setPrayerStatus(listPrayerStatus[1]);
+                prayer.setPrayText(listPrayText[1]);
+                prayers.add(dataManager.save(prayer));
 
-            prayer = dataManager.create(Prayer.class);
-            prayer.setGod(godTestData.gods.get(1));
-            prayer.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(2));
-            prayer.setPrayerStatus(listPrayerStatus[2]);
-            prayer.setPrayText(listPrayText[2]);
-            prayers.add(dataManager.save(prayer));
+                prayer = dataManager.create(Prayer.class);
+                prayer.setGod(godTestData.gods.get(1));
+                prayer.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(2));
+                prayer.setPrayerStatus(listPrayerStatus[2]);
+                prayer.setPrayText(listPrayText[2]);
+                prayers.add(dataManager.save(prayer));
 
-            return "done";
-        });
+                return "done";
+            });
+
+            loaded = true;
+        }
     }
 
     public void cleanup() {
-        authenticator.withSystem(() -> {
+        if (loaded) {
+            authenticator.withSystem(() -> {
 
-            prayers.forEach(object -> dataManager.remove(object));
-            prayers.clear();
+                prayers.forEach(object -> dataManager.remove(object));
+                prayers.clear();
 
-            return "done";
-        });
+                return "done";
+            });
 
-        diseaseCaseTestData.cleanup();
+            diseaseCaseTestData.cleanup();
+
+            loaded = false;
+        }
 
     }
 
