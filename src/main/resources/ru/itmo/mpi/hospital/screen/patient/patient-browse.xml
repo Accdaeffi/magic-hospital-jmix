@@ -9,7 +9,7 @@
             <fetchPlan extends="_base"/>
             <loader id="patientsDl">
                 <query>
-                    <![CDATA[select e from Patient e]]>
+                    <![CDATA[select e from Patient e order by e.createdDate desc]]>
                 </query>
             </loader>
         </collection>
