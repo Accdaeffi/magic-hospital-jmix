@@ -4,7 +4,6 @@ import io.jmix.core.DataManager;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.ui.Screens;
 import io.jmix.ui.component.Button;
-import io.jmix.ui.screen.StandardLookup;
 import io.jmix.ui.testassist.junit.UiTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -23,7 +22,6 @@ import ru.itmo.mpi.hospital.testsupport.TableInteractions;
 import ru.itmo.mpi.hospital.testsupport.WebIntegrationTest;
 import ru.itmo.mpi.hospital.testsupport.testdata.PrayerTestData;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +30,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @UiTest(authenticatedUser = "godUserName1", mainScreenId = "MainScreen", screenBasePackages = "ru.itmo.mpi.hospital.screen")
 public class GodUnitTest extends WebIntegrationTest {
 
-    private Prayer prayer;
     @Autowired
     private PrayerTestData prayers;
 
@@ -44,10 +41,7 @@ public class GodUnitTest extends WebIntegrationTest {
 
     @BeforeEach
     void setUp() {
-
         prayers.loadDefault();
-        prayer = prayers.prayers.get(0);
-
     }
 
     @Test
@@ -126,13 +120,12 @@ public class GodUnitTest extends WebIntegrationTest {
         ScreenInteractions screenInteractions = ScreenInteractions.forBrowse(screens);
         PrayerUnansweredBrowse prayerUnansweredBrowse = screenInteractions.open(PrayerUnansweredBrowse.class);
         TableInteractions<Prayer> prayerUnansweredTable = entityTable(prayerUnansweredBrowse, Prayer.class, "prayersTable");
-        God currentGod = ((God) auth.getUser());
+
         // and:
         Prayer firstPrayer = prayerUnansweredTable.firstItem();
 
         // and:
         prayerUnansweredTable.selectItem(firstPrayer.getId());
-        //prayerUnansweredTable.button("viewBtn").click();
         prayerUnansweredTable.view(firstPrayer);
 
         // then:
@@ -184,13 +177,6 @@ public class GodUnitTest extends WebIntegrationTest {
         Prayer answeredPrayer = dataManager.load(Prayer.class).id(unansweredPrayer.getId()).one();
 
         assertThat(answeredPrayer.getPrayerStatus()).isEqualTo(PrayerStatus.REJECTED);
-    }
-
-
-
-    @NotNull
-    private <T> TableInteractions<T> entityTable(StandardLookup<T> browseScreen, Class<T> clazz, String componentId) {
-        return TableInteractions.of(browseScreen, clazz, componentId);
     }
 
     @AfterEach
