@@ -7,9 +7,7 @@ import io.jmix.securityui.screen.roleassignment.RoleAssignmentScreen;
 import io.jmix.securityui.screen.rowlevelrole.RowLevelRoleModelLookup;
 import io.jmix.ui.Screens;
 import io.jmix.ui.testassist.junit.UiTest;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.Administrator;
@@ -63,26 +61,12 @@ import ru.itmo.mpi.hospital.screen.request.RequestHelperBrowse;
 import ru.itmo.mpi.hospital.screen.request.RequestHelperProcess;
 import ru.itmo.mpi.hospital.testsupport.ScreenInteractions;
 import ru.itmo.mpi.hospital.testsupport.WebIntegrationTest;
-import ru.itmo.mpi.hospital.testsupport.testdata.PrayerTestData;
 
 @UiTest(authenticatedUser = "regUserName1", mainScreenId = "MainScreen", screenBasePackages = "ru.itmo.mpi.hospital.screen")
 public class AdministratorSecurityTest extends WebIntegrationTest {
 
     @Autowired
-    private PrayerTestData prayers;
-
-    @Autowired
     private DataManager dataManager;
-
-    @BeforeEach
-    void setUp() {
-        prayers.loadDefault();
-    }
-
-    @AfterEach
-    void tearDown() {
-        prayers.cleanup();
-    }
 
     @Test
     void when_openAdminBrowseDiseasedPatients_then_opened(Screens screens) {
