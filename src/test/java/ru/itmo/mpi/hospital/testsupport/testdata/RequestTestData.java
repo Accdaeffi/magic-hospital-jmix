@@ -43,6 +43,7 @@ public class RequestTestData {
             authenticator.withSystem(() -> {
 
                 Request request = dataManager.create(Request.class);
+                request.setAdditionalInfo(listRequestText[0]);
                 request.setHelper(helperTestData.helpers.get(0));
                 request.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(0));
                 request.setRequestStatus(listRequestStatus[0]);
@@ -52,6 +53,7 @@ public class RequestTestData {
                 requests.add(dataManager.save(request));
 
                 request = dataManager.create(Request.class);
+                request.setAdditionalInfo(listRequestText[1]);
                 request.setHelper(helperTestData.helpers.get(1));
                 request.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(1));
                 request.setRequestStatus(listRequestStatus[1]);

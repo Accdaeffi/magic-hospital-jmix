@@ -24,12 +24,9 @@ public class HelperTestData {
     @Autowired
     RolesTestData rolesTestData;
 
-    @Autowired
-    SystemAuthenticator authenticator;
-
     public List<Helper> helpers = new ArrayList<>();
 
-    private static final String[] listUsername = {"helperUserName", "helperUserName2", "helperUserName3"};
+    private static final String[] listUsername = {"helperUserName1", "helperUserName2", "helperUserName3"};
     private static final String[] listName = {"helperName1", "helperName2", "helperName3"};
     private static final String[] listSurname = {"helperSurname1", "helperSurname2", "helperSurname3"};
 
