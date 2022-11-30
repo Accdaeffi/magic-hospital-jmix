@@ -36,7 +36,7 @@ public class DiseaseCaseTestData {
     private static final String[] listActions = {"actions1", "actions2", "actions3"};
     private static final DiseaseCaseState[] listDiseaseCaseStates = {DiseaseCaseState.AT_WORK, DiseaseCaseState.RECOVERY, DiseaseCaseState.DEATH};
 
-    public void loadDefaults() {
+    public void loadDefault() {
 
         if (!loaded) {
             patientTestData.loadDefault();

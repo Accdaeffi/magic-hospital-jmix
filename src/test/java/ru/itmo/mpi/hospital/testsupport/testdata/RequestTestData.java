@@ -38,7 +38,7 @@ public class RequestTestData {
     public void loadDefault() {
         if (!loaded) {
 
-            diseaseCaseTestData.loadDefaults();
+            diseaseCaseTestData.loadDefault();
 
             authenticator.withSystem(() -> {
 

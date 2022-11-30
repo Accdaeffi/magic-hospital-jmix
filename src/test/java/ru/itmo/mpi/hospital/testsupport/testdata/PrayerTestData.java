@@ -33,7 +33,7 @@ public class PrayerTestData {
 
     public void loadDefault() {
         if (!loaded){
-            diseaseCaseTestData.loadDefaults();
+            diseaseCaseTestData.loadDefault();
 
             authenticator.withSystem(() -> {
 
