@@ -29,16 +29,16 @@ public class RequestTestData {
     @Autowired
     DiseaseCaseTestData diseaseCaseTestData;
 
-    private static final String[] listRequestText = {"request1", "request2"};
-    private static final int[] listWaterAmount = {1, 0};
-    private static final int[] listDustAmount = {50, 70};
-    private static final boolean[] listPentaHelp = {true, false};
-    private static final RequestStatus[] listRequestStatus = {RequestStatus.INITIALISED, RequestStatus.COMPLETED};
+    private static final String[] listRequestText = {"request1", "request2", "request3"};
+    private static final int[] listWaterAmount = {1, 0, 2};
+    private static final int[] listDustAmount = {50, 70, 60};
+    private static final boolean[] listPentaHelp = {true, false, true};
+    private static final RequestStatus[] listRequestStatus = {RequestStatus.INITIALISED, RequestStatus.PROCESSING, RequestStatus.COMPLETED};
 
     public void loadDefault() {
         if (!loaded) {
 
-            diseaseCaseTestData.loadDefaults();
+            diseaseCaseTestData.loadDefault();
 
             authenticator.withSystem(() -> {
 
@@ -60,6 +60,16 @@ public class RequestTestData {
                 request.setRequiredPentaHelp(listPentaHelp[1]);
                 request.setWaterRequired(listWaterAmount[1]);
                 request.setDustAmountRequired(listDustAmount[1]);
+                requests.add(dataManager.save(request));
+
+                request = dataManager.create(Request.class);
+                request.setAdditionalInfo(listRequestText[2]);
+                request.setHelper(helperTestData.helpers.get(2));
+                request.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(2));
+                request.setRequestStatus(listRequestStatus[2]);
+                request.setRequiredPentaHelp(listPentaHelp[2]);
+                request.setWaterRequired(listWaterAmount[2]);
+                request.setDustAmountRequired(listDustAmount[2]);
                 requests.add(dataManager.save(request));
 
                 return "done";

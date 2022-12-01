@@ -53,8 +53,8 @@
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
-            <button action="lookupSelectAction"/>
-            <button action="lookupCancelAction"/>
+            <button id="lookupSelectActionBtn" action="lookupSelectAction"/>
+            <button id="lookupCancelActionBtn" action="lookupCancelAction"/>
         </hbox>
     </layout>
 </window>
