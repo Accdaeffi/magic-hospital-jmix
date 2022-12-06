@@ -14,7 +14,7 @@ import ru.itmo.mpi.hospital.screen.prayer.PrayerAdministratorView;
 import ru.itmo.mpi.hospital.testsupport.ScreenInteractions;
 import ru.itmo.mpi.hospital.testsupport.TableInteractions;
 import ru.itmo.mpi.hospital.testsupport.WebIntegrationTest;
-import ru.itmo.mpi.hospital.testsupport.testdata.RequestTestData;
+import ru.itmo.mpi.hospital.testsupport.testdata.PrayerTestData;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AdminPrayerUnitTest extends WebIntegrationTest {
 
     @Autowired
-    RequestTestData prayerTestData;
+    PrayerTestData prayerTestData;
 
     @Autowired
     private DataManager dataManager;
@@ -52,7 +52,6 @@ public class AdminPrayerUnitTest extends WebIntegrationTest {
         Assertions.assertThat(allPrayersFromDb).containsExactlyInAnyOrderElementsOf(allPrayersFromPage);
     }
 
-    // todo fix
     @Test
     void test_admin_open_prayer(Screens screens) {
         // given:
