@@ -9,7 +9,7 @@
             <fetchPlan extends="_base"/>
             <loader id="requestsDl">
                 <query>
-                    <![CDATA[select e from Request e]]>
+                    <![CDATA[select e from Request e order by e.additionalInfo]]>
                 </query>
             </loader>
         </collection>
