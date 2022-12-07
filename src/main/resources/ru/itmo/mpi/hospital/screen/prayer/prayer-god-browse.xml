@@ -12,7 +12,7 @@
             </fetchPlan>
             <loader id="prayersDl">
                 <query>
-                    <![CDATA[select e from Prayer e]]>
+                    <![CDATA[select e from Prayer e order by e.prayText]]>
                 </query>
             </loader>
         </collection>

@@ -9,7 +9,7 @@
             <fetchPlan extends="_base"/>
             <loader id="administratorsDl">
                 <query>
-                    <![CDATA[select e from Administrator e]]>
+                    <![CDATA[select e from Administrator e order by e.firstName]]>
                 </query>
             </loader>
         </collection>

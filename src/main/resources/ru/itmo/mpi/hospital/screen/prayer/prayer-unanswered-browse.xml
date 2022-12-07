@@ -11,7 +11,7 @@
             </fetchPlan>
             <loader id="prayersDl">
                 <query>
-                    <![CDATA[select e from Prayer e where e.prayerStatus = 'unanswered']]>
+                    <![CDATA[select e from Prayer e where e.prayerStatus = 'unanswered' order by e.prayText]]>
                 </query>
             </loader>
         </collection>

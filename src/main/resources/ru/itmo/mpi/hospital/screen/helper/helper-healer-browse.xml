@@ -9,7 +9,7 @@
             <fetchPlan extends="_base"/>
             <loader id="helpersDl">
                 <query>
-                    <![CDATA[select e from Helper e where e.active = true]]>
+                    <![CDATA[select e from Helper e where e.active = true order by e.firstName]]>
                 </query>
             </loader>
         </collection>
