@@ -75,7 +75,7 @@ public class Request {
     @InstanceName
     @DependsOnProperties({"id"})
     public String getDisplayName(Messages messages) {
-        return messages.formatMessage(getClass(), "Request.instanceName", id.toString());
+        return messages.formatMessage(getClass(), "Request.instanceName", helper.getDisplayName());
     }
 
 }
