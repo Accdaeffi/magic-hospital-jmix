@@ -16,6 +16,8 @@ import java.util.Map;
 @Component
 public class GodTestData {
 
+    private static boolean loaded = false;
+
     @Autowired
     DataManager dataManager;
 
@@ -37,21 +39,27 @@ public class GodTestData {
 
     @PostConstruct
     void init() {
-        gods = new ArrayList<>();
 
-        for (int i = 0; i < listUsername.length; i++) {
+        if (!loaded) {
 
-            God god = dataManager.create(God.class);
+            gods = new ArrayList<>();
 
-            god.setUsername(listUsername[i]);
-            god.setFirstName(listName[i]);
-            god.setLastName(listSurname[i]);
+            for (int i = 0; i < listUsername.length; i++) {
 
-            god = dataManager.save(god);
+                God god = dataManager.create(God.class);
 
-            gods.add(god);
+                god.setUsername(listUsername[i]);
+                god.setFirstName(listName[i]);
+                god.setLastName(listSurname[i]);
 
-            dataManager.save(rolesTestData.getRoles(god, godRoles).toArray());
+                god = dataManager.save(god);
+
+                gods.add(god);
+
+                dataManager.save(rolesTestData.getRoles(god, godRoles).toArray());
+            }
+
+            loaded = true;
         }
 
     }

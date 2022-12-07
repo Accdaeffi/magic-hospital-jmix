@@ -16,6 +16,7 @@ import java.util.Map;
 @Component
 public class HealerTestData {
 
+    private static boolean loaded = false;
     @Autowired
     DataManager dataManager;
 
@@ -38,18 +39,24 @@ public class HealerTestData {
     @PostConstruct
     void init() {
 
-        for (int i = 0; i < listUsername.length; i++) {
+        if (!loaded) {
 
-            Healer healer = dataManager.create(Healer.class);
-            healer.setUsername(listUsername[i]);
-            healer.setFirstName(listName[i]);
-            healer.setLastName(listSurname[i]);
+            for (int i = 0; i < listUsername.length; i++) {
 
-            healer = dataManager.save(healer);
+                Healer healer = dataManager.create(Healer.class);
+                healer.setUsername(listUsername[i]);
+                healer.setFirstName(listName[i]);
+                healer.setLastName(listSurname[i]);
 
-            healers.add(healer);
+                healer = dataManager.save(healer);
 
-            dataManager.save(rolesTestData.getRoles(healer, healerRoles).toArray());
+                healers.add(healer);
+
+                dataManager.save(rolesTestData.getRoles(healer, healerRoles).toArray());
+            }
+
+            loaded = true;
+
         }
 
     }

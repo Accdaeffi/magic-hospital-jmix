@@ -13,6 +13,8 @@ import java.util.List;
 @Component
 public class RequestTestData {
 
+    private static boolean loaded = false;
+
     public List<Request> requests = new ArrayList<>();
 
     @Autowired
@@ -27,49 +29,71 @@ public class RequestTestData {
     @Autowired
     DiseaseCaseTestData diseaseCaseTestData;
 
-    private static final String[] listRequestText = {"request1", "request2"};
-    private static final int[] listWaterAmount = {1, 0};
-    private static final int[] listDustAmount = {50, 70};
-    private static final boolean[] listPentaHelp = {true, false};
-    private static final RequestStatus[] listRequestStatus = {RequestStatus.INITIALISED, RequestStatus.COMPLETED};
+    private static final String[] listRequestText = {"request1", "request2", "request3"};
+    private static final int[] listWaterAmount = {1, 0, 2};
+    private static final int[] listDustAmount = {50, 70, 60};
+    private static final boolean[] listPentaHelp = {true, false, true};
+    private static final RequestStatus[] listRequestStatus = {RequestStatus.INITIALISED, RequestStatus.PROCESSING, RequestStatus.COMPLETED};
 
     public void loadDefault() {
-        diseaseCaseTestData.loadDefaults();
+        if (!loaded) {
 
-        authenticator.withSystem(() -> {
+            diseaseCaseTestData.loadDefault();
 
-            Request request = dataManager.create(Request.class);
-            request.setHelper(helperTestData.helpers.get(0));
-            request.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(0));
-            request.setRequestStatus(listRequestStatus[0]);
-            request.setRequiredPentaHelp(listPentaHelp[0]);
-            request.setWaterRequired(listWaterAmount[0]);
-            request.setDustAmountRequired(listWaterAmount[0]);
-            requests.add(dataManager.save(request));
+            authenticator.withSystem(() -> {
 
-            request = dataManager.create(Request.class);
-            request.setHelper(helperTestData.helpers.get(1));
-            request.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(1));
-            request.setRequestStatus(listRequestStatus[1]);
-            request.setRequiredPentaHelp(listPentaHelp[1]);
-            request.setWaterRequired(listWaterAmount[1]);
-            request.setDustAmountRequired(listWaterAmount[1]);
-            requests.add(dataManager.save(request));
+                Request request = dataManager.create(Request.class);
+                request.setAdditionalInfo(listRequestText[0]);
+                request.setHelper(helperTestData.helpers.get(0));
+                request.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(0));
+                request.setRequestStatus(listRequestStatus[0]);
+                request.setRequiredPentaHelp(listPentaHelp[0]);
+                request.setWaterRequired(listWaterAmount[0]);
+                request.setDustAmountRequired(listDustAmount[0]);
+                requests.add(dataManager.save(request));
 
-            return "done";
-        });
+                request = dataManager.create(Request.class);
+                request.setAdditionalInfo(listRequestText[1]);
+                request.setHelper(helperTestData.helpers.get(1));
+                request.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(1));
+                request.setRequestStatus(listRequestStatus[1]);
+                request.setRequiredPentaHelp(listPentaHelp[1]);
+                request.setWaterRequired(listWaterAmount[1]);
+                request.setDustAmountRequired(listDustAmount[1]);
+                requests.add(dataManager.save(request));
+
+                request = dataManager.create(Request.class);
+                request.setAdditionalInfo(listRequestText[2]);
+                request.setHelper(helperTestData.helpers.get(2));
+                request.setDiseaseCase(diseaseCaseTestData.diseaseCases.get(2));
+                request.setRequestStatus(listRequestStatus[2]);
+                request.setRequiredPentaHelp(listPentaHelp[2]);
+                request.setWaterRequired(listWaterAmount[2]);
+                request.setDustAmountRequired(listDustAmount[2]);
+                requests.add(dataManager.save(request));
+
+                return "done";
+            });
+
+            loaded = true;
+        }
     }
 
     public void cleanup() {
-        authenticator.withSystem(() -> {
+        if (loaded) {
 
-            requests.forEach(object -> dataManager.remove(object));
-            requests.clear();
+            authenticator.withSystem(() -> {
 
-            return "done";
-        });
+                requests.forEach(object -> dataManager.remove(object));
+                requests.clear();
 
-        diseaseCaseTestData.cleanup();
+                return "done";
+            });
+
+            diseaseCaseTestData.cleanup();
+
+            loaded = false;
+        }
     }
 
 
