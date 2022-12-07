@@ -14,6 +14,7 @@ import java.util.List;
 @Component
 public class PatientTestData {
 
+    private static boolean loaded = false;
     @Autowired
     DataManager dataManager;
 
@@ -30,32 +31,41 @@ public class PatientTestData {
     private static final PatientState[] listPatientStates = {PatientState.SICK, PatientState.HEALTHY, PatientState.BURIED, PatientState.DISEASED, PatientState.DISEASED};
 
     public void loadDefault() {
-        authenticator.withSystem(() -> {
-            for (int i = 0; i < listName.length; i++) {
+        if (!loaded) {
 
-                Patient patient = dataManager.create(Patient.class);
-                patient.setName(listName[i]);
-                patient.setSurname(listSurname[i]);
-                patient.setIsMale(listMale[i]);
-                patient.setIsMage(listMage[i]);
-                patient.setSocialStatus(listSocialStatus[i]);
-                patient.setPatientState(listPatientStates[i]);
+            authenticator.withSystem(() -> {
+                for (int i = 0; i < listName.length; i++) {
 
-                patients.add(dataManager.save(patient));
-            }
+                    Patient patient = dataManager.create(Patient.class);
+                    patient.setName(listName[i]);
+                    patient.setSurname(listSurname[i]);
+                    patient.setIsMale(listMale[i]);
+                    patient.setIsMage(listMage[i]);
+                    patient.setSocialStatus(listSocialStatus[i]);
+                    patient.setPatientState(listPatientStates[i]);
 
-            return "done!";
-        });
+                    patients.add(dataManager.save(patient));
+                }
 
+                return "done!";
+            });
+
+            loaded = true;
+        }
 
     }
 
     public void cleanup() {
-        authenticator.withSystem(() -> {
-            patients.forEach(object -> dataManager.remove(object));
-            return "done!";
-        });
+        if (loaded) {
 
-        patients.clear();
+            authenticator.withSystem(() -> {
+                patients.forEach(object -> dataManager.remove(object));
+                return "done!";
+            });
+
+            patients.clear();
+
+            loaded = false;
+        }
     }
 }

@@ -16,6 +16,8 @@ import java.util.Map;
 @Component
 public class AdministratorTestData {
 
+    private static boolean loaded = false;
+
     @Autowired
     DataManager dataManager;
 
@@ -37,19 +39,26 @@ public class AdministratorTestData {
     @PostConstruct
     void init() {
 
-        for (int i = 0; i < listUsername.length; i++) {
+        if (!loaded) {
 
-            Administrator reg = dataManager.create(Administrator.class);
-            reg.setUsername(listUsername[i]);
-            reg.setFirstName(listName[i]);
-            reg.setLastName(listSurname[i]);
+            for (int i = 0; i < listUsername.length; i++) {
 
-            reg = dataManager.save(reg);
+                Administrator reg = dataManager.create(Administrator.class);
+                reg.setUsername(listUsername[i]);
+                reg.setFirstName(listName[i]);
+                reg.setLastName(listSurname[i]);
 
-            regs.add(reg);
+                reg = dataManager.save(reg);
 
-            dataManager.save(rolesTestData.getRoles(reg, regRoles).toArray());
+                regs.add(reg);
+
+                dataManager.save(rolesTestData.getRoles(reg, regRoles).toArray());
+            }
+
+            loaded = true;
         }
+
+
     }
 
 }

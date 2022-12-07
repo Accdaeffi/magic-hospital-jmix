@@ -13,6 +13,8 @@ import java.util.List;
 @Component
 public class DiseaseCaseTestData {
 
+    private static boolean loaded = false;
+
     public List<DiseaseCase> diseaseCases = new ArrayList<>();
 
     @Autowired
@@ -34,51 +36,61 @@ public class DiseaseCaseTestData {
     private static final String[] listActions = {"actions1", "actions2", "actions3"};
     private static final DiseaseCaseState[] listDiseaseCaseStates = {DiseaseCaseState.AT_WORK, DiseaseCaseState.RECOVERY, DiseaseCaseState.DEATH};
 
-    public void loadDefaults() {
-        patientTestData.loadDefault();
+    public void loadDefault() {
 
-        systemAuthenticator.withSystem(() -> {
+        if (!loaded) {
+            patientTestData.loadDefault();
 
-            DiseaseCase diseaseCase = dataManager.create(DiseaseCase.class);
-            diseaseCase.setDisease(diseaseTestData.diseases.get(0));
-            diseaseCase.setActions(listActions[0]);
-            diseaseCase.setPatientComplaints(listComplaints[0]);
-            diseaseCase.setPatient(patientTestData.patients.get(0));
-            diseaseCase.setHealer(healerTestData.healers.get(0));
-            diseaseCase.setDiseaseCaseState(listDiseaseCaseStates[0]);
-            diseaseCases.add(dataManager.save(diseaseCase));
+            systemAuthenticator.withSystem(() -> {
 
-            diseaseCase = dataManager.create(DiseaseCase.class);
-            diseaseCase.setDisease(diseaseTestData.diseases.get(1));
-            diseaseCase.setActions(listActions[1]);
-            diseaseCase.setPatientComplaints(listComplaints[1]);
-            diseaseCase.setPatient(patientTestData.patients.get(1));
-            diseaseCase.setHealer(healerTestData.healers.get(0));
-            diseaseCase.setDiseaseCaseState(listDiseaseCaseStates[1]);
-            diseaseCases.add(dataManager.save(diseaseCase));
+                DiseaseCase diseaseCase = dataManager.create(DiseaseCase.class);
+                diseaseCase.setDisease(diseaseTestData.diseases.get(0));
+                diseaseCase.setActions(listActions[0]);
+                diseaseCase.setPatientComplaints(listComplaints[0]);
+                diseaseCase.setPatient(patientTestData.patients.get(0));
+                diseaseCase.setHealer(healerTestData.healers.get(0));
+                diseaseCase.setDiseaseCaseState(listDiseaseCaseStates[0]);
+                diseaseCases.add(dataManager.save(diseaseCase));
 
-            diseaseCase = dataManager.create(DiseaseCase.class);
-            diseaseCase.setDisease(diseaseTestData.diseases.get(1));
-            diseaseCase.setActions(listActions[2]);
-            diseaseCase.setPatientComplaints(listComplaints[2]);
-            diseaseCase.setPatient(patientTestData.patients.get(2));
-            diseaseCase.setHealer(healerTestData.healers.get(1));
-            diseaseCase.setDiseaseCaseState(listDiseaseCaseStates[2]);
-            diseaseCases.add(dataManager.save(diseaseCase));
+                diseaseCase = dataManager.create(DiseaseCase.class);
+                diseaseCase.setDisease(diseaseTestData.diseases.get(1));
+                diseaseCase.setActions(listActions[1]);
+                diseaseCase.setPatientComplaints(listComplaints[1]);
+                diseaseCase.setPatient(patientTestData.patients.get(1));
+                diseaseCase.setHealer(healerTestData.healers.get(0));
+                diseaseCase.setDiseaseCaseState(listDiseaseCaseStates[1]);
+                diseaseCases.add(dataManager.save(diseaseCase));
 
-            return "done";
-        });
+                diseaseCase = dataManager.create(DiseaseCase.class);
+                diseaseCase.setDisease(diseaseTestData.diseases.get(1));
+                diseaseCase.setActions(listActions[2]);
+                diseaseCase.setPatientComplaints(listComplaints[2]);
+                diseaseCase.setPatient(patientTestData.patients.get(2));
+                diseaseCase.setHealer(healerTestData.healers.get(1));
+                diseaseCase.setDiseaseCaseState(listDiseaseCaseStates[2]);
+                diseaseCases.add(dataManager.save(diseaseCase));
+
+                return "done";
+            });
+
+            loaded = true;
+        }
 
     }
 
     public void cleanup() {
-        systemAuthenticator.withSystem(() -> {
-            diseaseCases.forEach(object -> dataManager.remove(object));
-            return "Done";
-        });
-        diseaseCases.clear();
+        if (loaded) {
+            systemAuthenticator.withSystem(() -> {
+                diseaseCases.forEach(object -> dataManager.remove(object));
+                return "Done";
+            });
+            diseaseCases.clear();
 
-        patientTestData.cleanup();
+            patientTestData.cleanup();
+
+            loaded = false;
+        }
+
     }
 
 }

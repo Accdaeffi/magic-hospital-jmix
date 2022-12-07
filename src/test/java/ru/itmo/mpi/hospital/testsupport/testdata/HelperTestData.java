@@ -16,18 +16,17 @@ import java.util.Map;
 @Component
 public class HelperTestData {
 
+    private static boolean loaded = false;
+
     @Autowired
     DataManager dataManager;
 
     @Autowired
     RolesTestData rolesTestData;
 
-    @Autowired
-    SystemAuthenticator authenticator;
-
     public List<Helper> helpers = new ArrayList<>();
 
-    private static final String[] listUsername = {"helperUserName", "helperUserName2", "helperUserName3"};
+    private static final String[] listUsername = {"helperUserName1", "helperUserName2", "helperUserName3"};
     private static final String[] listName = {"helperName1", "helperName2", "helperName3"};
     private static final String[] listSurname = {"helperSurname1", "helperSurname2", "helperSurname3"};
 
@@ -38,21 +37,24 @@ public class HelperTestData {
     @PostConstruct
     void init() {
 
-        for (int i = 0; i < listUsername.length; i++) {
+        if (!loaded) {
 
-            Helper helper = dataManager.create(Helper.class);
-            helper.setUsername(listUsername[i]);
-            helper.setFirstName(listName[i]);
-            helper.setLastName(listSurname[i]);
+            for (int i = 0; i < listUsername.length; i++) {
 
-            helper = dataManager.save(helper);
+                Helper helper = dataManager.create(Helper.class);
+                helper.setUsername(listUsername[i]);
+                helper.setFirstName(listName[i]);
+                helper.setLastName(listSurname[i]);
 
-            helpers.add(helper);
+                helper = dataManager.save(helper);
 
-            dataManager.save(rolesTestData.getRoles(helper, helperRoles).toArray());
+                helpers.add(helper);
+
+                dataManager.save(rolesTestData.getRoles(helper, helperRoles).toArray());
+            }
+
+            loaded = true;
         }
-
-
     }
 
 }
