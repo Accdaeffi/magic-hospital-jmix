@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://requestHelperBrowse.caption"
+        focusComponent="requestsTable">
+    <data readOnly="true">
+        <collection id="requestsDc"
+                    class="ru.itmo.mpi.hospital.entity.Request">
+            <fetchPlan extends="_base">
+                <property name="helper" fetchPlan="_base"/>
+                <property name="diseaseCase"/>
+            </fetchPlan>
+            <loader id="requestsDl">
+                <query>
+                    <![CDATA[select e from Request e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="requestsTable" spacing="true">
+        <filter id="filter"
+                dataLoader="requestsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="requestsTable"
+                    width="100%"
+                    dataContainer="requestsDc">
+            <actions>
+                <action id="edit" type="edit">
+                    <properties>
+                        <property name="screenClass" value="ru.itmo.mpi.hospital.screen.request.RequestHelperProcess"/>
+                    </properties>
+                </action>
+            </actions>
+            <columns>
+                <column id="diseaseCase.healer" />
+                <column id="requiredPentaHelp"/>
+                <column id="additionalInfo"/>
+                <column id="dustAmountRequired"/>
+                <column id="waterRequired"/>
+                <column id="requestStatus"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="editBtn" action="requestsTable.edit"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

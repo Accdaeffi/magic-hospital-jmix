@@ -3,6 +3,7 @@ package ru.itmo.mpi.hospital.screen.diseasecase;
 import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.action.Action;
 import io.jmix.ui.model.CollectionContainer;
+import io.jmix.ui.model.CollectionLoader;
 import io.jmix.ui.screen.LookupComponent;
 import io.jmix.ui.screen.StandardLookup;
 import io.jmix.ui.screen.Subscribe;
@@ -20,7 +21,15 @@ public class DiseaseCaseHealerBrowse extends StandardLookup<DiseaseCase> {
     private CollectionContainer<DiseaseCase> diseaseCasesDc;
 
     @Autowired
+    private CollectionLoader<DiseaseCase> diseaseCasesDl;
+
+    @Autowired
     ScreenBuilders screenBuilders;
+
+    @Subscribe
+    public void onBeforeShow(BeforeShowEvent event) {
+        diseaseCasesDl.load();
+    }
 
     @Subscribe("diseaseCasesTable.examine")
     public void onViewPrayer(Action.ActionPerformedEvent event) {

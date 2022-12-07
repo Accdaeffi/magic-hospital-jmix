@@ -42,6 +42,9 @@ public class Patient {
     @Column(name = "social_status")
     private String socialStatus;
 
+    @Column(name = "state")
+    private String patientState;
+
     @CreatedBy
     @Column(name = "CREATED_BY")
     private String createdBy;
@@ -57,6 +60,14 @@ public class Patient {
 
     public void setSocialStatus(SocialStatus socialStatus) {
         this.socialStatus = socialStatus == null ? null : socialStatus.getId();
+    }
+
+    public PatientState getPatientState() {
+        return patientState == null ? null : PatientState.fromId(patientState);
+    }
+
+    public void setPatientState(PatientState patientState) {
+        this.patientState = patientState == null ? null : patientState.getId();
     }
 
     @InstanceName

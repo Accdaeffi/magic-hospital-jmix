@@ -51,6 +51,7 @@
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
+                <comboBox id="diseaseCaseStateField" property="diseaseCaseState"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

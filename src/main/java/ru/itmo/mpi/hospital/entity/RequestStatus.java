@@ -9,6 +9,7 @@ public enum RequestStatus implements EnumClass<String> {
 
     INITIALISED("initialised"),
     PROCESSING("processing"),
+    CANCELED("canceled"),
     COMPLETED("completed");
 
     private String id;

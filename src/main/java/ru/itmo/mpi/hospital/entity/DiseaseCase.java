@@ -64,6 +64,9 @@ public class DiseaseCase {
     @OneToOne(mappedBy = "diseaseCase", fetch = FetchType.LAZY)
     private Request request;
 
+    @Column(name = "disease_case_state")
+    private String diseaseCaseState;
+
     @CreatedBy
     @Column(name = "CREATED_BY")
     private String createdBy;
@@ -81,6 +84,14 @@ public class DiseaseCase {
     @Column(name = "LAST_MODIFIED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModifiedDate;
+
+    public DiseaseCaseState getDiseaseCaseState() {
+        return diseaseCaseState == null ? null : DiseaseCaseState.fromId(diseaseCaseState);
+    }
+
+    public void setDiseaseCaseState(DiseaseCaseState diseaseCaseState) {
+        this.diseaseCaseState = diseaseCaseState == null ? null : diseaseCaseState.getId();
+    }
 
     @InstanceName
     @DependsOnProperties({"patient", "createdDate"})

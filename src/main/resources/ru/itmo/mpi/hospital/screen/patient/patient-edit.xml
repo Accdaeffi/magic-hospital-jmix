@@ -27,7 +27,7 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="patientDc">
             <column width="350px">
-                <textField id="nameField" property="name"/>
+                <textField id="nameField" property="name" required="true"/>
                 <textField id="surnameField" property="surname"/>
                 <checkBox id="isMaleField" property="isMale"/>
                 <checkBox id="isMageField" property="isMage"/>

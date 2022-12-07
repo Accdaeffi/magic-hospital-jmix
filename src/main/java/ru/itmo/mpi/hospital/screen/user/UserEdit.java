@@ -1,21 +1,24 @@
 package ru.itmo.mpi.hospital.screen.user;
 
-import ru.itmo.mpi.hospital.entity.User;
 import io.jmix.core.EntityStates;
 import io.jmix.core.security.event.SingleUserPasswordChangeEvent;
 import io.jmix.ui.Notifications;
-import io.jmix.ui.component.ComboBox;
 import io.jmix.ui.component.PasswordField;
 import io.jmix.ui.component.TextField;
 import io.jmix.ui.model.DataContext;
 import io.jmix.ui.navigation.Route;
-import io.jmix.ui.screen.*;
+import io.jmix.ui.screen.EditedEntityContainer;
+import io.jmix.ui.screen.MessageBundle;
+import io.jmix.ui.screen.StandardEditor;
+import io.jmix.ui.screen.Subscribe;
+import io.jmix.ui.screen.Target;
+import io.jmix.ui.screen.UiController;
+import io.jmix.ui.screen.UiDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.itmo.mpi.hospital.entity.User;
 
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.TimeZone;
 
 @UiController("User.edit")
 @UiDescriptor("user-edit.xml")
@@ -43,9 +46,6 @@ public class UserEdit extends StandardEditor<User> {
 
     @Autowired
     private MessageBundle messageBundle;
-
-    @Autowired
-    private ComboBox<String> timeZoneField;
 
     private boolean isNewEntity;
 
@@ -84,8 +84,4 @@ public class UserEdit extends StandardEditor<User> {
         }
     }
 
-    @Subscribe
-    public void onInit(InitEvent event) {
-        timeZoneField.setOptionsList(Arrays.asList(TimeZone.getAvailableIDs()));
-    }
 }

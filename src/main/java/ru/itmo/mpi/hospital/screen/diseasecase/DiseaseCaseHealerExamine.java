@@ -1,5 +1,6 @@
 package ru.itmo.mpi.hospital.screen.diseasecase;
 
+import io.jmix.core.DataManager;
 import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.action.Action;
 import io.jmix.ui.component.Button;
@@ -10,17 +11,26 @@ import io.jmix.ui.screen.StandardOutcome;
 import io.jmix.ui.screen.Subscribe;
 import io.jmix.ui.screen.UiController;
 import io.jmix.ui.screen.UiDescriptor;
+import io.jmix.ui.util.OperationResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itmo.mpi.hospital.entity.DiseaseCase;
+import ru.itmo.mpi.hospital.entity.DiseaseCaseState;
+import ru.itmo.mpi.hospital.entity.Patient;
+import ru.itmo.mpi.hospital.entity.PatientState;
 import ru.itmo.mpi.hospital.entity.Prayer;
 import ru.itmo.mpi.hospital.entity.Request;
 import ru.itmo.mpi.hospital.screen.prayer.PrayerHealerCreate;
 import ru.itmo.mpi.hospital.screen.request.RequestHealerCreate;
 
+import java.util.ConcurrentModificationException;
+
 @UiController("DiseaseCase.healer-examine")
 @UiDescriptor("disease-case-healer-examine.xml")
 @EditedEntityContainer("diseaseCaseDc")
 public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
+
+    @Autowired
+    DataManager dataManager;
 
     @Autowired
     InstanceContainer<DiseaseCase> diseaseCaseDc;
@@ -78,6 +88,54 @@ public class DiseaseCaseHealerExamine extends StandardEditor<DiseaseCase> {
 
         screen.setDiseaseCase(diseaseCaseDc.getItem());
         screen.show();
+    }
+
+    @Subscribe("recordRecovery")
+    public void onRecordRecovery(Action.ActionPerformedEvent event) {
+        DiseaseCase diseaseCase = diseaseCaseDc.getItem();
+        Patient patient = diseaseCase.getPatient();
+
+        patient.setPatientState(PatientState.HEALTHY);
+        diseaseCase.setDiseaseCaseState(DiseaseCaseState.RECOVERY);
+
+        DiseaseCase diseaseCaseFromDb = dataManager.load(DiseaseCase.class).id(diseaseCase.getId()).one();
+        if (diseaseCaseFromDb.getDiseaseCaseState() != DiseaseCaseState.AT_WORK) {
+            closeWithDiscard();
+        } else {
+            closeWithCommit();
+        }
+    }
+
+    @Subscribe("recordDeath")
+    public void onRecordDeath(Action.ActionPerformedEvent event) {
+        DiseaseCase diseaseCase = diseaseCaseDc.getItem();
+        Patient patient = diseaseCase.getPatient();
+
+        patient.setPatientState(PatientState.DISEASED);
+        diseaseCase.setDiseaseCaseState(DiseaseCaseState.DEATH);
+
+        DiseaseCase diseaseCaseFromDb = dataManager.load(DiseaseCase.class).id(diseaseCase.getId()).one();
+        if (diseaseCaseFromDb.getDiseaseCaseState() != DiseaseCaseState.AT_WORK) {
+            closeWithDiscard();
+        } else {
+            closeWithCommit();
+        }
+    }
+
+    @Override
+    protected OperationResult commitChanges() {
+        OperationResult operationResult = null;
+
+        boolean committed = false;
+
+        while (!committed) {
+            try {
+                operationResult = super.commitChanges();
+                committed = true;
+            } catch (ConcurrentModificationException ignored) {}
+        }
+
+        return operationResult;
     }
 
 }

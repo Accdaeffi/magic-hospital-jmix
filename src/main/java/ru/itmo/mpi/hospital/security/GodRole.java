@@ -18,7 +18,7 @@ public interface GodRole {
     @EntityPolicy(entityClass = Prayer.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.UPDATE})
     @EntityAttributePolicy(entityClass = Prayer.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
     @EntityAttributePolicy(entityClass = Prayer.class, attributes = "prayerStatus", action = EntityAttributePolicyAction.MODIFY)
-    @ScreenPolicy(screenIds = {"Prayer.god-browse", "PrayerUnanswered.browse", "Prayer.edit", "Prayer.resolve"})
+    @ScreenPolicy(screenIds = {"Prayer.god-browse", "PrayerUnanswered.browse", "Prayer.god-view", "Prayer.resolve"})
     @MenuPolicy(menuIds = {"Prayer.god-browse", "PrayerUnanswered.browse"})
     void prayer();
 

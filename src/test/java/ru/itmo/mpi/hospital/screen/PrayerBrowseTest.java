@@ -2,6 +2,8 @@ package ru.itmo.mpi.hospital.screen;
 
 import io.jmix.core.DataManager;
 import io.jmix.ui.Screens;
+import io.jmix.ui.testassist.junit.UiTest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,9 @@ import ru.itmo.mpi.hospital.testsupport.testdata.PrayerTestData;
 import javax.validation.constraints.NotNull;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 
 
+@UiTest(authenticatedUser = "admin", mainScreenId = "MainScreen", screenBasePackages = "ru.itmo.mpi.hospital.screen")
 class PrayerBrowseTest extends WebIntegrationTest {
 
     private Prayer prayer;
@@ -32,6 +34,8 @@ class PrayerBrowseTest extends WebIntegrationTest {
     @BeforeEach
     void setUp() {
 
+        prayers.loadDefault();
+
         /*prayer = dataManager.create(Prayer.class);
 
         prayer.setPrayText("test");
@@ -42,54 +46,51 @@ class PrayerBrowseTest extends WebIntegrationTest {
     }
 
     @Test
-    void given_oneCustomerExists_when_openCustomerBrowse_then_tableContainsTheCustomer(Screens screens) {
+    void given_onePrayerExists_when_openPrayerBrowse_then_tableContainsThePrayer(Screens screens) {
 
         // given:
         ScreenInteractions screenInteractions = ScreenInteractions.forBrowse(screens);
-        PrayerBrowse customerBrowse = screenInteractions.open(PrayerBrowse.class);
-        TableInteractions<Prayer> customerTable = customerTable(customerBrowse);
+        PrayerBrowse prayerBrowse = screenInteractions.open(PrayerBrowse.class);
+        TableInteractions<Prayer> prayerTable = entityTable(prayerBrowse);
 
-        System.out.println(customerTable.firstItem().getPrayText());
-        System.out.println(prayer.getPrayText());
+        // then
+        Prayer tablePrayer = prayerTable.allItems().stream().filter(pr -> pr.equals(prayer)).findFirst().orElse(null);
 
         // expect:
-        assertTrue(customerTable.firstItem().getPrayText().equals(prayer.getPrayText()));
-
-        assertThat(customerTable.firstItem())
-                .isEqualTo(prayer);
+        assertThat(tablePrayer).isNotNull();
 
 
     }
 
 
     @Test
-    void given_oneCustomerExists_when_editCustomer_then_editCustomerEditorIsShown(Screens screens) {
+    void given_onePrayerExists_when_editPrayer_then_editPrayerEditorIsShown(Screens screens) {
 
         // given:
         ScreenInteractions screenInteractions = ScreenInteractions.forBrowse(screens);
-        PrayerBrowse customerBrowse = screenInteractions.open(PrayerBrowse.class);
-        TableInteractions<Prayer> customerTable = customerTable(customerBrowse);
+        PrayerBrowse prayerBrowse = screenInteractions.open(PrayerBrowse.class);
+        TableInteractions<Prayer> prayerTable = entityTable(prayerBrowse);
 
         // and:
-        Prayer firstCustomer = customerTable.firstItem();
+        Prayer firstPrayer = prayerTable.firstItem();
 
         // and:
-        customerTable.edit(firstCustomer);
+        prayerTable.edit(firstPrayer);
 
         // then:
-        PrayerEdit customerEdit = screenInteractions.findOpenScreen(PrayerEdit.class);
+        PrayerEdit prayerEdit = screenInteractions.findOpenScreen(PrayerEdit.class);
 
-        assertThat(customerEdit.getEditedEntity())
-                .isEqualTo(firstCustomer);
+        assertThat(prayerEdit.getEditedEntity())
+                .isEqualTo(firstPrayer);
     }
 
-    /*@AfterEach
-    void tearDown() {
-        dataManager.remove(prayer);
-    }*/
-
     @NotNull
-    private TableInteractions<Prayer> customerTable(PrayerBrowse customerBrowse) {
-        return TableInteractions.of(customerBrowse, Prayer.class, "prayersTable");
+    private TableInteractions<Prayer> entityTable(PrayerBrowse browseScreen) {
+        return TableInteractions.of(browseScreen, Prayer.class, "prayersTable");
+    }
+
+    @AfterEach
+    void tearDown() {
+        prayers.cleanup();
     }
 }

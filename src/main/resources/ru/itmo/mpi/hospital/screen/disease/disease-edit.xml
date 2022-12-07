@@ -27,7 +27,7 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="diseaseDc">
             <column width="350px">
-                <textField id="titleField" property="title"/>
+                <textField id="titleField" property="title" required="true"/>
                 <textField id="symptomsField" property="symptoms"/>
                 <textField id="recipeField" property="recipe"/>
             </column>

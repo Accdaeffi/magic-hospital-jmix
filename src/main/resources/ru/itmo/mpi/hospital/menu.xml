@@ -25,6 +25,28 @@
         <item screen="Request.browse" caption="msg://ru.itmo.mpi.hospital.screen.request/requestBrowse.menu"/>
         <item screen="DiseaseCase.administrator-browse"
               caption="msg://ru.itmo.mpi.hospital.screen.diseasecase/diseaseCaseAdministratorBrowse.menu"/>
+        <item screen="Patient.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.patient/patientAdministratorBrowse.menu"/>
+        <item screen="Request.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.request/requestAdministratorBrowse.menu"/>
+        <item screen="Prayer.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.prayer/prayerAdministratorBrowse.menu"/>
+        <item screen="God.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.god/godAdministratorBrowse.menu"/>
+        <item screen="Healer.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.healer/healerAdministratorBrowse.menu"/>
+        <item screen="Helper.administrator-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.helper/helperAdminsitratorBrowse.menu"/>
+        <item screen="Patient.administrator-healthy"
+              caption="msg://ru.itmo.mpi.hospital.screen.patient/patientAdministratorHealthy.menu"/>
+        <item screen="Request.helper-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.request/requestHelperBrowse.menu"/>
+        <item screen="Patient.administrator-diseased-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.patient/patientAdministratorDiseasedBrowse.menu"/>
+        <item screen="Helper.healer-browse" caption="msg://ru.itmo.mpi.hospital.screen.helper/helperHealerBrowse.menu"/>
+        <item screen="God.healer-browse" caption="msg://ru.itmo.mpi.hospital.screen.god/godHealerBrowse.menu"/>
+        <item screen="Disease.healer-browse"
+              caption="msg://ru.itmo.mpi.hospital.screen.disease/diseaseHealerBrowse.menu"/>
     </menu>
 
 </menu-config>

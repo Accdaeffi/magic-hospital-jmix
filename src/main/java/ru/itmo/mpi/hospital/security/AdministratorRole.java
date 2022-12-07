@@ -15,51 +15,52 @@ import ru.itmo.mpi.hospital.entity.Healer;
 import ru.itmo.mpi.hospital.entity.Helper;
 import ru.itmo.mpi.hospital.entity.Patient;
 import ru.itmo.mpi.hospital.entity.Prayer;
+import ru.itmo.mpi.hospital.entity.Request;
 
 @ResourceRole(name = "AdministratorRole", code = "administrator-role", scope = "UI")
 public interface AdministratorRole {
 
     @EntityPolicy(entityClass = Patient.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.CREATE, EntityPolicyAction.UPDATE})
     @EntityAttributePolicy(entityClass = Patient.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
-    @ScreenPolicy(screenIds = {"Patient.browse", "Patient.edit"})
-    @MenuPolicy(menuIds = {"Patient.browse"})
+    @ScreenPolicy(screenIds = {"Patient.administrator-browse", "Patient.administrator-edit", "Patient.administrator-healthy", "Patient.administrator-diseased-browse"})
+    @MenuPolicy(menuIds = {"Patient.administrator-browse", "Patient.administrator-diseased-browse"})
     void patient();
 
     @EntityPolicy(entityClass = DiseaseCase.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.CREATE})
     @EntityAttributePolicy(entityClass = DiseaseCase.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @EntityAttributePolicy(entityClass = DiseaseCase.class, attributes = {"healer", "patient", "registrator", "patientComplaints"}, action = EntityAttributePolicyAction.MODIFY)
+    @EntityAttributePolicy(entityClass = DiseaseCase.class, attributes = {"healer", "patient", "registrator", "patientComplaints", "state"}, action = EntityAttributePolicyAction.MODIFY)
     @ScreenPolicy(screenIds = {"DiseaseCase.administrator-browse", "DiseaseCase.administrator-edit"})
     @MenuPolicy(menuIds = "DiseaseCase.administrator-browse")
     void diseaseCase();
 
     @EntityPolicy(entityClass = Prayer.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = Prayer.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"Prayer.browse"})
-    @MenuPolicy(menuIds = "Prayer.browse")
+    @ScreenPolicy(screenIds = {"Prayer.administrator-browse", "Prayer.administrator-view"})
+    @MenuPolicy(menuIds = "Prayer.administrator-browse")
     void prayer();
 
-    @EntityPolicy(entityClass = Helper.class, actions = {EntityPolicyAction.READ})
-    @EntityAttributePolicy(entityClass = Helper.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"Request.browse"})
-    @MenuPolicy(menuIds = {"Request.browse"})
+    @EntityPolicy(entityClass = Request.class, actions = {EntityPolicyAction.READ})
+    @EntityAttributePolicy(entityClass = Request.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @ScreenPolicy(screenIds = {"Request.administrator-browse", "Request.administrator-view"})
+    @MenuPolicy(menuIds = {"Request.administrator-browse"})
     void request();
 
     @EntityPolicy(entityClass = Helper.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = Helper.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"Helper.browse", "Helper.edit"})
-    @MenuPolicy(menuIds = {"Helper.browse"})
+    @ScreenPolicy(screenIds = {"Helper.administrator-browse", "Helper.administrator-view"})
+    @MenuPolicy(menuIds = {"Helper.administrator-browse"})
     void helper();
 
     @EntityPolicy(entityClass = God.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = God.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"God.browse", "God.edit"})
-    @MenuPolicy(menuIds = {"God.browse"})
+    @ScreenPolicy(screenIds = {"God.administrator-browse", "God.administrator-view"})
+    @MenuPolicy(menuIds = {"God.administrator-browse"})
     void god();
 
     @EntityPolicy(entityClass = Healer.class, actions = {EntityPolicyAction.READ})
     @EntityAttributePolicy(entityClass = Healer.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @ScreenPolicy(screenIds = {"Healer.browse", "Healer.edit"})
-    @MenuPolicy(menuIds = {"Healer.browse"})
+    @ScreenPolicy(screenIds = {"Healer.administrator-browse", "Healer.administrator-view"})
+    @MenuPolicy(menuIds = {"Healer.administrator-browse"})
     void healer();
 
     @EntityPolicy(entityClass = Disease.class, actions = {EntityPolicyAction.READ})

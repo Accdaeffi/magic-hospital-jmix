@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://requestHelperProcess.caption"
+        focusComponent="form">
+    <data>
+        <instance id="requestDc"
+                  class="ru.itmo.mpi.hospital.entity.Request">
+            <fetchPlan extends="_base">
+                <property name="helper" fetch="AUTO" fetchPlan="_base"/>
+                <property name="diseaseCase"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+        <action id="startProcessing" caption="msg://requestHelperProcess.startProcessing"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="requestDc">
+            <column width="350px">
+                <entityPicker id="patientField" property="diseaseCase.patient" />
+                <entityPicker id="healerField" property="diseaseCase.healer" />
+                <checkBox id="requiredPentaHelpField" property="requiredPentaHelp" />
+                <textArea id="additionalInfoField" property="additionalInfo" />
+                <textField id="dustAmountRequiredField" property="dustAmountRequired" />
+                <textField id="waterRequiredField" property="waterRequired" />
+                <comboBox id="requestStatusField" property="requestStatus" editable="false"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="startProcessingBtn" action="startProcessing" />
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

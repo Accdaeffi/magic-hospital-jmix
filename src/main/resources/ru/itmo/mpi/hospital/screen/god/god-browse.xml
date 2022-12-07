@@ -42,6 +42,8 @@
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
+                <action id="showRoleAssignments" type="showRoleAssignments"/>
+                <action id="changePassword" type="changePassword"/>
             </actions>
             <columns>
                 <column id="username"/>
@@ -50,7 +52,6 @@
                 <column id="isMale"/>
                 <column id="email"/>
                 <column id="active"/>
-                <column id="timeZoneId"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
@@ -58,6 +59,8 @@
                 <button id="createBtn" action="godsTable.create"/>
                 <button id="editBtn" action="godsTable.edit"/>
                 <button id="removeBtn" action="godsTable.remove"/>
+                <button id="showRoleAssignmentsBtn" action="godsTable.showRoleAssignments"/>
+                <button id="changePasswordBtn" action="godsTable.changePassword"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

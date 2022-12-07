@@ -8,6 +8,7 @@
                     class="ru.itmo.mpi.hospital.entity.DiseaseCase">
             <fetchPlan extends="_base">
                 <property name="disease" fetchPlan="_base"/>
+                <property name="healer" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="diseaseCasesDl">
                 <query>
@@ -53,10 +54,12 @@
                 </action>
             </actions>
             <columns>
-                <column id="patientComplaints"/>
-                <column id="actions"/>
-                <column id="disease"/>
                 <column id="patient"/>
+                <column id="patientComplaints"/>
+                <column id="healer" />
+                <column id="disease"/>
+                <column id="actions"/>
+                <column id="diseaseCaseState" />
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

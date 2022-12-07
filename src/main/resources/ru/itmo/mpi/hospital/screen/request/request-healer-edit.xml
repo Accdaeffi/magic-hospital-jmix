@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://requestHealerEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="requestDc"
+                  class="ru.itmo.mpi.hospital.entity.Request">
+            <fetchPlan extends="_base">
+                <property name="helper" fetchPlan="_base"/>
+                <property name="diseaseCase"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+        <action id="receive" caption="msg://requestHealerEdit.receive"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="requestDc">
+            <column width="350px">
+                <entityPicker id="patientField" property="diseaseCase.patient" editable="false"/>
+                <entityPicker id="helperField" property="helper" editable="false"/>
+                <checkBox id="requiredPentaHelpField" property="requiredPentaHelp" editable="false"/>
+                <textArea id="additionalInfoField" property="additionalInfo" editable="false"/>
+                <textField id="dustAmountRequiredField" property="dustAmountRequired" editable="false"/>
+                <textField id="waterRequiredField" property="waterRequired" editable="false"/>
+                <comboBox id="requestStatusField" property="requestStatus" editable="false"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="receiveBtn" action="receive" />
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

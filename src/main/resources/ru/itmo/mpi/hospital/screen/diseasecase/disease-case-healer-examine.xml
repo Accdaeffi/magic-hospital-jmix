@@ -5,10 +5,15 @@
     <data>
         <instance id="diseaseCaseDc"
                   class="ru.itmo.mpi.hospital.entity.DiseaseCase">
-            <fetchPlan extends="_base">
-                <property name="prayer" fetchPlan="_base"/>
-                <property name="request" fetchPlan="_base"/>
-                <property name="disease" fetchPlan="_base"/>
+            <fetchPlan extends="_local">
+                <property name="patient" fetchPlan="_instance_name" />
+                <property name="prayer">
+                    <property name="prayerStatus" />
+                </property>
+                <property name="request">
+                    <property name="requestStatus" />
+                </property>
+                <property name="disease"/>
             </fetchPlan>
             <loader/>
         </instance>
@@ -20,6 +25,8 @@
     <actions>
         <action id="createPrayer" caption="msg://diseaseCaseHealerExamine.createPrayer"/>
         <action id="createRequest" caption="msg://diseaseCaseHealerExamine.createRequest"/>
+        <action id="recordDeath" caption="msg://diseaseCaseHealerExamine.recordDeath"/>
+        <action id="recordRecovery" caption="msg://diseaseCaseHealerExamine.recordRecovery"/>
         <action id="windowCommitAndClose" caption="msg:///actions.Ok"
                 icon="EDITOR_OK"
                 primary="true"
@@ -30,30 +37,37 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout spacing="true" expand="editActions">
+    <layout spacing="true" expand="actions">
         <form id="form" dataContainer="diseaseCaseDc">
             <column width="350px">
-                <textField id="patientComplaintsField" property="patientComplaints"/>
+                <textArea id="patientComplaintsField" property="patientComplaints"/>
                 <entityPicker id="diseaseField" property="disease">
                     <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityLookup" type="entity_lookup">
+                            <properties>
+                                <property name="screenClass" value="ru.itmo.mpi.hospital.screen.disease.DiseaseHealerBrowse"/>
+                            </properties>
+                        </action>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <textField id="actionsField" property="actions"/>
-                <entityPicker id="patientField" property="patient">
-                    <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
-                        <action id="entityClear" type="entity_clear"/>
-                    </actions>
-                </entityPicker>
+                <textArea id="actionsField" property="actions" rows="7"/>
+                <entityPicker id="patientField" property="patient" />
             </column>
         </form>
-        <hbox id="editActions" spacing="true">
-            <button id="createPrayerBtn" action="createPrayer"/>
-            <button id="createRequestBtn" action="createRequest"/>
-            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
-            <button id="closeBtn" action="windowClose"/>
-        </hbox>
+        <vbox id="actions" spacing="true" expand="closeActions">
+            <hbox id="helpActions" spacing="true">
+                <button id="createPrayerBtn" action="createPrayer"/>
+                <button id="createRequestBtn" action="createRequest"/>
+            </hbox>
+            <hbox id="resultActions" spacing="true">
+                <button id="recordDeathBtn" action="recordDeath"/>
+                <button id="recordRecoveryBtn" action="recordRecovery"/>
+            </hbox>
+            <hbox id="closeActions" spacing="true">
+                <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                <button id="closeBtn" action="windowClose"/>
+            </hbox>
+        </vbox>
     </layout>
 </window>

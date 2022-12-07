@@ -5,9 +5,10 @@
     <data>
         <instance id="diseaseCaseDc"
                   class="ru.itmo.mpi.hospital.entity.DiseaseCase">
-            <fetchPlan extends="_base">
+            <fetchPlan extends="_local">
                 <property name="disease" fetchPlan="_base"/>
                 <property name="healer" fetchPlan="_base"/>
+                <property name="patient" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
         </instance>
@@ -30,19 +31,27 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="diseaseCaseDc">
             <column width="350px">
-                <entityPicker id="patientField" property="patient">
+                <entityPicker id="patientField" property="patient" required="true">
                     <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityLookup" type="entity_lookup">
+                            <properties>
+                                <property name="screenClass" value="ru.itmo.mpi.hospital.screen.patient.PatientAdministratorHealthy"/>
+                            </properties>
+                        </action>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <entityPicker id="healerField" property="healer">
+                <entityPicker id="healerField" property="healer" required="true">
                     <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityLookup" type="entity_lookup">
+                            <properties>
+                                <property name="screenClass" value="ru.itmo.mpi.hospital.screen.healer.HealerAdministratorBrowse"/>
+                            </properties>
+                        </action>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <textField id="patientComplaintsField" property="patientComplaints"/>
+                <textArea id="patientComplaintsField" property="patientComplaints"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">
