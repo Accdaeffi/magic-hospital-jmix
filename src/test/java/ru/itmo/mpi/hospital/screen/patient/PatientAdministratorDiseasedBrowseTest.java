@@ -20,6 +20,7 @@ import ru.itmo.mpi.hospital.testsupport.testdata.PatientTestData;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -125,17 +126,17 @@ public class PatientAdministratorDiseasedBrowseTest extends WebIntegrationTest {
         TableInteractions<Patient> patientTable = entityTable(patientBrowse);
         Button buryAllBtn = patientTable.button("buryAllBtn");
 
-        List<Patient> allDead = patients.patients.stream().filter(pat -> pat.getPatientState().equals(PatientState.DISEASED)).toList();
-        List<UUID> deadUuid = allDead.stream().map(Patient::getId).toList();
+        List<Patient> allDead = patients.patients.stream().filter(pat -> pat.getPatientState().equals(PatientState.DISEASED)).collect(Collectors.toList());
+        List<UUID> deadUuid = allDead.stream().map(Patient::getId).collect(Collectors.toList());
 
         // then:
         assert buryAllBtn != null;
         buryAllBtn.click();
 
-        List<Patient> allBuried = dataManager.load(Patient.class).all().list().stream().filter(pat -> deadUuid.contains(pat.getId())).toList();
+        List<Patient> allBuried = dataManager.load(Patient.class).all().list().stream().filter(pat -> deadUuid.contains(pat.getId())).collect(Collectors.toList());
 
         // expect:
-        List<UUID> allBuriedUuids = allBuried.stream().map(Patient::getId).toList();
+        List<UUID> allBuriedUuids = allBuried.stream().map(Patient::getId).collect(Collectors.toList());
 
         Assertions.assertTrue(allBuriedUuids.size() == deadUuid.size() && allBuriedUuids.containsAll(deadUuid) && deadUuid.containsAll(allBuriedUuids));
     }
